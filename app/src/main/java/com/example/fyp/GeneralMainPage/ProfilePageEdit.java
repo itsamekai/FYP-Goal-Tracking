@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,26 +21,23 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class ProfilePage extends AppCompatActivity {
+public class ProfilePageEdit extends AppCompatActivity {
 
     public ImageView ProfilePic;
-    public ImageView ProfileArrowBack;
-    public ImageView settingB;
-    public ImageView awardicon1;
-    public ImageView awardicon2;
-    public ImageView homeB1;
-    public ImageView friends_button;
-    public ImageView addfriends_button;
-    public ImageView profile_button;
-    public TextView aboutdetails;
+    public ImageView Done;
     public TextView user_fullname;
+    public TextView user_fullname1;
+    public TextView user_fullname2;
+    public TextView DOB1;
+    public TextView phonenumber1;
+    public TextView address1;
     public DataBaseHelper db;
     private static int GET_FROM_GALLERY = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_page);
+        setContentView(R.layout.activity_profile_page_edit);
 
         // sets image
         db = new DataBaseHelper(this);
@@ -56,30 +54,17 @@ public class ProfilePage extends AppCompatActivity {
         db = new DataBaseHelper(this);
         user_fullname.setText(db.getUserFullName(uniqueString));
 
-        // return to previous page with arrow
-        ProfileArrowBack = (ImageView) findViewById(R.id.ProfileArrowBack);
-        ProfileArrowBack.setOnClickListener(v -> {
-            Intent returnPage = new Intent(this, MainHomePage.class);
-            startActivity(returnPage);
-        });
+        user_fullname1 = (TextView) findViewById(R.id.user_fullname1);
+        db = new DataBaseHelper(this);
+        user_fullname1.setText(db.getUserFullName(uniqueString));
 
-        // home button
-        homeB1 = (ImageView) findViewById(R.id.homeB);
-        homeB1.setOnClickListener(v -> {
-            Intent mainHomePage = new Intent(this, MainHomePage.class);
-            mainHomePage.putExtra("username", uniqueString);
-            startActivity(mainHomePage);
+        // return to previous page with done
+        Done = (ImageView) findViewById(R.id.Done);
+        Done.setOnClickListener(v -> {
+            Intent profilePage = new Intent(this, ProfilePage.class);
+            profilePage.putExtra("username", uniqueString);
+            startActivity(profilePage);
         });
-
-        // setting button
-        settingB = (ImageView) findViewById(R.id.setting_button);
-        settingB.setOnClickListener(v -> {
-            Intent profilePageEdit = new Intent(this, ProfilePageEdit.class);
-            profilePageEdit.putExtra("username", uniqueString);
-            startActivity(profilePageEdit);
-        });
-
 
     }
-
-    }
+}
