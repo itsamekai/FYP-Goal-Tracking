@@ -26,6 +26,7 @@
         <activity android:name=".SettingGoals.SetGoal" />
         <activity android:name=".SettingGoals.ChoosingGoal" />
         <activity android:name=".GeneralMainPage.ProfilePage" />
+        <activity android:name=".GeneralMainPage.ProfilePageEdit" />
         <activity android:name=".GeneralMainPage.MainHomePage" />
         <activity android:name=".Register.OrgRegisterPage" />
         <activity android:name=".Register.ChooseRegister" />
