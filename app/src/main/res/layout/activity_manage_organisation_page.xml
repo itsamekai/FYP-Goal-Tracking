@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.OrganisationPage.ManageOrganisationPage"
+    android:background="@drawable/approveorg_background">
+
+    <ImageView
+        android:id="@+id/adminArrowBack3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/returnPrev"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.039"
+        app:srcCompat="@drawable/arrow" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="294dp"
+        android:layout_height="66dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/manage_org_string"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.093" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/orgIcon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:layout_constraintVertical_bias="0.071"
+        app:srcCompat="@drawable/organisationicon" />
+
+    <TextView
+        android:id="@+id/ViewOrganisationButton"
+        android:layout_width="270dp"
+        android:layout_height="80dp"
+        android:background="@drawable/manageorgpage_border"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/ViewOrgButton"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="0.113" />
+
+    <TextView
+        android:id="@+id/UpdateOrganisationButton"
+        android:layout_width="270dp"
+        android:layout_height="80dp"
+        android:background="@drawable/manageorgpage_border"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/UpdateOrgButton"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ViewOrganisationButton"
+        app:layout_constraintVertical_bias="0.196" />
+
+    <TextView
+        android:id="@+id/ApproveOrganisationButton"
+        android:layout_width="270dp"
+        android:layout_height="80dp"
+        android:background="@drawable/manageorgpage_border"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/ApproveOrgButton"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UpdateOrganisationButton"
+        app:layout_constraintVertical_bias="0.33" />
+</androidx.constraintlayout.widget.ConstraintLayout>

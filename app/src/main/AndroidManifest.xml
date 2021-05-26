@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.fyp">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Design.Light.NoActionBar">
+        <activity android:name=".Admin.OrganisationPage.ApproveOrganisation"></activity>
+        <activity android:name=".Admin.OrganisationPage.ShowUnapprovedOrg" />
+        <activity android:name=".Admin.OrganisationPage.ViewOrganisation" />
+        <activity android:name=".Admin.OrganisationPage.UpdateOrganisation" />
+        <activity android:name=".Admin.AdminPage.UpdateAdmin" />
+        <activity android:name=".Admin.AdminPage.CreateAdmin" />
+        <activity android:name=".Admin.OrganisationPage.ManageOrganisationPage" />
+        <activity android:name=".Admin.CategoryPage.ManageCategoryPage" />
+        <activity android:name=".Admin.AdminPage.ManageAdminPage" />
+        <activity android:name=".Admin.MainAdminPage" />
+        <activity android:name=".SettingGoals.SetGoal" />
+        <activity android:name=".SettingGoals.ChoosingGoal" />
+        <activity android:name=".GeneralMainPage.ProfilePage" />
+        <activity android:name=".GeneralMainPage.MainHomePage" />
+        <activity android:name=".Register.OrgRegisterPage" />
+        <activity android:name=".Register.ChooseRegister" />
+        <activity android:name=".Register.SeniorRegisterPage" />
+        <activity android:name=".Login.LoginPage">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

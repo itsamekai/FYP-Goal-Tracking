@@ -1,0 +1,173 @@
+<resources>
+    <!-- strings for login page (activty_login_page.xml)-->
+    <string name="app_name">FYP</string>
+    <string name="WHC">WHC logo</string>
+    <string name="loginDesc1">Hello,</string>
+    <string name="loginDesc2">Welcome to Goal Tracking</string>
+    <string name="loginButton">Login</string>
+    <string name="forgotPasswordButton">Forgot Password?</string>
+    <string name="CreateAccountButton">Do not have an account? Create here</string>
+
+    <!-- string for choose register page, choose to register as an org or a senior (activity_choose_register.xml) -->
+    <string name="choose_senior">Senior</string>
+    <string name="choose_org">Organisation</string>
+    <string name="promptUser">Choose to Register as</string>
+
+    <!-- strings for register page (activity_register_page.xml) -->
+    <string name="senior_register_string">Register an Account</string>
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
+    <string name="full_name">Full Name</string>
+    <string name="dob">Date of Birth</string>
+    <string name="seniorPhoneNo">Phone Number</string>
+    <string name="Address">Address</string>
+    <string name="returnPrev">Return to previous page</string>
+    <string name="seniorRegisterButton">Register</string>
+
+    <!-- strings for org register page (activity_senior_register_page.xml) -->
+    <string name="org_register_string">Register Organisation</string>
+    <string name="org_name">Organisation Name</string>
+    <string name="email_address">Email Address</string>
+    <string name="orgLogin_password">Password</string>
+    <string name="orgPhoneNo">Phone Number</string>
+    <string name="inCharge">Person-In-Charge</string>
+    <string name="orgAddress">Address</string>
+    <string name="orgRegisterButton">Register</string>
+
+    <!-- strings for main home page aft logging in (activity_main_home_page.xml) -->
+    <string name="logout">Logout Button</string>
+    <string name="profilePicture">Profile Picture of User</string>
+    <string name="userName">User Name</string>
+    <string name="medalLogo">Medal Button</string>
+    <string name="view_medal_string">View Medals</string>
+    <string name="categories">Category Button</string>
+    <string name="setGoals">Set Goals Button</string>
+    <string name="monitorGoals">Monitor Goals Button</string>
+    <string name="svcOrg">Service Organisation Button</string>
+    <string name="rewards">Rewards Button</string>
+    <string name="Help">Help Button</string>
+    <string name="home_button">Home Button</string>
+    <string name="friend_button">Friends Button</string>
+    <string name="add_friend_button">Add Friends Button</string>
+    <string name="profile_button">Profile Button</string>
+    <string name="home_string">Home</string>
+    <string name="friend_string">Friend</string>
+    <string name="add_friend_string">Add Friends</string>
+    <string name="profile_string">Profile</string>
+
+    <!-- strings for profile page (activity_profile_page.xml) -->
+    <string name="profileAddButton">Add Profile Button</string>
+    <string name="addProfilePic"></string>
+
+    <!-- strings for choose goals page (activity_choosing_goals.xml) -->
+    <string name="imageIcon">Exercise Image</string>
+    <string name="chooseGoal_string">Choose Your Goal</string>
+    <string name="step_1">STEP 1</string>
+    <string name="description_string">Description</string>
+    <string name="dropDownBox">Drop Down Box</string>
+    <string name="nextButton">Next!</string>
+    <string name="fitness_desc">Fitness! keep healthy or you noob</string>
+    <string name="health_desc">Health! stay healthy or die noob</string>
+    <string name="finance_desc">Finance! Save money to make big bux and spend them all on useless stuff haha noob</string>
+    <string-array name="GoalType">
+        <item>Fitness</item>
+        <item>Health</item>
+        <item>Finance</item>
+    </string-array>
+
+    <!-- strings for set goals page (activity_set_goal.xml) -->
+    <string name="setYourGoals">Set Your Goals</string>
+    <string name="goal">Goal</string>
+    <string-array name="SetGoalCategory">
+        <item>Lose Weight</item>
+        <item>Walking</item>
+        <item>Running</item>
+    </string-array>
+    <string name="Weight">Weight</string>
+    <string name="inputWeight">Weight Input</string>
+    <string name="createGoalButton">Next</string>
+
+
+    <!-- strings for admin main page (activity_admin_main_page.xml) -->
+    <string name="admin_page_string">Admin Page</string>
+    <string name="admin_name">Admin Name</string>
+    <string name="editGoalCat">Goal Category Button</string>
+    <string name="ViewUsers">View Users Goal Button</string>
+    <string name="ManageAdmin">Manage Admins Button</string>
+    <string name="ApproveOrgs">Approve Organisations Button</string>
+
+    <!-- strings for manage admin page (activity_manage_admin_age.xml) -->
+    <string name="manage_admin_page_string">Admin Page</string>
+    <string name="adminIcon">Admin icon</string>
+    <string name="CreateAdminButton">Create Admin</string>
+    <string name="UpdateAdminButton">Update Admin</string>
+    <string name="DeleteAdmin">Delete Admin</string>
+
+    <!-- strings for create admin page (activity_create_admin.xml) -->
+    <string name="create_admin_page_string">Create Admin</string>
+    <string name="adminUserInput">Username</string>
+    <string name="adminPasswordInput">Password</string>
+    <string name="adminNameInput">Full Name</string>
+    <string name="adminDOB">Date of Birth</string>
+    <string name="adminPhoneInput">Phone Number</string>
+    <string name="adminCreateUserButton">Create</string>
+
+    <!-- string for update admin page (activity_update_admin.xml) -->
+    <string name="update_admin_page_string">Update Admin</string>
+    <string name="adminUpdateUsername">Username</string>
+    <string name="adminUpdatePassword">Password</string>
+    <string name="adminUpdateFullName">Full Name</string>
+    <string name="adminUpdateDOB">Date Of Birth</string>
+    <string name="adminUpdatePhoneNo">Phone Number</string>
+    <string name="adminUpdateUserButton">Update</string>
+
+    <!-- strings for manage category page (manage_category_page.xml) -->
+    <string name="category_page_string">Category Page</string>
+    <string name="categoryIcon">Category Icon</string>
+    <string name="UpdateCategoryButton">Update Category</string>
+    <string name="CreateCategoryButton">Create Category</string>
+
+    <!-- strings for manage organisation page (activity_manage_organisation_page.xml) -->
+    <string name="manage_org_string">Manage Organisation</string>
+    <string name="orgIcon">Org Icon</string>
+    <string name="ViewOrgButton">View Organisation</string>
+    <string name="UpdateOrgButton">Update Organisation</string>
+    <string name="ApproveOrgButton">Approve Organisation</string>
+
+    <!-- string for update organisation page (activity_update_organisation.xml) -->
+    <string name="update_organisation_page_string">Update Admin</string>
+    <string name="orgUpdateOrgName">Organisation Name</string>
+    <string name="orgUpdateEmail">EmailAddress</string>
+    <string name="orgUpdatePassword">Full Name</string>
+    <string name="orgUpdatePhoneNo">Date Of Birth</string>
+    <string name="orgUpdatePIC">Phone Number</string>
+    <string name="orgUpdateUserButton">Update</string>
+
+    <!-- string for view organisation page (activity_view_organisation.xml) -->
+    <string name="organisationview_string">View Organisation</string>
+
+    <!-- string for the recycleview_rows.xml -->
+    <string name="organisation_name_string">Organisation:</string>
+    <string name="organisation_incharge_string">In Charge:</string>
+    <string name="organisation_phoneNo">Phone No:</string>
+    <string name="view_org_name">name</string>
+    <string name="view_in_charge_name">in charge</string>
+    <string name="view_org_phoneno">phone no</string>
+
+    <!-- strings for show unapprove org page (activity_show_unapproved_org.xml) -->
+    <string name="approve_org_string">Approve Organisation</string>
+    <string name="status_string">Status:</string>
+
+    <!-- strings for recycleview_approve_rows.xml -->
+    <string name="notapproved_string">Not Approved</string>
+    <string name="approveOrgName">Organisation</string>
+
+    <!-- stirngs for approve org page (activity_approve_organisation.xml -->
+    <string name="email_string">Email Address:</string>
+    <string name="contact_string">Contact Number:</string>
+    <string name="contactname_string">Contact Name:</string>
+    <string name="address_string">Org Address:</string>
+    <string name="orgname_string">Organisation:</string>
+    <string name="approvebutton_string">Approve</string>
+
+</resources>
