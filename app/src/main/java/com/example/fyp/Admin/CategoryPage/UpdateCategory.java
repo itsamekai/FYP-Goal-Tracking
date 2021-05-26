@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.fyp.R;
+
 public class UpdateCategory extends AppCompatActivity {
 
     @Override

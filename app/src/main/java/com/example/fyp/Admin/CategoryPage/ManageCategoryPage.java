@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.fyp.Admin.MainAdminPage;
 import com.example.fyp.R;
@@ -12,6 +13,7 @@ import com.example.fyp.R;
 public class ManageCategoryPage extends AppCompatActivity {
 
     public ImageView returnButton;
+    public TextView createButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,5 +27,13 @@ public class ManageCategoryPage extends AppCompatActivity {
             returnprev.putExtra("username", uniqueString);
             startActivity(returnprev);
         });
+
+        createButton = (TextView) findViewById(R.id.createCategoryButton);
+        createButton.setOnClickListener(v ->{
+            Intent create = new Intent(this, CreateCategory.class);
+            create.putExtra("username", uniqueString);
+            startActivity(create);
+        });
+
     }
 }

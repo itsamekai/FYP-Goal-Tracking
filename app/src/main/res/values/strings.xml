@@ -127,6 +127,14 @@
     <string name="UpdateCategoryButton">Update Category</string>
     <string name="CreateCategoryButton">Create Category</string>
 
+    <!-- strings for create category page (create_category_page.xml) -->
+    <string name="category_page2_string">Create Category</string>
+    <string name="category_create_name">Name</string>
+    <string name="category_create_description">Description</string>
+    <string name="category_create_icon">Upload</string>
+    <string name="category_create_button">Create Category</string>
+
+
     <!-- strings for manage organisation page (activity_manage_organisation_page.xml) -->
     <string name="manage_org_string">Manage Organisation</string>
     <string name="orgIcon">Org Icon</string>

@@ -44,7 +44,7 @@ public class ProfilePage extends AppCompatActivity {
         // sets image
         db = new DataBaseHelper(this);
         Bitmap image = db.retrieveImage(getIntent().getStringExtra("username"));
-        System.out.println(image);
+       // System.out.println(image);
         if (image != null) {
             ProfilePic = (ImageView) findViewById(R.id.ProfilePic);
             ProfilePic.setImageBitmap(db.retrieveImage(getIntent().getStringExtra("username")));

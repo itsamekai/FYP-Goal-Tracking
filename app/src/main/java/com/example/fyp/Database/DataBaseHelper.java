@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 
 import androidx.annotation.Nullable;
 
+import com.example.fyp.ObjectClass.Category;
 import com.example.fyp.ObjectClass.OrgUsers;
 import com.example.fyp.ObjectClass.Users;
 
@@ -42,6 +43,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String ORG_PASSWORD = "password";
     public static final String ORG_VERIFIED = "verified";
 
+    //Category Table
+    public static final String CATEGORY_TABLE = "Category";
+    public static final String CAT_ID = "category_id";
+    public static final String CATEGORY_NAME = "category_name";
+    public static final String CATEGORY_DESC = "category_desc";
+    public static final String CATEGORY_IMAGE = "category_image";
+
     public DataBaseHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
@@ -61,6 +69,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         db.execSQL(createOrgUsersTable);
 
+        String createCategoryTable = "CREATE TABLE " + CATEGORY_TABLE + " (" + CAT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + CATEGORY_NAME + " TEXT NOT NULL, " + CATEGORY_DESC + " TEXT NOT NULL, " + CATEGORY_IMAGE + " BLOB NOT NULL);";
+
+        db.execSQL(createCategoryTable);
 
 
     }
@@ -71,6 +82,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE " + USERS_TABLE);
         db.execSQL("DROP TABLE " + ORGUSER_TABLE);
+        db.execSQL("DROP TABLE " + CATEGORY_TABLE);
         onCreate(db);
     }
 
@@ -286,5 +298,30 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         else return true;
     }
 
+    // add category to the table
+    public boolean addCategory(Category c) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(CATEGORY_NAME, c.getCategory_name());
+        cv.put(CATEGORY_DESC, c.getCategory_desc());
+        cv.put(CATEGORY_IMAGE, c.getImage());
+        long insert = database.insert(CATEGORY_TABLE, null, cv);
+        database.close();
+        if (insert == -1) return false;
+        else return true;
+    }
+
+    // check for category name
+    public int checkCategoryDuplicate(String c) {
+        int categoryCount = 0;
+        String sql = "SELECT COUNT(category_name) FROM Category WHERE category_name ='" + c + "'";
+        Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+        if(cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            categoryCount = cursor.getInt(0);
+        }
+        cursor.close();
+        return categoryCount;
+    }
 
 }
