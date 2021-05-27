@@ -54,9 +54,20 @@ public class ProfilePageEdit extends AppCompatActivity {
         db = new DataBaseHelper(this);
         user_fullname.setText(db.getUserFullName(uniqueString));
 
-        user_fullname1 = (TextView) findViewById(R.id.user_fullname1);
+        user_fullname2 = (TextView) findViewById(R.id.user_fullname2);
+        String uniqueString2 = getIntent().getStringExtra("username");
         db = new DataBaseHelper(this);
-        user_fullname1.setText(db.getUserFullName(uniqueString));
+        user_fullname2.setText(db.getUserFullName(uniqueString2));
+
+        user_fullname1 = (TextView) findViewById(R.id.user_fullname1);
+        String uniqueString1 = getIntent().getStringExtra("username");
+        db = new DataBaseHelper(this);
+        user_fullname1.setText(db.getUserName(uniqueString1));
+
+        DOB1 = (TextView) findViewById(R.id.DOB1);
+        String uniqueString3 = getIntent().getStringExtra("username");
+        db = new DataBaseHelper(this);
+        DOB1.setText(db.getDateOfBirth(uniqueString3));
 
         // return to previous page with done
         Done = (ImageView) findViewById(R.id.Done);

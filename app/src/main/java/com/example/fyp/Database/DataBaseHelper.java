@@ -252,6 +252,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return userFullName;
     }
 
+    // obtain username
+    public String getUserName(String un) {
+        String userName ="";
+        String sql = "SELECT username FROM Users WHERE username ='" + un + "'";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if(c.moveToFirst()) {
+            userName = c.getString(0);
+        }
+        return userName;
+    }
+
+    public String getDateOfBirth(String dob) {
+        String getDOB ="";
+        String sql = "SELECT dob FROM Users WHERE username ='" + dob + "'";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if(c.moveToFirst()) {
+            getDOB = c.getString(0);
+        }
+        return getDOB;
+    }
+
     // gets org name, org contact name, contact number from database
     public Cursor readOrgData() {
         String sql = "SELECT org_name, contact_name, ContactNo FROM " + ORGUSER_TABLE;
