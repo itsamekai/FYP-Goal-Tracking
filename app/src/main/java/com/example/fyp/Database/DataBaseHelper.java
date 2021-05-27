@@ -252,6 +252,50 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return userFullName;
     }
 
+    // obtain username
+    public String getUserName(String un) {
+        String userName ="";
+        String sql = "SELECT username FROM Users WHERE username ='" + un + "'";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if(c.moveToFirst()) {
+            userName = c.getString(0);
+        }
+        return userName;
+    }
+
+    //obtain DOB
+    public String getDateOfBirth(String dob) {
+        String getDOB ="";
+        String sql = "SELECT dob FROM Users WHERE username ='" + dob + "'";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if(c.moveToFirst()) {
+            getDOB = c.getString(0);
+        }
+        return getDOB;
+    }
+
+    //obtain phone number
+    public String getPhoneNumber(String pn) {
+        String getpn ="";
+        String sql = "SELECT phoneno FROM Users WHERE username ='" + pn + "'";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if(c.moveToFirst()) {
+            getpn = c.getString(0);
+        }
+        return getpn;
+    }
+
+    //obtain Address
+    public String getUserAddress(String a) {
+        String getadd ="";
+        String sql = "SELECT address FROM Users WHERE username ='" + a + "'";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if(c.moveToFirst()) {
+            getadd = c.getString(0);
+        }
+        return getadd;
+    }
+
     // gets org name, org contact name, contact number from database
     public Cursor readOrgData() {
         String sql = "SELECT org_name, contact_name, ContactNo FROM " + ORGUSER_TABLE;
