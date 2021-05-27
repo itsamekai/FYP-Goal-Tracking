@@ -324,4 +324,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return categoryCount;
     }
 
+
+    // retrieves the type of category to be shown in the choosing goal page.
+    public Cursor retrieveCategory() {
+        String sql = "SELECT category_name, category_desc, category_image FROM Category";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(sql, null);
+        }
+        return cursor;
+    }
+
 }

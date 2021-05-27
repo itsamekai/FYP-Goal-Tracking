@@ -47,7 +47,7 @@ public class CreateCategory extends AppCompatActivity {
         CategoryDesc = findViewById(R.id.createCategoryDesc);
 
         // return previous
-        arrow.setOnClickListener(v ->{
+        arrow.setOnClickListener(v -> {
             Intent i = new Intent(this, ManageCategoryPage.class);
             i.putExtra("username", uniqueString);
             startActivity(i);
@@ -58,13 +58,11 @@ public class CreateCategory extends AppCompatActivity {
         create.setOnClickListener(v -> {
             if (CheckIfEmpty()) {
                 Toast.makeText(this, "Please fill in all the fields.", Toast.LENGTH_SHORT).show();
-            }
-            else {
+            } else {
                 db = new DataBaseHelper(CreateCategory.this);
                 if (db.checkCategoryDuplicate(CategoryName.getText().toString()) != 0) {
                     Toast.makeText(this, "Category already exists.", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     Category c = new Category(CategoryName.getText().toString(), CategoryDesc.getText().toString(), image);
                     db = new DataBaseHelper(CreateCategory.this);
                     boolean added = db.addCategory(c);
@@ -73,8 +71,7 @@ public class CreateCategory extends AppCompatActivity {
                         Intent i = new Intent(this, ManageCategoryPage.class);
                         i.putExtra("username", uniqueString);
                         startActivity(i);
-                    }
-                    else {
+                    } else {
                         Toast.makeText(this, "Failed to create category.", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -98,7 +95,7 @@ public class CreateCategory extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //Detects request codes
-        if(requestCode==GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
+        if (requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
             Uri selectedImage = data.getData();
             Bitmap bitmap = null;
             try {
@@ -128,8 +125,7 @@ public class CreateCategory extends AppCompatActivity {
     public boolean CheckIfEmpty() {
         if (CategoryName.getText().toString().matches("") || CategoryDesc.getText().toString().matches("") || image == null) {
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
 
