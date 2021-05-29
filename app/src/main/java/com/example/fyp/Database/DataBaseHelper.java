@@ -13,6 +13,11 @@ import androidx.annotation.Nullable;
 import com.example.fyp.ObjectClass.Category;
 import com.example.fyp.ObjectClass.OrgUsers;
 import com.example.fyp.ObjectClass.Users;
+import com.example.fyp.ObjectClass.UsersGoal;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
@@ -50,6 +55,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String CATEGORY_DESC = "category_desc";
     public static final String CATEGORY_IMAGE = "category_image";
 
+    //User Goal Table
+    public static final String USERGOAL_TABLE = "UserGoalTable";
+    public static final String GOAL_ID = "goal_id";
+    public static final String GOALTYPE_ID = "goal_type_id";
+    public static final String USER_ID = "user_id";
+    public static final String GOAL_NAME = "goal_name";
+    public static final String GOAL_DESC = "goal_desc";
+    public static final String CREATED = "datetime_created";
+    public static final String COMPLETED = "datetime_completed";
+    public static final String ACCOMPLISHED = "accomplished";
+
     public DataBaseHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
@@ -62,16 +78,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         String createUsersTable ="CREATE TABLE " + USERS_TABLE + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USERNAME + " TEXT NOT NULL, " + PASSWORD + " TEXT NOT NULL, "
                 + FULLNAME + " TEXT NOT NULL, " + DOB + " TEXT NOT NULL, " + USER_PHONE_NO + " INTEGER NOT NULL, " + USER_ROLE + " TEXT NOT NULL, " + USER_ADDRESS + " TEXT NOT NULL, " + USER_PROFILE_IMAGE + " BLOB);";
 
-        db.execSQL(createUsersTable);
-
         String createOrgUsersTable ="CREATE TABLE " + ORGUSER_TABLE + " (" + ORG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ORG_EMAILADDRESS + " TEXT NOT NULL, " + ORG_CONTACT_NO + " TEXT NOT NULL, " + ORG_CONTACT_NAME + " TEXT NOT NULL, "
                 + ORG_ADDRESS + " TEXT NOT NULL, " + ORG_NAME + " TEXT NOT NULL, " + ORG_PASSWORD + " TEXT NOT NULL, " + ORG_VERIFIED + " INTEGER NOT NULL);";
 
-        db.execSQL(createOrgUsersTable);
-
         String createCategoryTable = "CREATE TABLE " + CATEGORY_TABLE + " (" + CAT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + CATEGORY_NAME + " TEXT NOT NULL, " + CATEGORY_DESC + " TEXT NOT NULL, " + CATEGORY_IMAGE + " BLOB NOT NULL);";
 
+        String createUsersGoalTable = "CREATE TABLE " + USERGOAL_TABLE + " (" + GOAL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + GOALTYPE_ID + " INTEGER NOT NULL, "
+                + USER_ID + " INTEGER NOT NULL, " + GOAL_NAME + " TEXT NOT NULL, " + GOAL_DESC + " TEXT NOT NULL, " + CREATED + " TEXT NOT NULL, "
+                + COMPLETED + " TEXT, " + ACCOMPLISHED + " INTEGER DEFAULT 0, FOREIGN KEY (" + GOALTYPE_ID +") REFERENCES " + CATEGORY_TABLE + " (" + CAT_ID + "), FOREIGN KEY (" + USER_ID + ") REFERENCES " + USERS_TABLE + "(" + USER_ID + "));";
+
+        db.execSQL(createUsersTable);
+        db.execSQL(createOrgUsersTable);
         db.execSQL(createCategoryTable);
+        db.execSQL(createUsersGoalTable);
 
 
     }
@@ -379,5 +398,50 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return cursor;
     }
+
+    // retrieves user_id from users table for isnerting goals
+    public int getUserID(String name) {
+        int id = 0;
+        String sql = "SELECT user_id FROM Users WHERE username ='" + name + "'";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if(c.moveToFirst()) {
+            id = c.getInt(0);
+        }
+        return id;
+    }
+
+    public int getCategoryID(String categoryName) {
+        int id = 0;
+        String sql = "SELECT category_id FROM Category WHERE category_name ='" + categoryName + "'";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if(c.moveToFirst()) {
+            id = c.getInt(0);
+        }
+        return id;
+    }
+
+    public boolean addUserGoal(UsersGoal goal) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("Singapore"));
+        cv.put(GOALTYPE_ID, goal.getGoal_type_id());
+        cv.put(USER_ID, goal.getUser_id());
+        cv.put(GOAL_NAME, goal.getGoal_name());
+        cv.put(GOAL_DESC, goal.getGoal_desc());
+        cv.put(CREATED, sdf.format(new Date()));
+        long insert = database.insert(USERGOAL_TABLE, null, cv);
+        database.close();
+        if (insert == -1) {
+            return false;
+        }
+        else return true;
+    }
+
+
+
+
+    // retrieves category_id from category table for inserting goals
+
 
 }

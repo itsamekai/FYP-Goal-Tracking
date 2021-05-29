@@ -77,15 +77,15 @@
 
     <!-- strings for set goals page (activity_set_goal.xml) -->
     <string name="setYourGoals">Set Your Goals</string>
-    <string name="goal">Goal</string>
+    <string name="goal">Goal Name</string>
     <string-array name="SetGoalCategory">
         <item>Lose Weight</item>
         <item>Walking</item>
         <item>Running</item>
     </string-array>
-    <string name="Weight">Weight</string>
+    <string name="goal_desc">Goal Description</string>
     <string name="inputWeight">Weight Input</string>
-    <string name="createGoalButton">Next</string>
+    <string name="createGoalButton">Create Goal!</string>
 
 
     <!-- strings for admin main page (activity_admin_main_page.xml) -->

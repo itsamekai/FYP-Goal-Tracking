@@ -21,7 +21,7 @@
         app:srcCompat="@drawable/arrow" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/createUserGoal"
         android:layout_width="294dp"
         android:layout_height="66dp"
         android:fontFamily="@font/poppins"
@@ -46,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/createUserGoal"
         app:layout_constraintVertical_bias="0.071"
         app:srcCompat="@drawable/organisationicon" />
 

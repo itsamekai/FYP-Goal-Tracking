@@ -32,6 +32,7 @@ public class ChoosingGoal extends AppCompatActivity {
     public ArrayList<String> category_name, category_desc;
     public ArrayList<byte[]> pre_image;
     public ArrayList<Bitmap> image;
+    public String passToNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,9 @@ public class ChoosingGoal extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     icon.setImageBitmap(image.get(i));
                     desc.setText(category_desc.get(i));
+                    passToNext = category_name.get(i);
+                    System.out.println("test " + passToNext);
+
             }
 
             @Override
@@ -79,6 +83,7 @@ public class ChoosingGoal extends AppCompatActivity {
         button.setOnClickListener(v -> {
             Intent setGoal = new Intent(this, SetGoal.class);
             setGoal.putExtra("username", uniqueString);
+            setGoal.putExtra("selected_category_name", passToNext);
             startActivity(setGoal);
         });
     }
