@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
@@ -12,14 +13,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fyp.Admin.MainAdminPage;
+import com.example.fyp.OrganisationPage.orgPage;
 import com.example.fyp.Register.ChooseRegister;
 import com.example.fyp.Database.DataBaseHelper;
 import com.example.fyp.GeneralMainPage.MainHomePage;
 import com.example.fyp.R;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class LoginPage extends AppCompatActivity {
     public EditText usernameInput;
     public EditText passwordInput;
+    public EditText loginInput;
     public TextView createAccount;
     public Button removeButton;
     public Button loginButton;
@@ -67,6 +73,11 @@ public class LoginPage extends AppCompatActivity {
         if (passwordInput.getText().toString().matches("")) {
             word += "Please enter your password.";
         }
+
+        if (loginInput.getText().toString().matches("")){
+            word += "Please enter your email";
+        }
+
         else if (!validation()) {
             word += "Incorrect username or password.";
         }
@@ -81,6 +92,14 @@ public class LoginPage extends AppCompatActivity {
         }
         return validated;
     }
+
+    private boolean checkUserorOrg(String loginInput) {
+        String regex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(loginInput);
+        return m.matches();
+    }
+
 
 
     private void loginAndRetrieve() {
@@ -98,15 +117,35 @@ public class LoginPage extends AppCompatActivity {
             // do this once admin page is done
             else if (db.checkAccountType(usernameInput.getText().toString()).equals("Admin")) {
                 Intent adminPage;
-                 adminPage = new Intent(this, MainAdminPage.class);
-                 adminPage.putExtra("username", usernameInput.getText().toString());
+                adminPage = new Intent(this, MainAdminPage.class);
+                adminPage.putExtra("username", usernameInput.getText().toString());
                 Toast.makeText(this, "Login success! Welcome.", Toast.LENGTH_SHORT).show();
-                 startActivity(adminPage);
+                startActivity(adminPage);
+            }
+
+        }
+
+        else if (checkUserorOrg(usernameInput.getText().toString()) == true) {
+            int a = 0;
+            db = new DataBaseHelper(LoginPage.this);
+
+            if(db.checkOrgLogin(usernameInput.getText().toString(), passwordInput.getText().toString()) == 1) {
+                a = db.checkOrgLogin(usernameInput.getText().toString(), passwordInput.getText().toString());
+                System.out.println(a);
+                Intent orgPage;
+                orgPage = new Intent(this, orgPage.class);
+                orgPage.putExtra("username", usernameInput.getText().toString());
+                Toast.makeText(this, "Login Success! Welcome.", Toast.LENGTH_SHORT).show();
+                startActivity(orgPage);
+
+            } else {
+                System.out.println("test" + db.checkOrgLogin(usernameInput.getText().toString(), passwordInput.getText().toString()));
+                Toast.makeText(this, "Login Failed! Please try again." ,Toast.LENGTH_SHORT).show();
             }
         }
+
         else Toast.makeText(this, validateMessage(), Toast.LENGTH_SHORT).show();
 
     }
+    }
 
-
-}

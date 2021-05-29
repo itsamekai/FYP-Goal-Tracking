@@ -250,6 +250,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return rowCount;
     }
 
+    //validate if organisation's login = email
+    public int checkOrgLogin(String email, String password){
+        int rowCount = 0;
+        String sql = "SELECT COUNT() FROM OrgUsers WHERE email_address = '"+ email +"' AND password = '"+ password +"'";
+        Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+
+        if(cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            rowCount = cursor.getInt(0);
+        }
+        cursor.close();
+        return rowCount;
+    }
+
     // checks for the type of user. user / admin / organisation
     public String checkAccountType(String u) {
         String userType ="";

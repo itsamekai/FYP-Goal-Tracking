@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
-        <activity android:name=".Admin.CategoryPage.UpdateCategory"></activity>
+        <activity android:name=".OrganisationPage.orgPage"></activity>
+        <activity android:name=".Admin.CategoryPage.UpdateCategory" />
         <activity android:name=".Admin.CategoryPage.CreateCategory" />
         <activity android:name=".Admin.OrganisationPage.ApproveOrganisation" />
         <activity android:name=".Admin.OrganisationPage.ShowUnapprovedOrg" />
