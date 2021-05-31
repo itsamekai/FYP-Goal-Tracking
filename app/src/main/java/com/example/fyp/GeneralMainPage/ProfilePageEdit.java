@@ -8,23 +8,32 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fyp.Admin.AdminPage.ManageAdminPage;
+import com.example.fyp.Admin.CategoryPage.CreateCategory;
+import com.example.fyp.Admin.CategoryPage.ManageCategoryPage;
 import com.example.fyp.Database.DataBaseHelper;
 import com.example.fyp.Login.LoginPage;
+import com.example.fyp.ObjectClass.Category;
+import com.example.fyp.ObjectClass.Users;
 import com.example.fyp.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ProfilePageEdit extends AppCompatActivity {
 
-    public ImageView ProfilePic;
-    public ImageView Done;
+    public ImageView profilePic;
+    public ImageView uploadButton;
+    public Button updateb;
     public TextView user_fullname;
     public TextView user_fullname1;
     public TextView user_fullname2;
@@ -32,20 +41,26 @@ public class ProfilePageEdit extends AppCompatActivity {
     public TextView phonenumber1;
     public TextView address1;
     public DataBaseHelper db;
+    public DataBaseHelper databaseHelper;
     private static int GET_FROM_GALLERY = 1;
+    public byte[] image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page_edit);
 
+        profilePic = findViewById(R.id.ProfilePic);
+        uploadButton = findViewById(R.id.upload1);
+
+
         // sets image
         db = new DataBaseHelper(this);
         Bitmap image = db.retrieveImage(getIntent().getStringExtra("username"));
         System.out.println(image);
         if (image != null) {
-            ProfilePic = (ImageView) findViewById(R.id.ProfilePic);
-            ProfilePic.setImageBitmap(db.retrieveImage(getIntent().getStringExtra("username")));
+            profilePic = (ImageView) findViewById(R.id.ProfilePic);
+            profilePic.setImageBitmap(db.retrieveImage(getIntent().getStringExtra("username")));
         }
 
         // gets the name of the user to display
@@ -82,13 +97,99 @@ public class ProfilePageEdit extends AppCompatActivity {
         db = new DataBaseHelper(this);
         address1.setText(db.getUserAddress(uniqueString5));
 
-        // return to previous page with done
-        Done = (ImageView) findViewById(R.id.Done);
-        Done.setOnClickListener(v -> {
-            Intent profilePage = new Intent(this, ProfilePage.class);
-            profilePage.putExtra("username", uniqueString);
-            startActivity(profilePage);
+        // update button
+        phonenumber1 = findViewById(R.id.phonenumber1);
+        updateb = (Button) findViewById(R.id.updatebutton);
+        updateb.setOnClickListener(v -> {
+            if (checkIfEmpty()) {
+                Toast.makeText(this, "You did not enter all fields.", Toast.LENGTH_LONG).show();
+                return;
+            } else {
+                Users senior;
+                databaseHelper = new DataBaseHelper(this);
+                String phoneNo = phonenumber1.getText().toString();
+                String address = address1.getText().toString();
+                if (checkAll(phoneNo,address)) {
+                    int updated = databaseHelper.updateAdmin(uniqueString, address, Integer.parseInt(phoneNo));
+                    if (updated == 0) {
+                        Toast.makeText(this, "Failed to update.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Updated Successfully.", Toast.LENGTH_SHORT).show();
+                        Intent returnPage = new Intent(this, ProfilePage.class);
+                        returnPage.putExtra("username", uniqueString);
+                        startActivity(returnPage);
+                    }
+                }
+            }
         });
 
+        // uploads image
+        uploadButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View arg0) {
+            startActivityForResult(new Intent(Intent.ACTION_GET_CONTENT, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
+        }
+    });
+}
+
+    //starts with 8 or 9 and at least 8 digits
+    private boolean checkValidPhoneNumber(String phoneNumber) {
+        String regex = "^[89]\\d{7}$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(phoneNumber);
+        return m.matches();
     }
+
+    private String validateMessage() {
+        String word = "";
+        if (!checkValidPhoneNumber(phonenumber1.getText().toString())) {
+            word += "Invalid phone number.";
+        }
+        return word;
+    }
+    // checkifempty
+    private boolean checkIfEmpty () {
+        if (phonenumber1.getText().toString().matches("")) {
+            return true;
+        } else return false;
+    }
+    // checks all at once
+    private boolean checkAll(String password, String phoneNo) {
+        if (checkValidPhoneNumber(phoneNo)) {
+            return true;
+        }
+        else return false;
+    }
+
+    // open photo gallery
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //Detects request codes
+        if(requestCode==GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
+            Uri selectedImage = data.getData();
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                db = new DataBaseHelper(this);
+                profilePic.setImageBitmap(bitmap);
+                image = getBytes(bitmap);
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+    public static byte[] getBytes(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
+        return stream.toByteArray();
+    }
+
+
 }
