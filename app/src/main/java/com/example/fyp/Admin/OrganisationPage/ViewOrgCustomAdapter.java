@@ -33,7 +33,7 @@ public class ViewOrgCustomAdapter extends RecyclerView.Adapter<ViewOrgCustomAdap
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.recycleview_rows, parent, false);
+        View view = inflater.inflate(R.layout.recycleview_show_orgs_rows, parent, false);
         return new MyViewHolder(view);
     }
 

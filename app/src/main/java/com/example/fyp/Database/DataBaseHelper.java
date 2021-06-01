@@ -451,11 +451,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         else return true;
     }
-
-
-
-
     // retrieves category_id from category table for inserting goals
+
+    public Cursor getUsersGoals() {
+        String sql = "SELECT u.fullname, c.category_name, ug.goal_name, ug.accomplished FROM UserGoalTable ug " +
+                "INNER JOIN Users u ON ug.user_id = u.user_id " +
+                "INNER JOIN Category c ON ug.goal_type_id = c.category_id;";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(sql, null);
+        }
+        return cursor;
+    }
+
 
 
 }

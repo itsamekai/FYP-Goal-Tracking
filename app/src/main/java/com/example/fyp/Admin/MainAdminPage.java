@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.fyp.Admin.AdminPage.ManageAdminPage;
 import com.example.fyp.Admin.OrganisationPage.ManageOrganisationPage;
 import com.example.fyp.Admin.CategoryPage.ManageCategoryPage;
+import com.example.fyp.Admin.UserPage.SearchUserGoal;
 import com.example.fyp.Database.DataBaseHelper;
 import com.example.fyp.Login.LoginPage;
 import com.example.fyp.R;
@@ -54,7 +55,12 @@ public class MainAdminPage extends AppCompatActivity {
 
 
         // goes to view users page
-        // UsersPage = (ImageView) findViewById(R.id.
+           UsersPage = (ImageView) findViewById(R.id.ViewUsersButton);
+           UsersPage.setOnClickListener(v -> {
+               Intent userPage = new Intent(this, SearchUserGoal.class);
+               userPage.putExtra("username", uniqueString);
+               startActivity(userPage);
+           });
 
 
         // goes to manage admin page

@@ -178,4 +178,7 @@
     <string name="orgname_string">Organisation:</string>
     <string name="approvebutton_string">Approve</string>
 
+    <!-- strings for activity_search_user_goal -->
+    <string name="GoalSearch">Search</string>
+
 </resources>

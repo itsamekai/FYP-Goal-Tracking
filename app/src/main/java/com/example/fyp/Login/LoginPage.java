@@ -74,10 +74,6 @@ public class LoginPage extends AppCompatActivity {
             word += "Please enter your password.";
         }
 
-        if (loginInput.getText().toString().matches("")){
-            word += "Please enter your email";
-        }
-
         else if (!validation()) {
             word += "Incorrect username or password.";
         }
