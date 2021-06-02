@@ -75,17 +75,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         // creates the Users table
-        String createUsersTable = "CREATE TABLE " + USERS_TABLE + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USERNAME + " TEXT NOT NULL, " + PASSWORD + " TEXT NOT NULL, "
+        String createUsersTable ="CREATE TABLE " + USERS_TABLE + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USERNAME + " TEXT NOT NULL, " + PASSWORD + " TEXT NOT NULL, "
                 + FULLNAME + " TEXT NOT NULL, " + DOB + " TEXT NOT NULL, " + USER_PHONE_NO + " INTEGER NOT NULL, " + USER_ROLE + " TEXT NOT NULL, " + USER_ADDRESS + " TEXT NOT NULL, " + USER_PROFILE_IMAGE + " BLOB);";
 
-        String createOrgUsersTable = "CREATE TABLE " + ORGUSER_TABLE + " (" + ORG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ORG_EMAILADDRESS + " TEXT NOT NULL, " + ORG_CONTACT_NO + " TEXT NOT NULL, " + ORG_CONTACT_NAME + " TEXT NOT NULL, "
+        String createOrgUsersTable ="CREATE TABLE " + ORGUSER_TABLE + " (" + ORG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ORG_EMAILADDRESS + " TEXT NOT NULL, " + ORG_CONTACT_NO + " TEXT NOT NULL, " + ORG_CONTACT_NAME + " TEXT NOT NULL, "
                 + ORG_ADDRESS + " TEXT NOT NULL, " + ORG_NAME + " TEXT NOT NULL, " + ORG_PASSWORD + " TEXT NOT NULL, " + ORG_VERIFIED + " INTEGER NOT NULL);";
 
         String createCategoryTable = "CREATE TABLE " + CATEGORY_TABLE + " (" + CAT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + CATEGORY_NAME + " TEXT NOT NULL, " + CATEGORY_DESC + " TEXT NOT NULL, " + CATEGORY_IMAGE + " BLOB NOT NULL);";
 
         String createUsersGoalTable = "CREATE TABLE " + USERGOAL_TABLE + " (" + GOAL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + GOALTYPE_ID + " INTEGER NOT NULL, "
                 + USER_ID + " INTEGER NOT NULL, " + GOAL_NAME + " TEXT NOT NULL, " + GOAL_DESC + " TEXT NOT NULL, " + CREATED + " TEXT NOT NULL, "
-                + COMPLETED + " TEXT, " + ACCOMPLISHED + " INTEGER DEFAULT 0, FOREIGN KEY (" + GOALTYPE_ID + ") REFERENCES " + CATEGORY_TABLE + " (" + CAT_ID + "), FOREIGN KEY (" + USER_ID + ") REFERENCES " + USERS_TABLE + "(" + USER_ID + "));";
+                + COMPLETED + " TEXT, " + ACCOMPLISHED + " INTEGER DEFAULT 0, FOREIGN KEY (" + GOALTYPE_ID +") REFERENCES " + CATEGORY_TABLE + " (" + CAT_ID + "), FOREIGN KEY (" + USER_ID + ") REFERENCES " + USERS_TABLE + "(" + USER_ID + "));";
 
         db.execSQL(createUsersTable);
         db.execSQL(createOrgUsersTable);
@@ -145,7 +145,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         else return true;
     }
 
-    public boolean allowRegister(OrgUsers orgUsers) {
+    public boolean allowRegister(OrgUsers orgUsers){
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(ORG_EMAILADDRESS, orgUsers.getEmail_address());
@@ -163,10 +163,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
+
     // add profile picture image to users
     public void addImage(byte[] image, String user) {
         SQLiteDatabase database = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
+        ContentValues cv = new  ContentValues();
         cv.put(USER_PROFILE_IMAGE, image);
         database.update(USERS_TABLE, cv, "username ='" + user + "'", null);
     }
@@ -182,27 +183,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
-    // deletes admin by username and where userRole = admin
-    // if return > 0 == true; (delete successful)
-    // if return == 0 == false; (delete unsuccessful)
-    public boolean deleteAdmin(String username) {
-        SQLiteDatabase database = this.getWritableDatabase();
-        return database.delete(USERS_TABLE, "username = '" + username + "' AND UserRole = 'Admin'", null) > 0;
-    }
 
-    public int checkAdminExists(String u) {
-        int adminExists = 0;
-        String sql = "SELECT COUNT(*) FROM Users WHERE username = '" + u + "' AND UserRole = 'Admin'";
-        Cursor cursor = getReadableDatabase().rawQuery(sql, null);
-        if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            adminExists = cursor.getInt(0);
-        }
-        cursor.close();
-        return adminExists;
-    }
-
-    public int updateSenior(int phoneNumb) {
+    public int updateSenior(int phoneNumb ) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(USER_PHONE_NO, phoneNumb);
@@ -217,7 +199,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public Bitmap retrieveImage(String u) {
         String sql = "SELECT image FROM Users WHERE username='" + u + "'";
         Cursor cursor = getReadableDatabase().rawQuery(sql, null);
-        if (cursor.moveToFirst()) {
+        if (cursor.moveToFirst()){
             byte[] imgByte = cursor.getBlob(0);
             cursor.close();
             if (imgByte != null) {
@@ -232,12 +214,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
+
     // checks for username duplicates in database
     public int checkUsernameDuplicate(String u) {
         int usernameCount = 0;
-        String sql = "SELECT COUNT(username) FROM Users WHERE username = '" + u + "'";
+        String sql = "SELECT COUNT(username) FROM Users WHERE username = '"+ u +"'";
         Cursor cursor = getReadableDatabase().rawQuery(sql, null);
-        if (cursor.getCount() > 0) {
+        if(cursor.getCount() > 0) {
             cursor.moveToFirst();
             usernameCount = cursor.getInt(0);
         }
@@ -248,9 +231,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     //checks for email dplicates in database
     public int checkEmailDuplicate(String e) {
         int emailCount = 0;
-        String sql = "SELECT COUNT(email_address) FROM OrgUsers WHERE email_address ='" + e + "'";
+        String sql = "SELECT COUNT(email_address) FROM OrgUsers WHERE email_address ='" + e +"'";
         Cursor cursor = getReadableDatabase().rawQuery(sql, null);
-        if (cursor.getCount() > 0) {
+        if(cursor.getCount() > 0) {
             cursor.moveToFirst();
             emailCount = cursor.getInt(0);
         }
@@ -272,9 +255,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // validate login by checking if username and password matches
     public int validateLogin(String u, String p) {
         int rowCount = 0;
-        String sql = "SELECT COUNT() FROM Users WHERE username = '" + u + "' AND password = '" + p + "'";
+        String sql = "SELECT COUNT() FROM Users WHERE username = '"+ u +"' AND password = '"+ p + "'";
         Cursor cursor = getReadableDatabase().rawQuery(sql, null);
-        if (cursor.getCount() > 0) {
+        if(cursor.getCount() > 0) {
             cursor.moveToFirst();
             rowCount = cursor.getInt(0);
         }
@@ -285,9 +268,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // valid org login
     public int validateOrgLogin(String e, String p) {
         int rowCount = 0;
-        String sql = "SELECT COUNT() FROM OrgUsers WHERE email_address ='" + e + "' AND password = '" + p + "'";
+        String sql = "SELECT COUNT() FROM OrgUsers WHERE email_address ='" + e +"' AND password = '" + p + "'";
         Cursor cursor = getReadableDatabase().rawQuery(sql, null);
-        if (cursor.getCount() > 0) {
+        if(cursor.getCount() > 0) {
             cursor.moveToFirst();
             rowCount = cursor.getInt(0);
         }
@@ -296,12 +279,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     //validate if organisation's login = email
-    public int checkOrgLogin(String email, String password) {
+    public int checkOrgLogin(String email, String password){
         int rowCount = 0;
-        String sql = "SELECT COUNT() FROM OrgUsers WHERE email_address = '" + email + "' AND password = '" + password + "'";
+        String sql = "SELECT COUNT() FROM OrgUsers WHERE email_address = '"+ email +"' AND password = '"+ password +"'";
         Cursor cursor = getReadableDatabase().rawQuery(sql, null);
 
-        if (cursor.getCount() > 0) {
+        if(cursor.getCount() > 0) {
             cursor.moveToFirst();
             rowCount = cursor.getInt(0);
         }
@@ -311,20 +294,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     // checks for the type of user. user / admin / organisation
     public String checkAccountType(String u) {
-        String userType = "";
-        String sql = "SELECT UserRole from Users WHERE username = '" + u + "'";
+        String userType ="";
+        String sql = "SELECT UserRole from Users WHERE username = '"+ u +"'";
         Cursor c = getReadableDatabase().rawQuery(sql, null);
-        if (c.moveToFirst()) {
+        if(c.moveToFirst()) {
             userType = c.getString(0);
         }
         return userType;
     }
 
     public String getUserFullName(String u) {
-        String userFullName = "";
+        String userFullName ="";
         String sql = "SELECT fullname FROM Users WHERE username ='" + u + "'";
         Cursor c = getReadableDatabase().rawQuery(sql, null);
-        if (c.moveToFirst()) {
+        if(c.moveToFirst()) {
             userFullName = c.getString(0);
         }
         return userFullName;
@@ -332,10 +315,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     // obtain username
     public String getUserName(String un) {
-        String userName = "";
+        String userName ="";
         String sql = "SELECT username FROM Users WHERE username ='" + un + "'";
         Cursor c = getReadableDatabase().rawQuery(sql, null);
-        if (c.moveToFirst()) {
+        if(c.moveToFirst()) {
             userName = c.getString(0);
         }
         return userName;
@@ -343,10 +326,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     //obtain DOB
     public String getDateOfBirth(String dob) {
-        String getDOB = "";
+        String getDOB ="";
         String sql = "SELECT dob FROM Users WHERE username ='" + dob + "'";
         Cursor c = getReadableDatabase().rawQuery(sql, null);
-        if (c.moveToFirst()) {
+        if(c.moveToFirst()) {
             getDOB = c.getString(0);
         }
         return getDOB;
@@ -354,10 +337,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     //obtain phone number
     public String getPhoneNumber(String pn) {
-        String getpn = "";
+        String getpn ="";
         String sql = "SELECT phoneno FROM Users WHERE username ='" + pn + "'";
         Cursor c = getReadableDatabase().rawQuery(sql, null);
-        if (c.moveToFirst()) {
+        if(c.moveToFirst()) {
             getpn = c.getString(0);
         }
         return getpn;
@@ -365,10 +348,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     //obtain Address
     public String getUserAddress(String a) {
-        String getadd = "";
+        String getadd ="";
         String sql = "SELECT address FROM Users WHERE username ='" + a + "'";
         Cursor c = getReadableDatabase().rawQuery(sql, null);
-        if (c.moveToFirst()) {
+        if(c.moveToFirst()) {
             getadd = c.getString(0);
         }
         return getadd;
@@ -380,7 +363,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;
-        if (db != null) {
+        if(db != null){
             cursor = db.rawQuery(sql, null);
         }
         return cursor;
@@ -391,7 +374,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;
-        if (db != null) {
+        if(db != null){
             cursor = db.rawQuery(sql, null);
         }
         return cursor;
@@ -402,7 +385,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;
-        if (db != null) {
+        if(db != null){
             cursor = db.rawQuery(sql, null);
         }
         return cursor;
@@ -413,10 +396,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(ORG_VERIFIED, 1);
-        long result = db.update(ORGUSER_TABLE, cv, "org_name=?", new String[]{name});
-        if (result == -1) {
+        long result =db.update(ORGUSER_TABLE, cv, "org_name=?", new String[]{name});
+        if (result == -1){
             return false;
-        } else return true;
+        }
+        else return true;
     }
 
     // add category to the table
@@ -437,7 +421,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         int categoryCount = 0;
         String sql = "SELECT COUNT(category_name) FROM Category WHERE category_name ='" + c + "'";
         Cursor cursor = getReadableDatabase().rawQuery(sql, null);
-        if (cursor.getCount() > 0) {
+        if(cursor.getCount() > 0) {
             cursor.moveToFirst();
             categoryCount = cursor.getInt(0);
         }
@@ -446,12 +430,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
+
+
     // retrieves the type of category to be shown in the choosing goal page.
     public Cursor retrieveCategory() {
         String sql = "SELECT category_name, category_desc, category_image FROM Category";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
-        if (db != null) {
+        if(db != null){
             cursor = db.rawQuery(sql, null);
         }
         return cursor;
@@ -462,7 +448,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         int id = 0;
         String sql = "SELECT user_id FROM Users WHERE username ='" + name + "'";
         Cursor c = getReadableDatabase().rawQuery(sql, null);
-        if (c.moveToFirst()) {
+        if(c.moveToFirst()) {
             id = c.getInt(0);
         }
         return id;
@@ -472,7 +458,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         int id = 0;
         String sql = "SELECT category_id FROM Category WHERE category_name ='" + categoryName + "'";
         Cursor c = getReadableDatabase().rawQuery(sql, null);
-        if (c.moveToFirst()) {
+        if(c.moveToFirst()) {
             id = c.getInt(0);
         }
         return id;
@@ -492,7 +478,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         database.close();
         if (insert == -1) {
             return false;
-        } else return true;
+        }
+        else return true;
     }
     // retrieves category_id from category table for inserting goals
 
@@ -502,7 +489,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "INNER JOIN Category c ON ug.goal_type_id = c.category_id;";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
-        if (db != null) {
+        if(db != null){
             cursor = db.rawQuery(sql, null);
         }
         return cursor;
@@ -522,7 +509,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         int goalCount = 0;
         String sql = "SELECT COUNT(*) FROM UserGoalTable ug INNER JOIN Users u ON ug.user_id = u.user_id WHERE u.username = '" + username + "';";
         Cursor cursor = getReadableDatabase().rawQuery(sql, null);
-        if (cursor.getCount() > 0) {
+        if(cursor.getCount() > 0) {
             cursor.moveToFirst();
             goalCount = cursor.getInt(0);
         }
@@ -530,9 +517,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return goalCount;
 
     }
+
+
+
+
+
 }
-
-
-
-
-
