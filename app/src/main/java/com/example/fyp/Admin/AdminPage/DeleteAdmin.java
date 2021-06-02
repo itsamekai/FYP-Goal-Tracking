@@ -19,6 +19,7 @@ public class DeleteAdmin extends AppCompatActivity {
     public Button deleteAdmin;
     public DataBaseHelper databaseHelper;
 
+    //test
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,9 +47,10 @@ public class DeleteAdmin extends AppCompatActivity {
                 if (databaseHelper.checkAdminExists(username) == 0) {
                     Toast.makeText(this, "Please enter a valid username.", Toast.LENGTH_SHORT).show();
                 } else {
-                    Intent returnprev = new Intent(this, ConfirmDeleteAdmin.class);
-                    returnprev.putExtra("username", username);
-                    startActivity(returnprev);
+                    Intent goNext = new Intent(this, ConfirmDeleteAdmin.class);
+                    goNext.putExtra("username", username);
+                    startActivity(goNext);
+                    System.out.println("it works");
                 }
             }
 
