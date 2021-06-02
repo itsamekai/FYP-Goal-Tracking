@@ -38,8 +38,8 @@ public class ProfilePageEdit extends AppCompatActivity {
     public TextView user_fullname1;
     public TextView user_fullname2;
     public TextView DOB1;
-    public TextView phonenumber1;
-    public TextView address1;
+    public EditText phonenumber1;
+    public EditText address1;
     public DataBaseHelper db;
     public DataBaseHelper databaseHelper;
     private static int GET_FROM_GALLERY = 1;
@@ -86,13 +86,13 @@ public class ProfilePageEdit extends AppCompatActivity {
         DOB1.setText(db.getDateOfBirth(uniqueString3));
 
         // gets the PhoneNumber of the user to display
-        phonenumber1 = (TextView) findViewById(R.id.phonenumber1);
+        phonenumber1 = (EditText) findViewById(R.id.phonenumber1);
         String uniqueString4 = getIntent().getStringExtra("username");
         db = new DataBaseHelper(this);
         phonenumber1.setText(db.getPhoneNumber(uniqueString4));
 
         // gets the Address of the user to display
-        address1 = (TextView) findViewById(R.id.address1);
+        address1 = (EditText) findViewById(R.id.address1);
         String uniqueString5 = getIntent().getStringExtra("username");
         db = new DataBaseHelper(this);
         address1.setText(db.getUserAddress(uniqueString5));
@@ -109,16 +109,19 @@ public class ProfilePageEdit extends AppCompatActivity {
                 databaseHelper = new DataBaseHelper(this);
                 String phoneNo = phonenumber1.getText().toString();
                 String address = address1.getText().toString();
-                if (checkAll(phoneNo,address)) {
-                    int updated = databaseHelper.updateAdmin(uniqueString, address, Integer.parseInt(phoneNo));
-                    if (updated == 0) {
+                if (checkAll(phoneNo)) {
+                    int updated = databaseHelper.updateSenior(Integer.parseInt(phoneNo));
+                    if (updated == 1) {
                         Toast.makeText(this, "Failed to update.", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(this, "Updated Successfully.", Toast.LENGTH_SHORT).show();
-                        Intent returnPage = new Intent(this, ProfilePage.class);
-                        returnPage.putExtra("username", uniqueString);
-                        startActivity(returnPage);
+                        Intent profilepage = new Intent(this, ProfilePage.class);
+                        profilepage.putExtra("username", uniqueString);
+                        startActivity(profilepage);
                     }
+                }
+                else {
+                    Toast.makeText(this, validateMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -147,14 +150,17 @@ public class ProfilePageEdit extends AppCompatActivity {
         }
         return word;
     }
-    // checkifempty
-    private boolean checkIfEmpty () {
+    // checkifempty(phone number)
+    private boolean checkIfEmpty() {
         if (phonenumber1.getText().toString().matches("")) {
             return true;
-        } else return false;
+        }
+
+        else return false;
     }
+
     // checks all at once
-    private boolean checkAll(String password, String phoneNo) {
+    private boolean checkAll(String phoneNo) {
         if (checkValidPhoneNumber(phoneNo)) {
             return true;
         }

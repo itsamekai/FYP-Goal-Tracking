@@ -166,6 +166,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public int updateSenior(int phoneNumb ) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(USER_PHONE_NO, phoneNumb);
+        int update = database.update(USERS_TABLE, cv, "username=?", new String[]{});
+        database.close();
+        return update;
+
+    }
+
 
     // retrieves image.
     public Bitmap retrieveImage(String u) {
