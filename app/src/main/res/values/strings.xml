@@ -105,12 +105,21 @@
     <string name="ManageAdmin">Manage Admins Button</string>
     <string name="ApproveOrgs">Approve Organisations Button</string>
 
-    <!-- strings for manage admin page (activity_manage_admin_age.xml) -->
+    <!-- strings for manage admin page (activity_manage_admin_page.xml) -->
     <string name="manage_admin_page_string">Admin Page</string>
     <string name="adminIcon">Admin icon</string>
     <string name="CreateAdminButton">Create Admin</string>
     <string name="UpdateAdminButton">Update Admin</string>
     <string name="DeleteAdmin">Delete Admin</string>
+
+    <!-- strings for delete admin page (activity_delete_admin_page.xml) -->
+    <string name="delete_admin_page_string">Delete Admin</string>
+    <string name="adminDeleteUsername">Username</string>
+    <string name="adminDeleteAdminButton">Delete</string>
+
+    <!-- strings for confirm delete admin page (activity_confirm_delete_admin_page.xml) -->
+    <string name="confirm_delete_admin_page_string">Confirm Delete</string>
+    <string name="adminConfirmDeleteAdminButton">ConfirmDelete</string>
 
     <!-- strings for create admin page (activity_create_admin.xml) -->
     <string name="create_admin_page_string">Create Admin</string>

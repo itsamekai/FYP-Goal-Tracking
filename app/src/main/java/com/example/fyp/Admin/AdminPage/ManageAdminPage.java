@@ -15,6 +15,7 @@ public class ManageAdminPage extends AppCompatActivity {
     public ImageView returnButton;
     public TextView createAdmin;
     public TextView updateAdmin;
+    public TextView deleteAdmin;
 
 
     @Override
@@ -43,6 +44,13 @@ public class ManageAdminPage extends AppCompatActivity {
             Intent update = new Intent(this, UpdateAdmin.class);
             update.putExtra("username", uniqueString);
             startActivity(update);
+        });
+
+        deleteAdmin = (TextView) findViewById(R.id.DeleteAdminButton);
+        deleteAdmin.setOnClickListener(v -> {
+            Intent delete = new Intent(this, DeleteAdmin.class);
+            delete.putExtra("username", uniqueString);
+            startActivity(delete);
         });
 
 
