@@ -12,6 +12,7 @@ public class ConfirmDeleteAdmin extends AppCompatActivity {
     public ImageView returnArrow;
     public Button confirmDeleteAdmin;
 
+    //test
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

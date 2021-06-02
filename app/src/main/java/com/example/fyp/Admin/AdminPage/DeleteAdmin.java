@@ -19,6 +19,7 @@ public class DeleteAdmin extends AppCompatActivity {
     public Button deleteAdmin;
     public DataBaseHelper databaseHelper;
 
+    //test
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
