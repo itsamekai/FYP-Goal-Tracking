@@ -15,7 +15,7 @@ public class ConfirmDeleteAdmin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_delete_admin);
+        setContentView(R.layout.activity_confirm_delete_admin);
         String uniqueString = getIntent().getStringExtra("username");
 
         // return to prev page
