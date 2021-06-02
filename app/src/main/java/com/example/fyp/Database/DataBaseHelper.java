@@ -75,17 +75,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         // creates the Users table
-        String createUsersTable ="CREATE TABLE " + USERS_TABLE + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USERNAME + " TEXT NOT NULL, " + PASSWORD + " TEXT NOT NULL, "
+        String createUsersTable = "CREATE TABLE " + USERS_TABLE + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USERNAME + " TEXT NOT NULL, " + PASSWORD + " TEXT NOT NULL, "
                 + FULLNAME + " TEXT NOT NULL, " + DOB + " TEXT NOT NULL, " + USER_PHONE_NO + " INTEGER NOT NULL, " + USER_ROLE + " TEXT NOT NULL, " + USER_ADDRESS + " TEXT NOT NULL, " + USER_PROFILE_IMAGE + " BLOB);";
 
-        String createOrgUsersTable ="CREATE TABLE " + ORGUSER_TABLE + " (" + ORG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ORG_EMAILADDRESS + " TEXT NOT NULL, " + ORG_CONTACT_NO + " TEXT NOT NULL, " + ORG_CONTACT_NAME + " TEXT NOT NULL, "
+        String createOrgUsersTable = "CREATE TABLE " + ORGUSER_TABLE + " (" + ORG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ORG_EMAILADDRESS + " TEXT NOT NULL, " + ORG_CONTACT_NO + " TEXT NOT NULL, " + ORG_CONTACT_NAME + " TEXT NOT NULL, "
                 + ORG_ADDRESS + " TEXT NOT NULL, " + ORG_NAME + " TEXT NOT NULL, " + ORG_PASSWORD + " TEXT NOT NULL, " + ORG_VERIFIED + " INTEGER NOT NULL);";
 
         String createCategoryTable = "CREATE TABLE " + CATEGORY_TABLE + " (" + CAT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + CATEGORY_NAME + " TEXT NOT NULL, " + CATEGORY_DESC + " TEXT NOT NULL, " + CATEGORY_IMAGE + " BLOB NOT NULL);";
 
         String createUsersGoalTable = "CREATE TABLE " + USERGOAL_TABLE + " (" + GOAL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + GOALTYPE_ID + " INTEGER NOT NULL, "
                 + USER_ID + " INTEGER NOT NULL, " + GOAL_NAME + " TEXT NOT NULL, " + GOAL_DESC + " TEXT NOT NULL, " + CREATED + " TEXT NOT NULL, "
-                + COMPLETED + " TEXT, " + ACCOMPLISHED + " INTEGER DEFAULT 0, FOREIGN KEY (" + GOALTYPE_ID +") REFERENCES " + CATEGORY_TABLE + " (" + CAT_ID + "), FOREIGN KEY (" + USER_ID + ") REFERENCES " + USERS_TABLE + "(" + USER_ID + "));";
+                + COMPLETED + " TEXT, " + ACCOMPLISHED + " INTEGER DEFAULT 0, FOREIGN KEY (" + GOALTYPE_ID + ") REFERENCES " + CATEGORY_TABLE + " (" + CAT_ID + "), FOREIGN KEY (" + USER_ID + ") REFERENCES " + USERS_TABLE + "(" + USER_ID + "));";
 
         db.execSQL(createUsersTable);
         db.execSQL(createOrgUsersTable);
@@ -128,7 +128,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         else return true;
     }
 
-    public boolean allowRegister(OrgUsers orgUsers){
+    public boolean allowRegister(OrgUsers orgUsers) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(ORG_EMAILADDRESS, orgUsers.getEmail_address());
@@ -146,11 +146,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
-
     // add profile picture image to users
     public void addImage(byte[] image, String user) {
         SQLiteDatabase database = this.getWritableDatabase();
-        ContentValues cv = new  ContentValues();
+        ContentValues cv = new ContentValues();
         cv.put(USER_PROFILE_IMAGE, image);
         database.update(USERS_TABLE, cv, "username ='" + user + "'", null);
     }
@@ -166,15 +165,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public int updateSenior(int phoneNumb ) {
+    public int updateSenior(String username,int phoneNumb,String address) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(USER_PHONE_NO, phoneNumb);
-        int update = database.update(USERS_TABLE, cv, "username=?", new String[]{});
+        cv.put(USER_ADDRESS, address);
+        int update = database.update(USERS_TABLE, cv, "username=?", new String[]{username});
         database.close();
         return update;
-
     }
+
 
 
     // retrieves image.

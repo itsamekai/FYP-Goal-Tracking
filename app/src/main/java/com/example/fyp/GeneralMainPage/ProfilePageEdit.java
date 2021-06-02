@@ -38,7 +38,7 @@ public class ProfilePageEdit extends AppCompatActivity {
     public TextView user_fullname1;
     public TextView user_fullname2;
     public TextView DOB1;
-    public EditText phonenumber1;
+    public EditText phonenumber2;
     public EditText address1;
     public DataBaseHelper db;
     public DataBaseHelper databaseHelper;
@@ -86,10 +86,10 @@ public class ProfilePageEdit extends AppCompatActivity {
         DOB1.setText(db.getDateOfBirth(uniqueString3));
 
         // gets the PhoneNumber of the user to display
-        phonenumber1 = (EditText) findViewById(R.id.phonenumber1);
+        phonenumber2 = (EditText) findViewById(R.id.phonenumber1);
         String uniqueString4 = getIntent().getStringExtra("username");
         db = new DataBaseHelper(this);
-        phonenumber1.setText(db.getPhoneNumber(uniqueString4));
+        phonenumber2.setText(db.getPhoneNumber(uniqueString4));
 
         // gets the Address of the user to display
         address1 = (EditText) findViewById(R.id.address1);
@@ -98,7 +98,7 @@ public class ProfilePageEdit extends AppCompatActivity {
         address1.setText(db.getUserAddress(uniqueString5));
 
         // update button
-        phonenumber1 = findViewById(R.id.phonenumber1);
+        phonenumber2 = findViewById(R.id.phonenumber1);
         updateb = (Button) findViewById(R.id.updatebutton);
         updateb.setOnClickListener(v -> {
             if (checkIfEmpty()) {
@@ -106,12 +106,13 @@ public class ProfilePageEdit extends AppCompatActivity {
                 return;
             } else {
                 Users senior;
-                databaseHelper = new DataBaseHelper(this);
-                String phoneNo = phonenumber1.getText().toString();
+                db = new DataBaseHelper(this);
+                String phoneNo = phonenumber2.getText().toString();
                 String address = address1.getText().toString();
-                if (checkAll(phoneNo)) {
-                    int updated = databaseHelper.updateSenior(Integer.parseInt(phoneNo));
-                    if (updated == 1) {
+                String userName = user_fullname1.getText().toString();
+                if (checkValidPhoneNumber(phoneNo)) {
+                    int updated = db.updateSenior(userName,Integer.parseInt(phoneNo),address);
+                    if (updated == 0) {
                         Toast.makeText(this, "Failed to update.", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(this, "Updated Successfully.", Toast.LENGTH_SHORT).show();
@@ -145,14 +146,14 @@ public class ProfilePageEdit extends AppCompatActivity {
 
     private String validateMessage() {
         String word = "";
-        if (!checkValidPhoneNumber(phonenumber1.getText().toString())) {
+        if (!checkValidPhoneNumber(phonenumber2.getText().toString())) {
             word += "Invalid phone number.";
         }
         return word;
     }
     // checkifempty(phone number)
     private boolean checkIfEmpty() {
-        if (phonenumber1.getText().toString().matches("")) {
+        if (phonenumber2.getText().toString().matches("")) {
             return true;
         }
 
