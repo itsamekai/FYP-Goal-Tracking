@@ -181,7 +181,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return update;
     }
 
-
+    //test
     // deletes admin by username and where userRole = admin
     // if return > 0 == true; (delete successful)
     // if return == 0 == false; (delete unsuccessful)
