@@ -128,6 +128,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         else return true;
     }
 
+    public boolean addTemporaryAdmin() {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(USERNAME, "testadmin");
+        cv.put(PASSWORD, "Admin123!");
+        cv.put(FULLNAME, "alyssa noob");
+        cv.put(DOB, "12/5/2021");
+        cv.put(USER_PHONE_NO, 81112354);
+        cv.put(USER_ROLE, "Admin");
+        cv.put(USER_ADDRESS, "WHC");
+        cv.putNull(USER_PROFILE_IMAGE);
+        long insert = database.insert(USERS_TABLE, null, cv);
+        database.close();
+        if (insert == -1) return false;
+        else return true;
+    }
+
     public boolean allowRegister(OrgUsers orgUsers){
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
