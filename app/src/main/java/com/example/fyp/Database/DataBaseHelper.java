@@ -203,11 +203,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return adminExists;
     }
 
-    public int updateSenior(int phoneNumb) {
+    public int updateSenior(String username, String address, int phoneNumb ) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(USER_PHONE_NO, phoneNumb);
-        int update = database.update(USERS_TABLE, cv, "username=?", new String[]{});
+        cv.put(USER_ADDRESS, address);
+        int update = database.update(USERS_TABLE, cv, "username=?", new String[]{username});
         database.close();
         return update;
 
