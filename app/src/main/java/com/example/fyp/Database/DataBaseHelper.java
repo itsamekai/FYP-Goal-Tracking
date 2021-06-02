@@ -163,8 +163,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         int update = database.update(USERS_TABLE, cv, "username=?", new String[]{username});
         database.close();
         return update;
-
     }
+
+
 
     public int updateSenior(int phoneNumb ) {
         SQLiteDatabase database = this.getWritableDatabase();
@@ -412,6 +413,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
+
+
     // retrieves the type of category to be shown in the choosing goal page.
     public Cursor retrieveCategory() {
         String sql = "SELECT category_name, category_desc, category_image FROM Category";
@@ -474,6 +477,31 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return cursor;
     }
+
+    public Cursor trackingGoals(String username) {
+        String sql = "SELECT ug.goal_name, ug.goal_desc FROM UserGoalTable ug INNER JOIN Users u ON ug.user_id = u.user_id WHERE ug.accomplished = 0 AND u.username = '" + username + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = null;
+        if (db != null) {
+            c = db.rawQuery(sql, null);
+        }
+        return c;
+    }
+
+    public int TotalGoals(String username) {
+        int goalCount = 0;
+        String sql = "SELECT COUNT(*) FROM UserGoalTable ug INNER JOIN Users u ON ug.user_id = u.user_id WHERE u.username = '" + username + "';";
+        Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+        if(cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            goalCount = cursor.getInt(0);
+        }
+        cursor.close();
+        return goalCount;
+
+    }
+
+
 
 
 

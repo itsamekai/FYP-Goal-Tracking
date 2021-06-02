@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingGoals.SetGoal">
+    tools:context=".Goals.SetGoal">
 
     <TextView
         android:id="@+id/textView5"
@@ -83,7 +83,7 @@
         android:contentDescription="@string/inputWeight"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="testing hello there description"
+        android:hint="What is this goal for?"
         android:fontFamily="@font/poppins"
         android:textColor="#A3A3A3"
         android:textSize="15sp"
@@ -118,7 +118,7 @@
         android:ems="10"
         android:fontFamily="@font/poppins"
         android:inputType="textPersonName"
-        android:text="TESTING"
+        android:hint="Name of goal!"
         android:textColor="#A3A3A3"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/textView8"

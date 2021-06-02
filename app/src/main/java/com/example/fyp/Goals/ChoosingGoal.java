@@ -1,4 +1,4 @@
-package com.example.fyp.SettingGoals;
+package com.example.fyp.Goals;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,7 +18,6 @@ import com.example.fyp.Database.DataBaseHelper;
 import com.example.fyp.GeneralMainPage.MainHomePage;
 import com.example.fyp.R;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ChoosingGoal extends AppCompatActivity {

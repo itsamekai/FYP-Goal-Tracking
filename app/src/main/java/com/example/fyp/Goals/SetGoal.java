@@ -1,15 +1,11 @@
-package com.example.fyp.SettingGoals;
+package com.example.fyp.Goals;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,9 +13,6 @@ import com.example.fyp.Database.DataBaseHelper;
 import com.example.fyp.GeneralMainPage.MainHomePage;
 import com.example.fyp.ObjectClass.UsersGoal;
 import com.example.fyp.R;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class SetGoal extends AppCompatActivity {
 
@@ -38,8 +31,14 @@ public class SetGoal extends AppCompatActivity {
 
         GoalName = findViewById(R.id.userGoalName);
         GoalDesc = findViewById(R.id.userGoalDesc);
-        createGoal = findViewById(R.id.createUserGoal);
+        arrow = findViewById(R.id.SetGoalArrowBack);
+        arrow.setOnClickListener(v -> {
+            Intent returnback = new Intent(this, ChoosingGoal.class);
+            returnback.putExtra("username", uniqueString);
+            startActivity(returnback);
+        });
 
+        createGoal = findViewById(R.id.createUserGoal);
         createGoal.setOnClickListener(v -> {
             db = new DataBaseHelper(this);
             if (!checkIfEmpty()) {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingGoals.ChoosingGoal"
+    tools:context=".Goals.ChoosingGoal"
     android:background="@drawable/setting_goals">
 
     <ImageView

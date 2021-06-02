@@ -10,9 +10,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fyp.Database.DataBaseHelper;
+import com.example.fyp.Goals.TrackingGoal;
 import com.example.fyp.Login.LoginPage;
 import com.example.fyp.R;
-import com.example.fyp.SettingGoals.ChoosingGoal;
+import com.example.fyp.Goals.ChoosingGoal;
 
 public class MainHomePage extends AppCompatActivity {
 
@@ -22,11 +23,13 @@ public class MainHomePage extends AppCompatActivity {
     public ImageView profileB;
     public ImageView profilePic;
     public ImageView setGoalsB;
+    public ImageView trackGoalsB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_home_page);
+        String uniqueString = getIntent().getStringExtra("username");
 
         db = new DataBaseHelper(this);
         Bitmap image = db.retrieveImage(getIntent().getStringExtra("username"));
@@ -38,7 +41,6 @@ public class MainHomePage extends AppCompatActivity {
 
         // gets the name of the user to display
         full_name = (TextView) findViewById(R.id.user_fullname);
-        String uniqueString = getIntent().getStringExtra("username");
         db = new DataBaseHelper(this);
         full_name.setText(db.getUserFullName(uniqueString));
 
@@ -59,12 +61,20 @@ public class MainHomePage extends AppCompatActivity {
         });
 
 
-        // Button redirects
+        // Button redirects - set goals
         setGoalsB = (ImageView) findViewById(R.id.setGoals_button);
         setGoalsB.setOnClickListener(v -> {
             Intent setGoalsPage = new Intent(this, ChoosingGoal.class);
             setGoalsPage.putExtra("username", uniqueString);
             startActivity(setGoalsPage);
+        });
+
+        // Tracking of Goals
+        trackGoalsB = (ImageView) findViewById(R.id.monitorGoals_button);
+        trackGoalsB.setOnClickListener(v -> {
+            Intent trackGoalsPage = new Intent(this, TrackingGoal.class);
+            trackGoalsPage.putExtra("username", uniqueString);
+            startActivity(trackGoalsPage);
         });
 
 

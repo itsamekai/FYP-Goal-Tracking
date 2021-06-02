@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
-        <activity android:name=".Admin.UserPage.SearchUserGoal"></activity>
+        <activity android:name=".Goals.CompletingGoal"></activity>
+        <activity android:name=".Goals.TrackingGoal" />
+        <activity android:name=".Admin.UserPage.SearchUserGoal" />
         <activity android:name=".OrganisationPage.orgPage" />
         <activity android:name=".Admin.CategoryPage.UpdateCategory" />
         <activity android:name=".Admin.CategoryPage.CreateCategory" />
@@ -25,8 +27,8 @@
         <activity android:name=".Admin.CategoryPage.ManageCategoryPage" />
         <activity android:name=".Admin.AdminPage.ManageAdminPage" />
         <activity android:name=".Admin.MainAdminPage" />
-        <activity android:name=".SettingGoals.SetGoal" />
-        <activity android:name=".SettingGoals.ChoosingGoal" />
+        <activity android:name=".Goals.SetGoal" />
+        <activity android:name=".Goals.ChoosingGoal" />
         <activity android:name=".GeneralMainPage.ProfilePage" />
         <activity android:name=".GeneralMainPage.ProfilePageEdit" />
         <activity android:name=".GeneralMainPage.MainHomePage" />
