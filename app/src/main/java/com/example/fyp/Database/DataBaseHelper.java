@@ -182,8 +182,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return update;
     }
 
-
-
+    //update senior
     public int updateSenior(int phoneNumb ) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
