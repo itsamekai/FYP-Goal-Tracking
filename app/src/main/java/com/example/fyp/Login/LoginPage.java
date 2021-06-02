@@ -30,6 +30,7 @@ public class LoginPage extends AppCompatActivity {
     public Button removeButton;
     public Button loginButton;
     public DataBaseHelper db;
+    public Button addAdmin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,16 @@ public class LoginPage extends AppCompatActivity {
             startActivity(intent);
         });
 
+        addAdmin = findViewById(R.id.removeButton);
+        addAdmin.setOnClickListener(v -> {
+            db = new DataBaseHelper(this);
+            if(db.addTemporaryAdmin()) {
+                Toast.makeText(this, "added test admin: user is testadmin", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Toast.makeText(this, "noob", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         usernameInput = (EditText) findViewById(R.id.inputUser);
         passwordInput = (EditText) findViewById(R.id.inputPassword);
@@ -54,13 +65,6 @@ public class LoginPage extends AppCompatActivity {
             }
         });
 
-
-        // temporary button to remove all fields for check
-        // lazy to write code l o l
-        removeButton = findViewById(R.id.removeButton);
-        removeButton.setOnClickListener(v -> {
-            String add = "";
-        });
 
 
     }

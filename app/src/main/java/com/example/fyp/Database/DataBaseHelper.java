@@ -75,17 +75,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         // creates the Users table
-        String createUsersTable = "CREATE TABLE " + USERS_TABLE + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USERNAME + " TEXT NOT NULL, " + PASSWORD + " TEXT NOT NULL, "
+        String createUsersTable ="CREATE TABLE " + USERS_TABLE + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USERNAME + " TEXT NOT NULL, " + PASSWORD + " TEXT NOT NULL, "
                 + FULLNAME + " TEXT NOT NULL, " + DOB + " TEXT NOT NULL, " + USER_PHONE_NO + " INTEGER NOT NULL, " + USER_ROLE + " TEXT NOT NULL, " + USER_ADDRESS + " TEXT NOT NULL, " + USER_PROFILE_IMAGE + " BLOB);";
 
-        String createOrgUsersTable = "CREATE TABLE " + ORGUSER_TABLE + " (" + ORG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ORG_EMAILADDRESS + " TEXT NOT NULL, " + ORG_CONTACT_NO + " TEXT NOT NULL, " + ORG_CONTACT_NAME + " TEXT NOT NULL, "
+        String createOrgUsersTable ="CREATE TABLE " + ORGUSER_TABLE + " (" + ORG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ORG_EMAILADDRESS + " TEXT NOT NULL, " + ORG_CONTACT_NO + " TEXT NOT NULL, " + ORG_CONTACT_NAME + " TEXT NOT NULL, "
                 + ORG_ADDRESS + " TEXT NOT NULL, " + ORG_NAME + " TEXT NOT NULL, " + ORG_PASSWORD + " TEXT NOT NULL, " + ORG_VERIFIED + " INTEGER NOT NULL);";
 
         String createCategoryTable = "CREATE TABLE " + CATEGORY_TABLE + " (" + CAT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + CATEGORY_NAME + " TEXT NOT NULL, " + CATEGORY_DESC + " TEXT NOT NULL, " + CATEGORY_IMAGE + " BLOB NOT NULL);";
 
         String createUsersGoalTable = "CREATE TABLE " + USERGOAL_TABLE + " (" + GOAL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + GOALTYPE_ID + " INTEGER NOT NULL, "
                 + USER_ID + " INTEGER NOT NULL, " + GOAL_NAME + " TEXT NOT NULL, " + GOAL_DESC + " TEXT NOT NULL, " + CREATED + " TEXT NOT NULL, "
-                + COMPLETED + " TEXT, " + ACCOMPLISHED + " INTEGER DEFAULT 0, FOREIGN KEY (" + GOALTYPE_ID + ") REFERENCES " + CATEGORY_TABLE + " (" + CAT_ID + "), FOREIGN KEY (" + USER_ID + ") REFERENCES " + USERS_TABLE + "(" + USER_ID + "));";
+                + COMPLETED + " TEXT, " + ACCOMPLISHED + " INTEGER DEFAULT 0, FOREIGN KEY (" + GOALTYPE_ID +") REFERENCES " + CATEGORY_TABLE + " (" + CAT_ID + "), FOREIGN KEY (" + USER_ID + ") REFERENCES " + USERS_TABLE + "(" + USER_ID + "));";
 
         db.execSQL(createUsersTable);
         db.execSQL(createOrgUsersTable);
@@ -128,7 +128,24 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         else return true;
     }
 
-    public boolean allowRegister(OrgUsers orgUsers) {
+    public boolean addTemporaryAdmin() {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(USERNAME, "testadmin");
+        cv.put(PASSWORD, "Admin123!");
+        cv.put(FULLNAME, "alyssa noob");
+        cv.put(DOB, "12/5/2021");
+        cv.put(USER_PHONE_NO, 81112354);
+        cv.put(USER_ROLE, "Admin");
+        cv.put(USER_ADDRESS, "WHC");
+        cv.putNull(USER_PROFILE_IMAGE);
+        long insert = database.insert(USERS_TABLE, null, cv);
+        database.close();
+        if (insert == -1) return false;
+        else return true;
+    }
+
+    public boolean allowRegister(OrgUsers orgUsers){
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(ORG_EMAILADDRESS, orgUsers.getEmail_address());
@@ -146,10 +163,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
+
     // add profile picture image to users
     public void addImage(byte[] image, String user) {
         SQLiteDatabase database = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
+        ContentValues cv = new  ContentValues();
         cv.put(USER_PROFILE_IMAGE, image);
         database.update(USERS_TABLE, cv, "username ='" + user + "'", null);
     }
@@ -162,19 +180,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         int update = database.update(USERS_TABLE, cv, "username=?", new String[]{username});
         database.close();
         return update;
-
     }
 
-    public int updateSenior(String username,int phoneNumb,String address) {
+
+
+    public int updateSenior(int phoneNumb ) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(USER_PHONE_NO, phoneNumb);
-        cv.put(USER_ADDRESS, address);
-        int update = database.update(USERS_TABLE, cv, "username=?", new String[]{username});
+        int update = database.update(USERS_TABLE, cv, "username=?", new String[]{});
         database.close();
         return update;
-    }
 
+    }
 
 
     // retrieves image.
@@ -412,6 +430,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
+
+
     // retrieves the type of category to be shown in the choosing goal page.
     public Cursor retrieveCategory() {
         String sql = "SELECT category_name, category_desc, category_image FROM Category";
@@ -474,6 +494,31 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return cursor;
     }
+
+    public Cursor trackingGoals(String username) {
+        String sql = "SELECT ug.goal_name, ug.goal_desc FROM UserGoalTable ug INNER JOIN Users u ON ug.user_id = u.user_id WHERE ug.accomplished = 0 AND u.username = '" + username + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = null;
+        if (db != null) {
+            c = db.rawQuery(sql, null);
+        }
+        return c;
+    }
+
+    public int TotalGoals(String username) {
+        int goalCount = 0;
+        String sql = "SELECT COUNT(*) FROM UserGoalTable ug INNER JOIN Users u ON ug.user_id = u.user_id WHERE u.username = '" + username + "';";
+        Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+        if(cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            goalCount = cursor.getInt(0);
+        }
+        cursor.close();
+        return goalCount;
+
+    }
+
+
 
 
 
