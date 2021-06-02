@@ -34,12 +34,13 @@ public class ProfilePageEdit extends AppCompatActivity {
     public ImageView profilePic;
     public ImageView uploadButton;
     public Button updateb;
-    public TextView user_fullname;
     public TextView user_fullname1;
     public TextView user_fullname2;
+    public TextView user_fullname3;
     public TextView DOB1;
     public EditText phonenumber2;
     public EditText address1;
+    public EditText aboutD;
     public DataBaseHelper db;
     public DataBaseHelper databaseHelper;
     private static int GET_FROM_GALLERY = 1;
@@ -52,6 +53,8 @@ public class ProfilePageEdit extends AppCompatActivity {
 
         profilePic = findViewById(R.id.ProfilePic);
         uploadButton = findViewById(R.id.upload1);
+        user_fullname3 = findViewById(R.id.user_fullname1);
+        aboutD = findViewById(R.id.aboutdetails);
 
 
         // sets image
@@ -64,10 +67,7 @@ public class ProfilePageEdit extends AppCompatActivity {
         }
 
         // gets the name of the user to display
-        user_fullname = (TextView) findViewById(R.id.user_fullname);
-        String uniqueString = getIntent().getStringExtra("username");
-        db = new DataBaseHelper(this);
-        user_fullname.setText(db.getUserFullName(uniqueString));
+
 
         user_fullname2 = (TextView) findViewById(R.id.user_fullname2);
         String uniqueString2 = getIntent().getStringExtra("username");
@@ -97,6 +97,12 @@ public class ProfilePageEdit extends AppCompatActivity {
         db = new DataBaseHelper(this);
         address1.setText(db.getUserAddress(uniqueString5));
 
+        // gets the about of the user to display
+        aboutD = (EditText) findViewById(R.id.aboutdetails);
+        String uniqueString6 = getIntent().getStringExtra("username");
+        db = new DataBaseHelper(this);
+        aboutD.setText(db.getUserAbout(uniqueString6));
+
         // update button
         phonenumber2 = findViewById(R.id.phonenumber1);
         updateb = (Button) findViewById(R.id.updatebutton);
@@ -110,15 +116,18 @@ public class ProfilePageEdit extends AppCompatActivity {
                 String phoneNo = phonenumber2.getText().toString();
                 String address = address1.getText().toString();
                 String userName = user_fullname1.getText().toString();
+                String about = aboutD.getText().toString();
+
                 if (checkValidPhoneNumber(phoneNo)) {
-                    int updated = db.updateSenior(userName,address,Integer.parseInt(phoneNo));
+                    int updated = db.updateSenior(userName,address,Integer.parseInt(phoneNo),about);
                     if (updated == 0) {
                         Toast.makeText(this, "Failed to update.", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(this, "Updated Successfully.", Toast.LENGTH_SHORT).show();
-                        Intent profilepage = new Intent(this, ProfilePage.class);
-                        profilepage.putExtra("username", uniqueString);
-                        startActivity(profilepage);
+                        String uniqueString = getIntent().getStringExtra("username");
+                        Intent returnPage = new Intent(this, MainHomePage.class);
+                        returnPage.putExtra("username", uniqueString);
+                        startActivity(returnPage);
+                        Toast.makeText(this, "OK", Toast.LENGTH_SHORT).show();
                     }
                 }
                 else {
@@ -133,7 +142,7 @@ public class ProfilePageEdit extends AppCompatActivity {
         uploadButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View arg0) {
-            startActivityForResult(new Intent(Intent.ACTION_GET_CONTENT, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
+            startActivityForResult(new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.INTERNAL_CONTENT_URI), GET_FROM_GALLERY);
         }
     });
 }
@@ -155,7 +164,7 @@ public class ProfilePageEdit extends AppCompatActivity {
     }
     // checkifempty(phone number)
     private boolean checkIfEmpty() {
-        if (phonenumber2.getText().toString().matches("")) {
+        if (phonenumber2.getText().toString().matches("") || address1.getText().toString().matches("") || aboutD.getText().toString().matches("")) {
             return true;
         }
 
@@ -181,6 +190,7 @@ public class ProfilePageEdit extends AppCompatActivity {
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
                 db = new DataBaseHelper(this);
+                db.addImage(getBytes(bitmap), getIntent().getStringExtra("username"));
                 profilePic.setImageBitmap(bitmap);
                 image = getBytes(bitmap);
 

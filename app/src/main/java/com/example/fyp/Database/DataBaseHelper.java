@@ -36,6 +36,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String USER_ROLE = "UserRole";
     public static final String USER_ADDRESS = "address";
     public static final String USER_PROFILE_IMAGE = "image";
+    public static final String USER_ABOUT = "about";
 
     //For OrgUsers
     public static final String ORGUSER_TABLE = "OrgUsers";
@@ -66,6 +67,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String COMPLETED = "datetime_completed";
     public static final String ACCOMPLISHED = "accomplished";
 
+
     public DataBaseHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
@@ -76,7 +78,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         // creates the Users table
         String createUsersTable ="CREATE TABLE " + USERS_TABLE + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USERNAME + " TEXT NOT NULL, " + PASSWORD + " TEXT NOT NULL, "
-                + FULLNAME + " TEXT NOT NULL, " + DOB + " TEXT NOT NULL, " + USER_PHONE_NO + " INTEGER NOT NULL, " + USER_ROLE + " TEXT NOT NULL, " + USER_ADDRESS + " TEXT NOT NULL, " + USER_PROFILE_IMAGE + " BLOB);";
+                + FULLNAME + " TEXT NOT NULL, " + DOB + " TEXT NOT NULL, " + USER_PHONE_NO + " INTEGER NOT NULL, " + USER_ROLE + " TEXT NOT NULL, " + USER_ADDRESS + " TEXT NOT NULL, " + USER_ABOUT + " TEXT, "+ USER_PROFILE_IMAGE + " BLOB);";
 
         String createOrgUsersTable ="CREATE TABLE " + ORGUSER_TABLE + " (" + ORG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ORG_EMAILADDRESS + " TEXT NOT NULL, " + ORG_CONTACT_NO + " TEXT NOT NULL, " + ORG_CONTACT_NAME + " TEXT NOT NULL, "
                 + ORG_ADDRESS + " TEXT NOT NULL, " + ORG_NAME + " TEXT NOT NULL, " + ORG_PASSWORD + " TEXT NOT NULL, " + ORG_VERIFIED + " INTEGER NOT NULL);";
@@ -118,6 +120,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cv.put(USER_ROLE, User.getUserRole());
         cv.put(USER_ADDRESS, User.getAddress());
         cv.put(USER_PROFILE_IMAGE, User.getImage());
+        cv.put(USER_ABOUT, User.getAbout());
 
         // if it inserts successfully, insert == 1 if not insert == -1
         // success = positive
@@ -203,11 +206,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return adminExists;
     }
 
-    public int updateSenior(String username, String address, int phoneNumb ) {
+    public int updateSenior(String username, String address, int phoneNumb , String about ) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(USER_PHONE_NO, phoneNumb);
         cv.put(USER_ADDRESS, address);
+        cv.put(USER_ABOUT, about);
         int update = database.update(USERS_TABLE, cv, "username=?", new String[]{username});
         database.close();
         return update;
@@ -377,6 +381,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return getadd;
     }
 
+    //obtain about
+    public String getUserAbout(String ub) {
+        String getabout ="";
+        String sql = "SELECT about FROM Users WHERE username ='" + ub + "'";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if(c.moveToFirst()) {
+            getabout = c.getString(0);
+        }
+        return getabout;
+    }
+
     // gets org name, org contact name, contact number from database
     public Cursor readOrgData() {
         String sql = "SELECT org_name, contact_name, ContactNo FROM " + ORGUSER_TABLE;
@@ -431,6 +446,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cv.put(CATEGORY_DESC, c.getCategory_desc());
         cv.put(CATEGORY_IMAGE, c.getImage());
         long insert = database.insert(CATEGORY_TABLE, null, cv);
+        database.close();
+        if (insert == -1) return false;
+        else return true;
+    }
+
+    // add category to the table
+    public boolean addProfileP(Users addProfilePicture ) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(USERNAME, addProfilePicture.getUsername());
+        cv.put(USER_PROFILE_IMAGE, addProfilePicture.getImage());
+        long insert = database.insert(USERS_TABLE, null, cv);
         database.close();
         if (insert == -1) return false;
         else return true;

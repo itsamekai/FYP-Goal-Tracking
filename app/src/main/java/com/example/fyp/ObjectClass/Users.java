@@ -14,6 +14,7 @@ public class Users {
     private String UserRole;
     private String address;
     private byte[] image;
+    private String about;
 
     public Users(String username, String password, String full_name, String dob, int phoneNo, String userRole, String address) {
         this.username = username;
@@ -24,6 +25,7 @@ public class Users {
         this.UserRole = userRole;
         this.address = address;
         this.image = null;
+        this.about = null;
     }
 
     public Users(String username, String password, String full_name, String dob, int phoneNo) {
@@ -37,9 +39,6 @@ public class Users {
         this.UserRole = "Admin";
     }
 
-    public Users() {
-
-    }
 
     public int getUser_id() {
         return user_id;
@@ -111,6 +110,14 @@ public class Users {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
     }
 
     @Override
