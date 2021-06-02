@@ -111,7 +111,7 @@ public class ProfilePageEdit extends AppCompatActivity {
                 String address = address1.getText().toString();
                 String userName = user_fullname1.getText().toString();
                 if (checkValidPhoneNumber(phoneNo)) {
-                    int updated = db.updateSenior(userName,Integer.parseInt(phoneNo),address);
+                    int updated = db.updateSenior(userName,address,Integer.parseInt(phoneNo));
                     if (updated == 0) {
                         Toast.makeText(this, "Failed to update.", Toast.LENGTH_SHORT).show();
                     } else {
@@ -126,6 +126,8 @@ public class ProfilePageEdit extends AppCompatActivity {
                 }
             }
         });
+
+
 
         // uploads image
         uploadButton.setOnClickListener(new View.OnClickListener() {
