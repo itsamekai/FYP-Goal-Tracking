@@ -124,10 +124,10 @@ public class ProfilePageEdit extends AppCompatActivity {
                         Toast.makeText(this, "Failed to update.", Toast.LENGTH_SHORT).show();
                     } else {
                         String uniqueString = getIntent().getStringExtra("username");
-                        Intent returnPage = new Intent(this, MainHomePage.class);
+                        Intent returnPage = new Intent(this, ProfilePage.class);
                         returnPage.putExtra("username", uniqueString);
                         startActivity(returnPage);
-                        Toast.makeText(this, "OK", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Update Successful", Toast.LENGTH_SHORT).show();
                     }
                 }
                 else {

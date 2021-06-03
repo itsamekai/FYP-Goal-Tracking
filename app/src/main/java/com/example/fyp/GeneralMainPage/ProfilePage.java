@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +32,7 @@ public class ProfilePage extends AppCompatActivity {
     public ImageView friends_button;
     public ImageView addfriends_button;
     public ImageView profile_button;
-    public TextView aboutdetails;
+    public TextView aboutd;
     public TextView user_fullname;
     public DataBaseHelper db;
     private static int GET_FROM_GALLERY = 1;
@@ -55,6 +56,12 @@ public class ProfilePage extends AppCompatActivity {
         String uniqueString = getIntent().getStringExtra("username");
         db = new DataBaseHelper(this);
         user_fullname.setText(db.getUserFullName(uniqueString));
+
+        // gets the about of the user to display
+        aboutd = (TextView) findViewById(R.id.aboutdetails);
+        String uniqueString1 = getIntent().getStringExtra("username");
+        db = new DataBaseHelper(this);
+        aboutd.setText(db.getUserAbout(uniqueString1));
 
         // return to previous page with arrow
         ProfileArrowBack = (ImageView) findViewById(R.id.ProfileArrowBack);
