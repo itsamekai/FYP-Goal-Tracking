@@ -12,7 +12,7 @@ import com.example.fyp.Database.DataBaseHelper;
 import com.example.fyp.ObjectClass.Users;
 import com.example.fyp.R;
 
-public class DeleteAdmin extends AppCompatActivity {
+public class    DeleteAdmin extends AppCompatActivity {
 
     public ImageView returnArrow;
     public EditText adminDeleteUsername;
@@ -46,12 +46,20 @@ public class DeleteAdmin extends AppCompatActivity {
 
                 if (databaseHelper.checkAdminExists(username) == 0) {
                     Toast.makeText(this, "Please enter a valid username.", Toast.LENGTH_SHORT).show();
-                } else {
-                    Intent goNext = new Intent(this, ConfirmDeleteAdmin.class);
-                    goNext.putExtra("username", username);
-                    startActivity(goNext);
-                    System.out.println("it works");
                 }
+                else if (uniqueString.equals(adminDeleteUsername.getText().toString())) {
+                    Toast.makeText(this, "Cannot delete current logged in account.", Toast.LENGTH_SHORT).show();
+                }
+
+                else {
+                    Intent goNext = new Intent(this, ConfirmDeleteAdmin.class);
+                    goNext.putExtra("deletingusername", username);
+                    goNext.putExtra("currentUsername", uniqueString);
+                    System.out.println(username);
+                    startActivity(goNext);
+                }
+
+
             }
 
         });

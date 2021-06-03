@@ -91,7 +91,7 @@ public class CreateAdmin extends AppCompatActivity {
                 databaseHelper = new DataBaseHelper(this);
                 String user = adminUsername.getText().toString();
                 String pass = adminPassword.getText().toString();
-                String fullname = adminPassword.getText().toString();
+                String fullname = adminFullName.getText().toString();
                 String birthday = dob.getText().toString();
                 String phoneNo = adminPhoneNo.getText().toString();
                 if (checkAll(user, pass, phoneNo)) {

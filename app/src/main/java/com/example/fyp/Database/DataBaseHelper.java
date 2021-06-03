@@ -205,6 +205,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return adminExists;
     }
+    public Cursor retrieveCurrentAdmin(String u) {
+        String sql = "SELECT fullname, dob, phoneno FROM Users WHERE username ='" + u + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = null;
+        if(db != null){
+            c = db.rawQuery(sql, null);
+        }
+        return c;
+    }
 
     public int updateSenior(String username, String address, int phoneNumb , String about ) {
         SQLiteDatabase database = this.getWritableDatabase();
