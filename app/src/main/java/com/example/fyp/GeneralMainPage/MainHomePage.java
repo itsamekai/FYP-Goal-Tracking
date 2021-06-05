@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fyp.Database.DataBaseHelper;
+import com.example.fyp.Goals.HistoryGoals;
 import com.example.fyp.Goals.TrackingGoal;
 import com.example.fyp.Goals.ViewCompletedGoal;
 import com.example.fyp.Login.LoginPage;
@@ -82,7 +83,7 @@ public class MainHomePage extends AppCompatActivity {
         //History Goals
         viewHistoryGoals = (ImageView) findViewById(R.id.history_button);
         viewHistoryGoals.setOnClickListener(v -> {
-            Intent HistoryGoalPage = new Intent(this, ViewCompletedGoal.class);
+            Intent HistoryGoalPage = new Intent(this, HistoryGoals.class);
             HistoryGoalPage.putExtra("username", uniqueString);
             startActivity(HistoryGoalPage);
         });

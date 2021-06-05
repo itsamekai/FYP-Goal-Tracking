@@ -27,8 +27,6 @@ public class TrackingGoalAdapter extends RecyclerView.Adapter<TrackingGoalAdapte
    private Context context;
    private Activity activity;
    private ArrayList goalName, goalDesc;
-   private CardView cv;
-
 
 
     public TrackingGoalAdapter(Activity activity, Context context, ArrayList goalName, ArrayList goalDesc) {

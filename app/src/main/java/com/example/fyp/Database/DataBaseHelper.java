@@ -575,6 +575,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return c;
     }
 
+    public Cursor HistoryGoals(String username) {
+        String sql = "SELECT ug.goal_name, ug.goal_desc, ug.datetime_created FROM UserGoalTable ug INNER JOIN Users u ON ug.user_id = u.user_id WHERE ug.accomplished = 1 AND u.username = '" + username + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = null;
+        if (db != null) {
+            c = db.rawQuery(sql, null);
+        }
+        return c;
+    }
+
     public int TotalGoals(String username) {
         int goalCount = 0;
         String sql = "SELECT COUNT(*) FROM UserGoalTable ug INNER JOIN Users u ON ug.user_id = u.user_id WHERE u.username = '" + username + "';";
@@ -598,6 +608,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return c;
     }
 
+    public Cursor getCompletedGoal(String username, String goalName) {
+        String sql = "SELECT ug.goal_desc, ug.datetime_created, ug.datetime_completed FROM UserGoalTable ug INNER JOIN Users u ON ug.user_id = u.user_id WHERE u.username ='" + username + "' AND ug.goal_name = '" + goalName + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = null;
+        if (db != null) {
+            c = db.rawQuery(sql, null);
+        }
+        return c;
+    }
+
     public boolean deleteGoal(int user_id, String goalName) {
         SQLiteDatabase database = this.getWritableDatabase();
         return database.delete(USERGOAL_TABLE, "user_id ='" + user_id + "' AND goal_name = '" + goalName + "'", null) > 0;
@@ -605,8 +625,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public int updateGoal(String user_id, String goalName) {
         SQLiteDatabase database = this.getWritableDatabase();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("Singapore"));
         ContentValues cv = new ContentValues();
         cv.put(ACCOMPLISHED, 1);
+        cv.put(COMPLETED, sdf.format(new Date()));
         int update = database.update(USERGOAL_TABLE, cv, "user_id=? AND goal_name=?", new String[]{user_id, goalName});
         database.close();
         return update;
