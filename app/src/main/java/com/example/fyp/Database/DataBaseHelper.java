@@ -194,6 +194,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return database.delete(USERS_TABLE, "username = '" + username + "' AND UserRole = 'Admin'", null) > 0;
     }
 
+    public boolean deleteGoal(int user_id, String goalName) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        return database.delete(USERGOAL_TABLE, "user_id ='" + user_id + "' AND goal_name = '" + goalName + "'", null) > 0;
+    }
+
     public int checkAdminExists(String u) {
         int adminExists = 0;
         String sql = "SELECT COUNT(*) FROM Users WHERE username = '" + u + "' AND UserRole = 'Admin'";
@@ -551,6 +556,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public int CheckDuplicateGoal(String username, String input) {
+        int goalCount = 0;
+        String sql = "SELECT COUNT(ug.goal_name) FROM UserGoalTable ug INNER JOIN Users u ON ug.user_id = u.user_id WHERE u.username = '" + username + "' AND ug.goal_name = '" + input + "';";
+        Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            goalCount = cursor.getInt(0);
+
+        }
+        return goalCount;
+    }
+
     public Cursor trackingGoals(String username) {
         String sql = "SELECT ug.goal_name, ug.goal_desc FROM UserGoalTable ug INNER JOIN Users u ON ug.user_id = u.user_id WHERE ug.accomplished = 0 AND u.username = '" + username + "';";
         SQLiteDatabase db = this.getWritableDatabase();
@@ -572,6 +589,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return goalCount;
 
+    }
+
+    public Cursor getGoals(String username, String goalName) {
+        String sql = "SELECT ug.goal_desc, ug.datetime_created FROM UserGoalTable ug INNER JOIN Users u ON ug.user_id = u.user_id WHERE u.username ='" + username + "' AND ug.goal_name = '" + goalName + "';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = null;
+        if (db != null) {
+            c = db.rawQuery(sql, null);
+        }
+        return c;
     }
 
 

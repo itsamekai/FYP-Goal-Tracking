@@ -95,7 +95,12 @@
     <string name="notCompleted_count">0</string>
     <string name="completed_count">0</string>
 
-
+    <!-- strings for show view uncomplete goals (activity_view_uncompleted_goals.xml) -->
+    <string name="chosenGoalDesc">Description</string>
+    <string name="chosenDateStart">Date Started:</string>
+    <string name="progression_string">Progression:</string>
+    <string name="progression_string2">Ongoing</string>
+    <string name="deletegoal_button">Delete Goal</string>
 
     <!-- strings for admin main page (activity_admin_main_page.xml) -->
     <string name="admin_page_string">Admin Page</string>
@@ -116,6 +121,7 @@
     <string name="delete_admin_page_string">Delete Admin</string>
     <string name="adminDeleteUsername">Username</string>
     <string name="adminDeleteAdminButton">Delete</string>
+
 
     <!-- strings for confirm delete admin page (activity_confirm_delete_admin_page.xml) -->
     <string name="confirm_delete_admin_page_string">Confirm Delete</string>
@@ -198,5 +204,7 @@
 
     <!-- strings for activity_search_user_goal -->
     <string name="GoalSearch">Search</string>
+
+
 
 </resources>

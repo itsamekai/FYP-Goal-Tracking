@@ -26,7 +26,7 @@ public class TrackingGoal extends AppCompatActivity {
     public TrackingGoalAdapter trackingGoalAdapter;
     int counter = 0;
     int total = 0;
-    String uniqueString;
+    public static String uniqueString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +56,10 @@ public class TrackingGoal extends AppCompatActivity {
         goalDesc = new ArrayList<>();
         putDataInArray();
         setAllGoalCount();
-        trackingGoalAdapter = new TrackingGoalAdapter(TrackingGoal.this, goalName, goalDesc);
-        recyclerView.setLayoutManager(new LinearLayoutManager(TrackingGoal.this));
+        trackingGoalAdapter = new TrackingGoalAdapter(TrackingGoal.this, this, goalName, goalDesc);
         recyclerView.setAdapter(trackingGoalAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(TrackingGoal.this));
+
 
 
 

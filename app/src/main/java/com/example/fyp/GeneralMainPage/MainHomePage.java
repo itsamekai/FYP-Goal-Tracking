@@ -62,7 +62,7 @@ public class MainHomePage extends AppCompatActivity {
 
 
         // Button redirects - set goals
-        setGoalsB = (ImageView) findViewById(R.id.setGoals_button);
+        setGoalsB = (ImageView) findViewById(R.id.setgoal_button);
         setGoalsB.setOnClickListener(v -> {
             Intent setGoalsPage = new Intent(this, ChoosingGoal.class);
             setGoalsPage.putExtra("username", uniqueString);
@@ -70,7 +70,7 @@ public class MainHomePage extends AppCompatActivity {
         });
 
         // Tracking of Goals
-        trackGoalsB = (ImageView) findViewById(R.id.monitorGoals_button);
+        trackGoalsB = (ImageView) findViewById(R.id.monitor_button);
         trackGoalsB.setOnClickListener(v -> {
             Intent trackGoalsPage = new Intent(this, TrackingGoal.class);
             trackGoalsPage.putExtra("username", uniqueString);

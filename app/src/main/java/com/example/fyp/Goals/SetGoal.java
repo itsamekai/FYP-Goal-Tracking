@@ -40,18 +40,25 @@ public class SetGoal extends AppCompatActivity {
 
         createGoal = findViewById(R.id.createUserGoal);
         createGoal.setOnClickListener(v -> {
+            System.out.println(uniqueString);
+            System.out.println(GoalName.getText().toString());
             db = new DataBaseHelper(this);
             if (!checkIfEmpty()) {
-                UsersGoal goal = new UsersGoal(db.getCategoryID(selectedName), db.getUserID(uniqueString), GoalName.getText().toString(), GoalDesc.getText().toString());
-                if(db.addUserGoal(goal)) {
-                    Intent i = new Intent(this, MainHomePage.class);
-                    i.putExtra("username", uniqueString);
-                    startActivity(i);
-                    Toast.makeText(this, "Goal Created! Good luck!", Toast.LENGTH_SHORT).show();
+                if (db.CheckDuplicateGoal(uniqueString, GoalName.getText().toString()) == 0) {
+                    UsersGoal goal = new UsersGoal(db.getCategoryID(selectedName), db.getUserID(uniqueString), GoalName.getText().toString(), GoalDesc.getText().toString());
+                    if(db.addUserGoal(goal)) {
+                        Intent i = new Intent(this, MainHomePage.class);
+                        i.putExtra("username", uniqueString);
+                        startActivity(i);
+                        Toast.makeText(this, "Goal Created! Good luck!", Toast.LENGTH_SHORT).show();
+                    }
+                    else Toast.makeText(this, "error error error why", Toast.LENGTH_LONG).show();
                 }
-                else Toast.makeText(this, "error error error why", Toast.LENGTH_LONG).show();
-            }
+                else Toast.makeText(this, "Goal already exists!", Toast.LENGTH_LONG).show();
+
+                }
             else Toast.makeText(this, validateMessage(), Toast.LENGTH_LONG).show();
+
         });
 
 
@@ -63,6 +70,8 @@ public class SetGoal extends AppCompatActivity {
         }
         else return false;
     }
+
+
 
     private String validateMessage() {
         String message = "";

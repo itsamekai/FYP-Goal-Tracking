@@ -1,12 +1,16 @@
 package com.example.fyp.Goals;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -21,11 +25,14 @@ import java.util.ArrayList;
 public class TrackingGoalAdapter extends RecyclerView.Adapter<TrackingGoalAdapter.MyViewHolder> {
 
    private Context context;
+   private Activity activity;
    private ArrayList goalName, goalDesc;
+   private CardView cv;
 
 
 
-    public TrackingGoalAdapter(Context context, ArrayList goalName, ArrayList goalDesc) {
+    public TrackingGoalAdapter(Activity activity, Context context, ArrayList goalName, ArrayList goalDesc) {
+        this.activity = activity;
         this.context = context;
         this.goalName = goalName;
         this.goalDesc = goalDesc;
@@ -47,9 +54,14 @@ public class TrackingGoalAdapter extends RecyclerView.Adapter<TrackingGoalAdapte
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent i = new Intent(context, )
+                Intent i = new Intent(context, ViewUncompletedGoal.class);
+                i.putExtra("goal_name", String.valueOf(goalName.get(position)));
+                i.putExtra("username", TrackingGoal.uniqueString);
+                activity.startActivityForResult(i, 1);
             }
         });
+
+
     }
 
     @Override
@@ -67,7 +79,6 @@ public class TrackingGoalAdapter extends RecyclerView.Adapter<TrackingGoalAdapte
             GoalName = itemView.findViewById(R.id.goalName);
             GoalDesc = itemView.findViewById(R.id.goalDesc);
             cardView = itemView.findViewById(R.id.cardView3);
-
 
         }
     }

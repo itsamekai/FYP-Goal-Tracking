@@ -82,40 +82,40 @@
         app:layout_constraintVertical_bias="0.01" />
 
     <ImageView
-        android:id="@+id/category_button"
+        android:id="@+id/setgoal_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:contentDescription="@string/categories"
         app:layout_constraintBottom_toTopOf="@+id/svcOrg_button"
-        app:layout_constraintEnd_toStartOf="@+id/setGoals_button"
+        app:layout_constraintEnd_toStartOf="@+id/monitor_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_medal"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/categoriesbox" />
+        app:srcCompat="@drawable/setgoalsbox" />
 
     <ImageView
-        android:id="@+id/setGoals_button"
+        android:id="@+id/monitor_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:contentDescription="@string/setGoals"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.483"
-        app:layout_constraintStart_toEndOf="@+id/category_button"
+        app:layout_constraintStart_toEndOf="@+id/setgoal_button"
         app:layout_constraintTop_toBottomOf="@+id/view_medal"
-        app:srcCompat="@drawable/setgoalsbox" />
+        app:srcCompat="@drawable/monitorgoalsbox" />
 
     <ImageView
-        android:id="@+id/monitorGoals_button"
+        android:id="@+id/history_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:contentDescription="@string/monitorGoals"
         app:layout_constraintEnd_toStartOf="@+id/svcOrg_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/category_button"
-        app:srcCompat="@drawable/monitorgoalsbox" />
+        app:layout_constraintTop_toBottomOf="@+id/setgoal_button"
+        app:srcCompat="@drawable/showhistorybox" />
 
     <ImageView
         android:id="@+id/svcOrg_button"
@@ -125,8 +125,8 @@
         android:contentDescription="@string/svcOrg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.913"
-        app:layout_constraintStart_toEndOf="@+id/monitorGoals_button"
-        app:layout_constraintTop_toBottomOf="@+id/setGoals_button"
+        app:layout_constraintStart_toEndOf="@+id/history_button"
+        app:layout_constraintTop_toBottomOf="@+id/monitor_button"
         app:srcCompat="@drawable/serviceorgbox" />
 
     <ImageView
@@ -142,7 +142,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/help_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/monitorGoals_button"
+        app:layout_constraintTop_toBottomOf="@+id/history_button"
         app:layout_constraintVertical_bias="0.008"
         app:srcCompat="@drawable/rewardsbox" />
 
