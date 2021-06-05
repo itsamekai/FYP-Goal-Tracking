@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.fyp.Database.DataBaseHelper;
 import com.example.fyp.Goals.TrackingGoal;
+import com.example.fyp.Goals.ViewCompletedGoal;
 import com.example.fyp.Login.LoginPage;
 import com.example.fyp.R;
 import com.example.fyp.Goals.ChoosingGoal;
@@ -24,6 +25,7 @@ public class MainHomePage extends AppCompatActivity {
     public ImageView profilePic;
     public ImageView setGoalsB;
     public ImageView trackGoalsB;
+    public ImageView viewHistoryGoals;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +79,13 @@ public class MainHomePage extends AppCompatActivity {
             startActivity(trackGoalsPage);
         });
 
-
+        //History Goals
+        viewHistoryGoals = (ImageView) findViewById(R.id.history_button);
+        viewHistoryGoals.setOnClickListener(v -> {
+            Intent HistoryGoalPage = new Intent(this, ViewCompletedGoal.class);
+            HistoryGoalPage.putExtra("username", uniqueString);
+            startActivity(HistoryGoalPage);
+        });
 
 
 
