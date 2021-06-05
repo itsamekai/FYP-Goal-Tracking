@@ -19,7 +19,7 @@ import com.example.fyp.R;
 public class ViewUncompletedGoal extends AppCompatActivity {
 
     public TextView selectedGoalName, goalDesc, selectedGoalStart;
-    public Button deleteGoal;
+    public Button deleteGoal, finishGoal;
     public ImageView arrowback;
     public String uniqueString, goal_name;
     public DataBaseHelper db;
@@ -36,6 +36,7 @@ public class ViewUncompletedGoal extends AppCompatActivity {
         goalDesc = findViewById(R.id.goalChosenDesc);
         selectedGoalStart = findViewById(R.id.goalChosenDateCreated);
         deleteGoal = findViewById(R.id.deleteGoalButton);
+        finishGoal = findViewById(R.id.finishGoalButton);
         arrowback = findViewById(R.id.returnArrow5);
 
         fillTextViews();
@@ -49,9 +50,16 @@ public class ViewUncompletedGoal extends AppCompatActivity {
         deleteGoal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alertDialog();
+                DeleteAlertDialog();
             }
 
+        });
+
+        finishGoal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FinishAlertDialog();
+            }
         });
 
     }
@@ -68,7 +76,7 @@ public class ViewUncompletedGoal extends AppCompatActivity {
         selectedGoalName.setText(goal_name);
     }
 
-    private void alertDialog() {
+    private void DeleteAlertDialog() {
         AlertDialog.Builder dialog=new AlertDialog.Builder(this);
         dialog.setMessage("Are you sure you want to delete this goal?");
         dialog.setTitle("Confirmation");
@@ -93,6 +101,36 @@ public class ViewUncompletedGoal extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(getApplicationContext(), "Be extra careful when deleting!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        AlertDialog alertDialog = dialog.create();
+        alertDialog.show();
+    }
+
+    private void FinishAlertDialog() {
+        AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+        dialog.setMessage("Have you fully completed this goal?");
+        dialog.setTitle("Complete Goal");
+        dialog.setPositiveButton("Finish!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                db = new DataBaseHelper(getApplicationContext());
+                String id = String.valueOf(db.getUserID(uniqueString));
+                int finished = db.updateGoal(id, goal_name);
+                if (finished > 0) {
+                    Toast.makeText(getApplicationContext(), "Goal Finished!", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(getApplicationContext(), TrackingGoal.class);
+                    i.putExtra("username", uniqueString);
+                    startActivity(i);
+                }
+                else Toast.makeText(getApplicationContext(), "can't update?", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "You can do it!", Toast.LENGTH_SHORT).show();
             }
         });
         AlertDialog alertDialog = dialog.create();

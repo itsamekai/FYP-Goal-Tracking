@@ -101,6 +101,7 @@
     <string name="progression_string">Progression:</string>
     <string name="progression_string2">Ongoing</string>
     <string name="deletegoal_button">Delete Goal</string>
+    <string name="finishgoal_button">Goal Completed</string>
 
     <!-- strings for admin main page (activity_admin_main_page.xml) -->
     <string name="admin_page_string">Admin Page</string>

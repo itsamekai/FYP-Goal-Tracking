@@ -194,10 +194,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return database.delete(USERS_TABLE, "username = '" + username + "' AND UserRole = 'Admin'", null) > 0;
     }
 
-    public boolean deleteGoal(int user_id, String goalName) {
-        SQLiteDatabase database = this.getWritableDatabase();
-        return database.delete(USERGOAL_TABLE, "user_id ='" + user_id + "' AND goal_name = '" + goalName + "'", null) > 0;
-    }
+
 
     public int checkAdminExists(String u) {
         int adminExists = 0;
@@ -599,6 +596,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             c = db.rawQuery(sql, null);
         }
         return c;
+    }
+
+    public boolean deleteGoal(int user_id, String goalName) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        return database.delete(USERGOAL_TABLE, "user_id ='" + user_id + "' AND goal_name = '" + goalName + "'", null) > 0;
+    }
+
+    public int updateGoal(String user_id, String goalName) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(ACCOMPLISHED, 1);
+        int update = database.update(USERGOAL_TABLE, cv, "user_id=? AND goal_name=?", new String[]{user_id, goalName});
+        database.close();
+        return update;
     }
 
 
