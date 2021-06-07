@@ -68,6 +68,11 @@ public class ProfilePageEdit extends AppCompatActivity {
 
         // gets the name of the user to display
 
+        user_fullname1 = (TextView) findViewById(R.id.user_fullname);
+        String uniqueString8 = getIntent().getStringExtra("username");
+        db = new DataBaseHelper(this);
+        user_fullname1.setText(db.getUserFullName(uniqueString8));
+
 
         user_fullname2 = (TextView) findViewById(R.id.user_fullname2);
         String uniqueString2 = getIntent().getStringExtra("username");

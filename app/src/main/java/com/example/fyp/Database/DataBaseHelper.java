@@ -217,6 +217,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return c;
     }
 
+    // update senior address,phoneNo , about
+
     public int updateSenior(String username, String address, int phoneNumb , String about ) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -224,6 +226,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cv.put(USER_ADDRESS, address);
         cv.put(USER_ABOUT, about);
         int update = database.update(USERS_TABLE, cv, "username=?", new String[]{username});
+        database.close();
+        return update;
+
+    }
+    // update category des
+    public int updateCategory(String category_name1 , String category_desc1 , byte[] image2 ) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(CATEGORY_DESC, category_desc1);
+        cv.put(CATEGORY_IMAGE, image2);
+        int update = database.update(CATEGORY_TABLE, cv, "category_name ='" + category_name1 + "'", null);
         database.close();
         return update;
 
@@ -348,7 +361,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return userFullName;
     }
 
-    // obtain username
+    // obtain username (user)
     public String getUserName(String un) {
         String userName ="";
         String sql = "SELECT username FROM Users WHERE username ='" + un + "'";
@@ -359,7 +372,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return userName;
     }
 
-    //obtain DOB
+    //obtain DOB (user)
     public String getDateOfBirth(String dob) {
         String getDOB ="";
         String sql = "SELECT dob FROM Users WHERE username ='" + dob + "'";
@@ -370,7 +383,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return getDOB;
     }
 
-    //obtain phone number
+    //obtain phone number (user)
     public String getPhoneNumber(String pn) {
         String getpn ="";
         String sql = "SELECT phoneno FROM Users WHERE username ='" + pn + "'";
@@ -381,7 +394,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return getpn;
     }
 
-    //obtain Address
+    //obtain Address (user)
     public String getUserAddress(String a) {
         String getadd ="";
         String sql = "SELECT address FROM Users WHERE username ='" + a + "'";
@@ -392,7 +405,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return getadd;
     }
 
-    //obtain about
+    //obtain about (user)
     public String getUserAbout(String ub) {
         String getabout ="";
         String sql = "SELECT about FROM Users WHERE username ='" + ub + "'";
@@ -402,6 +415,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return getabout;
     }
+
+
 
     // gets org name, org contact name, contact number from database
     public Cursor readOrgData() {
