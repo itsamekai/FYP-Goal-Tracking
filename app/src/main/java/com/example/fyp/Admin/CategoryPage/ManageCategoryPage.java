@@ -14,6 +14,7 @@ public class ManageCategoryPage extends AppCompatActivity {
 
     public ImageView returnButton;
     public TextView createButton;
+    public TextView updateButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,13 @@ public class ManageCategoryPage extends AppCompatActivity {
             Intent create = new Intent(this, CreateCategory.class);
             create.putExtra("username", uniqueString);
             startActivity(create);
+        });
+
+        updateButton = (TextView) findViewById(R.id.updateCategoryButton);
+        updateButton.setOnClickListener(v ->{
+            Intent update = new Intent(this, UpdateCategory.class);
+            update.putExtra("username", uniqueString);
+            startActivity(update);
         });
 
     }
