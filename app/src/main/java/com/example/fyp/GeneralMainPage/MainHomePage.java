@@ -10,9 +10,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fyp.Database.DataBaseHelper;
+import com.example.fyp.GeneralMainPage.OrgHelp.ChooseHelp;
+import com.example.fyp.GeneralMainPage.Profile.ProfilePage;
 import com.example.fyp.Goals.HistoryGoals;
 import com.example.fyp.Goals.TrackingGoal;
-import com.example.fyp.Goals.ViewCompletedGoal;
 import com.example.fyp.Login.LoginPage;
 import com.example.fyp.R;
 import com.example.fyp.Goals.ChoosingGoal;
@@ -27,6 +28,7 @@ public class MainHomePage extends AppCompatActivity {
     public ImageView setGoalsB;
     public ImageView trackGoalsB;
     public ImageView viewHistoryGoals;
+    public ImageView getHelpB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +88,13 @@ public class MainHomePage extends AppCompatActivity {
             Intent HistoryGoalPage = new Intent(this, HistoryGoals.class);
             HistoryGoalPage.putExtra("username", uniqueString);
             startActivity(HistoryGoalPage);
+        });
+
+        getHelpB = (ImageView) findViewById(R.id.help_button);
+        getHelpB.setOnClickListener(v -> {
+            Intent HelpPage = new Intent(this, ChooseHelp.class);
+            HelpPage.putExtra("username", uniqueString);
+            startActivity(HelpPage);
         });
 
 

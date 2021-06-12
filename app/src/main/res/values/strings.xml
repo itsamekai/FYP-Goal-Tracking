@@ -214,4 +214,13 @@
     <string name="goal_progression">Progression</string>
     <string name="goal_status">Accomplished</string>
 
+    <!-- strings for activity_choose_help.xml -->
+    <string name="get_help_string">Get Help</string>
+    <string name="existing_help">Show Existing Help</string>
+    <string name="get_help">Get Help from Organisations</string>
+
+    <!-- strings for activity_select_help_goal.xml -->
+    <string name="select_help_goal_string">Current Goals</string>
+    <string name="select_instructions">Choose the goal that you need help with.</string>
+
 </resources>

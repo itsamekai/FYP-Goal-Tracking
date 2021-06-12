@@ -650,6 +650,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return update;
     }
 
+    public Cursor getGoalsHelpPage(String username) {
+        String sql = "SELECT ug.goal_name, ug.goal_desc, ug.datetime_created FROM UserGoalTable ug INNER JOIN Users u ON ug.user_id = u.user_id WHERE u.username ='" + username + "' AND ug.accomplished = '0';";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = null;
+        if (db != null) {
+            c = db.rawQuery(sql, null);
+        }
+        return c;
+    }
+
 
 
 

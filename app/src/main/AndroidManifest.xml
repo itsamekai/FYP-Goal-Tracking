@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
-        <activity android:name=".Goals.HistoryGoals"></activity>
+        <activity android:name=".GeneralMainPage.OrgHelp.ConfirmHelpGoal"></activity>
+        <activity android:name=".GeneralMainPage.OrgHelp.SelectHelpGoal" />
+        <activity android:name=".GeneralMainPage.OrgHelp.ChooseHelp" />
+        <activity android:name=".Goals.HistoryGoals" />
         <activity android:name=".Goals.ViewUncompletedGoal" />
         <activity android:name=".Admin.UserPage.SearchUserGoal" />
         <activity android:name=".Goals.ViewCompletedGoal" />
@@ -33,8 +36,8 @@
         <activity android:name=".Goals.SetGoal" />
         <activity android:name=".Goals.ChoosingGoal" />
         <activity android:name=".Goals.TrackingGoal" />
-        <activity android:name=".GeneralMainPage.ProfilePage" />
-        <activity android:name=".GeneralMainPage.ProfilePageEdit" />
+        <activity android:name=".GeneralMainPage.Profile.ProfilePage" />
+        <activity android:name=".GeneralMainPage.Profile.ProfilePageEdit" />
         <activity android:name=".GeneralMainPage.MainHomePage" />
         <activity android:name=".Register.OrgRegisterPage" />
         <activity android:name=".Register.ChooseRegister" />

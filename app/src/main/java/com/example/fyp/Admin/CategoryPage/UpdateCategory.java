@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 import com.example.fyp.Admin.MainAdminPage;
 import com.example.fyp.Database.DataBaseHelper;
-import com.example.fyp.GeneralMainPage.ProfilePage;
+import com.example.fyp.GeneralMainPage.Profile.*;
 import com.example.fyp.ObjectClass.Category;
 import com.example.fyp.ObjectClass.Users;
 import com.example.fyp.R;

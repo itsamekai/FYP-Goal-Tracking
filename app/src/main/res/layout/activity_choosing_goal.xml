@@ -26,6 +26,7 @@
         android:layout_height="141dp"
         android:fontFamily="@font/poppins"
         android:text="@string/description_string"
+        android:gravity="center_horizontal"
         android:textColor="@color/white"
         android:textSize="17sp"
         android:textStyle="bold"
@@ -53,7 +54,7 @@
 
     <Spinner
         android:id="@+id/dropdownBox"
-        android:layout_width="138dp"
+        android:layout_width="170dp"
         android:layout_height="41dp"
         android:contentDescription="@string/dropDownBox"
         app:layout_constraintBottom_toBottomOf="parent"

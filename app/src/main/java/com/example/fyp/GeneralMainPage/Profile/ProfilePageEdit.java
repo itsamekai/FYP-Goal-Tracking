@@ -1,4 +1,4 @@
-package com.example.fyp.GeneralMainPage;
+package com.example.fyp.GeneralMainPage.Profile;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
@@ -14,12 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.fyp.Admin.AdminPage.ManageAdminPage;
-import com.example.fyp.Admin.CategoryPage.CreateCategory;
-import com.example.fyp.Admin.CategoryPage.ManageCategoryPage;
 import com.example.fyp.Database.DataBaseHelper;
-import com.example.fyp.Login.LoginPage;
-import com.example.fyp.ObjectClass.Category;
 import com.example.fyp.ObjectClass.Users;
 import com.example.fyp.R;
 

@@ -1,25 +1,16 @@
-package com.example.fyp.GeneralMainPage;
+package com.example.fyp.GeneralMainPage.Profile;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.app.Activity;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.fyp.Database.DataBaseHelper;
-import com.example.fyp.Login.LoginPage;
+import com.example.fyp.GeneralMainPage.MainHomePage;
 import com.example.fyp.R;
-
-import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 public class ProfilePage extends AppCompatActivity {
 
@@ -41,6 +32,7 @@ public class ProfilePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
+        String uniqueString = getIntent().getStringExtra("username");
 
         // sets image
         db = new DataBaseHelper(this);
@@ -53,7 +45,7 @@ public class ProfilePage extends AppCompatActivity {
 
         // gets the name of the user to display
         user_fullname = (TextView) findViewById(R.id.user_fullname);
-        String uniqueString = getIntent().getStringExtra("username");
+        //String uniqueString = getIntent().getStringExtra("username");
         db = new DataBaseHelper(this);
         user_fullname.setText(db.getUserFullName(uniqueString));
 
@@ -67,6 +59,7 @@ public class ProfilePage extends AppCompatActivity {
         ProfileArrowBack = (ImageView) findViewById(R.id.ProfileArrowBack);
         ProfileArrowBack.setOnClickListener(v -> {
             Intent returnPage = new Intent(this, MainHomePage.class);
+            returnPage.putExtra("username",  uniqueString);
             startActivity(returnPage);
         });
 

@@ -8,14 +8,13 @@
     cardView:cardCornerRadius="15dp"
     cardView:cardElevation="8dp"
     android:layout_margin="8dp">
-
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/HistoryGoalName"
+            android:id="@+id/helpGoalName"
             android:layout_width="200dp"
             android:layout_height="24dp"
             android:fontFamily="@font/poppins"
@@ -25,42 +24,42 @@
             android:textStyle="bold"
             cardView:layout_constraintBottom_toBottomOf="parent"
             cardView:layout_constraintEnd_toEndOf="parent"
-            cardView:layout_constraintHorizontal_bias="0.138"
+            cardView:layout_constraintHorizontal_bias="0.09"
             cardView:layout_constraintStart_toStartOf="parent"
             cardView:layout_constraintTop_toTopOf="parent"
-            cardView:layout_constraintVertical_bias="0.166" />
+            cardView:layout_constraintVertical_bias="0.224" />
 
         <TextView
-            android:id="@+id/HistoryGoalDesc"
+            android:id="@+id/helpGoalDesc"
             android:layout_width="250dp"
-            android:layout_height="40dp"
+            android:layout_height="25dp"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/poppins"
             android:text="TextView"
             android:textColor="#696969"
             android:textSize="13sp"
             android:textStyle="italic"
-            android:scrollHorizontally="false"
             cardView:layout_constraintBottom_toBottomOf="parent"
-            cardView:layout_constraintEnd_toEndOf="@+id/HistoryGoalName"
+            cardView:layout_constraintEnd_toEndOf="@+id/helpGoalName"
             cardView:layout_constraintHorizontal_bias="0.0"
-            cardView:layout_constraintStart_toStartOf="@+id/HistoryGoalName"
-            cardView:layout_constraintTop_toBottomOf="@+id/HistoryGoalName"
-            cardView:layout_constraintVertical_bias="0.161" />
+            cardView:layout_constraintStart_toStartOf="@+id/helpGoalName"
+            cardView:layout_constraintTop_toBottomOf="@+id/helpGoalName"
+            cardView:layout_constraintVertical_bias="0.065" />
 
         <TextView
-            android:id="@+id/HistoryStartDate"
-            android:layout_width="200dp"
-            android:layout_height="24dp"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="@font/poppins"
+            android:id="@+id/helpDateTime"
+            android:layout_width="250dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="8dp"
             android:text="TextView"
+            android:textSize="16sp"
             android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/poppins"
             cardView:layout_constraintBottom_toBottomOf="parent"
-            cardView:layout_constraintEnd_toEndOf="@+id/HistoryGoalDesc"
+            cardView:layout_constraintEnd_toEndOf="@+id/helpGoalDesc"
             cardView:layout_constraintHorizontal_bias="0.0"
-            cardView:layout_constraintStart_toStartOf="@+id/HistoryGoalDesc" />
+            cardView:layout_constraintStart_toStartOf="@+id/helpGoalDesc"
+            cardView:layout_constraintTop_toBottomOf="@+id/helpGoalDesc"
+            cardView:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
