@@ -67,6 +67,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String COMPLETED = "datetime_completed";
     public static final String ACCOMPLISHED = "accomplished";
 
+    //Services
+    public static final String SERVICES_TABLE = "Services";
+    public static final String SERVICE_ID = "service_id";
+    public static final String SERVICE_NAME = "service_name";
+    public static final String SERVICE_DESC = "service_desc";
+
+    //Org Services
+    public static final String ORGSERVICES_TABLE = "OrgServices";
+    public static final String ORG_HAS_SERVICE_ID = "org_has_service_id";
+    public static final String ORGID = "org_id";
+    public static final String SERVICEID = "service_id";
+
+
 
     public DataBaseHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -89,10 +102,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + USER_ID + " INTEGER NOT NULL, " + GOAL_NAME + " TEXT NOT NULL, " + GOAL_DESC + " TEXT NOT NULL, " + CREATED + " TEXT NOT NULL, "
                 + COMPLETED + " TEXT, " + ACCOMPLISHED + " INTEGER DEFAULT 0, FOREIGN KEY (" + GOALTYPE_ID +") REFERENCES " + CATEGORY_TABLE + " (" + CAT_ID + "), FOREIGN KEY (" + USER_ID + ") REFERENCES " + USERS_TABLE + "(" + USER_ID + "));";
 
+        String createServicesTable = "CREATE TABLE " + SERVICES_TABLE + " (" + SERVICE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + SERVICE_NAME + " TEXT NOT NULL, " + SERVICE_DESC + " TEXT NOT NULL);";
+
+        String createOrgServicesTable = "CREATE TABLE " + ORGSERVICES_TABLE + " (" + ORG_HAS_SERVICE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ORGID + " INTEGER NOT NULL, " + SERVICEID + " INTEGER NOT NULL);";
+
         db.execSQL(createUsersTable);
         db.execSQL(createOrgUsersTable);
         db.execSQL(createCategoryTable);
         db.execSQL(createUsersGoalTable);
+        db.execSQL(createServicesTable);
+        db.execSQL(createOrgServicesTable);
 
 
     }
