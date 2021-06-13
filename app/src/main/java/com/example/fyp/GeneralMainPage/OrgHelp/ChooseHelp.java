@@ -13,7 +13,7 @@ import com.example.fyp.R;
 public class ChooseHelp extends AppCompatActivity {
     // choose to view existing help or select new help
     public ImageView returnarrow;
-    public Button existingHelp, getHelp;
+    public Button existingHelp, getHelp, pendingHelp;
     public String uniqueString;
 
     @Override
@@ -25,6 +25,7 @@ public class ChooseHelp extends AppCompatActivity {
         returnarrow = findViewById(R.id.returnArrow8);
         existingHelp = findViewById(R.id.existingHelp);
         getHelp = findViewById(R.id.getHelpChoice);
+        pendingHelp = findViewById(R.id.showPendingHelp);
 
         returnarrow.setOnClickListener(v -> {
             Intent ret = new Intent(this, MainHomePage.class);
@@ -40,6 +41,12 @@ public class ChooseHelp extends AppCompatActivity {
             Intent newHelp = new Intent(this, SelectHelpGoal.class);
             newHelp.putExtra("username", uniqueString);
             startActivity(newHelp);
+        });
+
+        pendingHelp.setOnClickListener(v -> {
+            Intent pending = new Intent(this, PendingHelp.class);
+            pending.putExtra("username", uniqueString);
+            startActivity(pending);
         });
 
     }

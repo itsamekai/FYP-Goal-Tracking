@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
-        <activity android:name=".GeneralMainPage.OrgHelp.ConfirmHelpGoal"></activity>
+        <activity android:name=".GeneralMainPage.OrgHelp.PendingHelp" />
+        <activity android:name=".GeneralMainPage.OrgHelp.ConfirmHelpGoal" />
         <activity android:name=".GeneralMainPage.OrgHelp.SelectHelpGoal" />
         <activity android:name=".GeneralMainPage.OrgHelp.ChooseHelp" />
         <activity android:name=".Goals.HistoryGoals" />

@@ -218,9 +218,18 @@
     <string name="get_help_string">Get Help</string>
     <string name="existing_help">Show Existing Help</string>
     <string name="get_help">Get Help from Organisations</string>
+    <string name="pending_help">Show Pending Help</string>
 
     <!-- strings for activity_select_help_goal.xml -->
     <string name="select_help_goal_string">Current Goals</string>
     <string name="select_instructions">Choose the goal that you need help with.</string>
+
+    <!-- strings for activity_confirm_help_goal.xml -->
+    <string name="selected_goal_help">Selected Goal</string>
+    <string name="confirm_goal_help">Get Help</string>
+
+    <!-- strings for activity-pending_help.xml -->
+    <string name="pending_help_2">Pending Help</string>
+    <string name="patience_text">Please be patient while they get back to you!</string>
 
 </resources>

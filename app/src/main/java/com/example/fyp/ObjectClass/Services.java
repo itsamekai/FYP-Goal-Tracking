@@ -6,8 +6,7 @@ public class Services {
     private String service_name;
     private String service_desc;
 
-    public Services(int service_id, String service_name,String service_desc ) {
-        this.service_id = service_id;
+    public Services(String service_name,String service_desc ) {
         this.service_name = service_name;
         this.service_desc = service_desc;
     }

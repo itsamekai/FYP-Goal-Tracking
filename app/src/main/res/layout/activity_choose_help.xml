@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GeneralMainPage.OrgHelp.ChooseHelp"
-    android:background="@drawable/gethelp_background">
+    android:background="@drawable/gethelp_background"
+    tools:context=".GeneralMainPage.OrgHelp.ChooseHelp">
 
     <TextView
         android:id="@+id/textView27"
@@ -38,24 +38,24 @@
         android:id="@+id/existingHelp"
         android:layout_width="200dp"
         android:layout_height="70dp"
-        android:layout_marginTop="188dp"
+        android:layout_marginBottom="240dp"
         android:background="@drawable/gethelp_border"
         android:fontFamily="@font/poppins"
+        android:gravity="center"
         android:text="@string/existing_help"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/getHelpChoice"
         android:layout_width="200dp"
         android:layout_height="70dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginBottom="48dp"
         android:background="@drawable/gethelp_border"
         android:fontFamily="@font/poppins"
         android:gravity="center"
@@ -63,8 +63,27 @@
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/showPendingHelp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/existingHelp" />
+        app:layout_constraintTop_toBottomOf="@+id/textView27"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/showPendingHelp"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/gethelp_border"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/pending_help"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/existingHelp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

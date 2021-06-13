@@ -182,11 +182,15 @@ public class UpdateCategory extends AppCompatActivity {
                 if (updated == 0) {
                     Toast.makeText(this, "Failed to update.", Toast.LENGTH_SHORT).show();
                 } else {
+                    int updateService = db.updateService(passToNext, catdesc);
+                    if (updateService != 0) {
+                        Intent returnPage = new Intent(this, ManageCategoryPage.class);
+                        returnPage.putExtra("username", uniqueString);
+                        startActivity(returnPage);
+                        Toast.makeText(this, "Update Successful", Toast.LENGTH_SHORT).show();
+                    }
+                    else Toast.makeText(this, "Failed to update service.", Toast.LENGTH_SHORT).show();
 
-                    Intent returnPage = new Intent(this, ManageCategoryPage.class);
-                    returnPage.putExtra("username", uniqueString);
-                    startActivity(returnPage);
-                    Toast.makeText(this, "Update Successful", Toast.LENGTH_SHORT).show();
                 }
 
             }

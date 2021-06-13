@@ -4,6 +4,201 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GeneralMainPage.OrgHelp.ConfirmHelpGoal">
+    tools:context=".GeneralMainPage.OrgHelp.ConfirmHelpGoal"
+    android:background="@drawable/gethelp_background">
+
+    <TextView
+        android:id="@+id/textView36"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="96dp"
+        android:text="@string/selected_goal_help"
+        android:fontFamily="@font/poppins"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView39"
+        android:layout_width="110dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="76dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="Goal Name:"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.123"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView36" />
+
+    <TextView
+        android:id="@+id/textView41"
+        android:layout_width="110dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="Goal Description:"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.123"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView39" />
+
+    <TextView
+        android:id="@+id/textView42"
+        android:layout_width="110dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="24dp"
+        android:text="Date Started:"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins"
+        android:textSize="16sp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.123"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView41" />
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="120dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/progression_string"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.351"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView42" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView38"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.076"
+        app:layout_constraintStart_toEndOf="@+id/textView37"
+        app:srcCompat="@drawable/development" />
+
+    <TextView
+        android:id="@+id/textView38"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
+        android:background="@drawable/goal_status_box"
+        android:drawableStart="@drawable/pending"
+        android:drawableLeft="@drawable/pending"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:paddingLeft="50dp"
+        android:paddingRight="70dp"
+        android:text="Ongoing"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView37"
+        app:layout_constraintVertical_bias="0.097" />
+
+    <Button
+        android:id="@+id/getSelectedHelpButton"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="64dp"
+        android:text="@string/confirm_goal_help"
+        android:background="@drawable/gethelp_border"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:fontFamily="@font/poppins"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView38"
+        app:layout_constraintVertical_bias="0.178" />
+
+    <TextView
+        android:id="@+id/selectedHelpGoalName"
+        android:layout_width="160dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="76dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.181"
+        app:layout_constraintStart_toEndOf="@+id/textView39"
+        app:layout_constraintTop_toBottomOf="@+id/textView36" />
+
+    <TextView
+        android:id="@+id/selectedHelpGoalDesc"
+        android:layout_width="160dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="24dp"
+        android:text="TextView"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:textStyle="italic"
+        android:fontFamily="@font/poppins"
+        android:textColor="@color/black"
+        android:scrollHorizontally="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.181"
+        app:layout_constraintStart_toEndOf="@+id/textView41"
+        app:layout_constraintTop_toBottomOf="@+id/selectedHelpGoalName" />
+
+    <TextView
+        android:id="@+id/selectedHelpGoalDate"
+        android:layout_width="160dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="24dp"
+        android:text="TextView"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintStart_toEndOf="@+id/textView42"
+        app:layout_constraintTop_toBottomOf="@+id/selectedHelpGoalDesc" />
+
+    <ImageView
+        android:id="@+id/returnArrow10"
+        android:layout_width="47dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView36"
+        app:layout_constraintEnd_toStartOf="@+id/textView36"
+        app:layout_constraintHorizontal_bias="0.29"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.075"
+        app:srcCompat="@drawable/arrow" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

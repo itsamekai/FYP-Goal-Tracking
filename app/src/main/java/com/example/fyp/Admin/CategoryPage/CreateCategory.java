@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.fyp.Database.DataBaseHelper;
 import com.example.fyp.ObjectClass.Category;
+import com.example.fyp.ObjectClass.Services;
 import com.example.fyp.R;
 
 import java.io.ByteArrayOutputStream;
@@ -64,16 +65,21 @@ public class CreateCategory extends AppCompatActivity {
                     Toast.makeText(this, "Category already exists.", Toast.LENGTH_SHORT).show();
                 } else {
                     Category c = new Category(CategoryName.getText().toString(), CategoryDesc.getText().toString(), image);
+                    Services s = new Services(CategoryName.getText().toString(), CategoryDesc.getText().toString());
                     db = new DataBaseHelper(CreateCategory.this);
+                    boolean serviceAdded = db.addServices(s);
                     boolean added = db.addCategory(c);
                     if (added) {
-                        Toast.makeText(this, "Successfully added!", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(this, ManageCategoryPage.class);
-                        i.putExtra("username", uniqueString);
-                        startActivity(i);
-                    } else {
-                        Toast.makeText(this, "Failed to create category.", Toast.LENGTH_SHORT).show();
-                    }
+                        if (serviceAdded) {
+                            Toast.makeText(this, "Successfully added!", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(this, ManageCategoryPage.class);
+                            i.putExtra("username", uniqueString);
+                            startActivity(i);
+                        } else {
+                            Toast.makeText(this, "Failed to create category.", Toast.LENGTH_SHORT).show();
+                        }
+                        }
+
                 }
 
 
