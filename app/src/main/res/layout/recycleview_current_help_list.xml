@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:cardView="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView7"
+    android:layout_width="match_parent"
+    android:layout_height="230dp"
+    cardView:cardCornerRadius="15dp"
+    cardView:cardElevation="8dp"
+    android:layout_margin="8dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/currentCategory"
+            android:layout_width="150dp"
+            android:layout_height="24dp"
+            android:fontFamily="@font/poppins"
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            cardView:layout_constraintBottom_toBottomOf="parent"
+            cardView:layout_constraintEnd_toEndOf="parent"
+            cardView:layout_constraintHorizontal_bias="0.09"
+            cardView:layout_constraintStart_toStartOf="parent"
+            cardView:layout_constraintTop_toTopOf="parent"
+            cardView:layout_constraintVertical_bias="0.09" />
+
+        <TextView
+            android:id="@+id/currentFullName"
+            android:layout_width="250dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/poppins"
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            cardView:layout_constraintBottom_toBottomOf="parent"
+            cardView:layout_constraintEnd_toEndOf="@+id/currentCategory"
+            cardView:layout_constraintHorizontal_bias="0.0"
+            cardView:layout_constraintStart_toStartOf="@+id/currentCategory"
+            cardView:layout_constraintTop_toBottomOf="@+id/currentCategory"
+            cardView:layout_constraintVertical_bias="0.037" />
+
+        <TextView
+            android:id="@+id/currentUserNo"
+            android:layout_width="140dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins"
+            cardView:layout_constraintBottom_toBottomOf="parent"
+            cardView:layout_constraintEnd_toEndOf="@+id/currentFullName"
+            cardView:layout_constraintHorizontal_bias="0.0"
+            cardView:layout_constraintStart_toStartOf="@+id/currentFullName"
+            cardView:layout_constraintTop_toBottomOf="@+id/currentFullName"
+            cardView:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/currentGoalName"
+            android:layout_width="170dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins"
+            cardView:layout_constraintBottom_toBottomOf="parent"
+            cardView:layout_constraintEnd_toEndOf="parent"
+            cardView:layout_constraintHorizontal_bias="0.096"
+            cardView:layout_constraintStart_toStartOf="parent"
+            cardView:layout_constraintTop_toBottomOf="@+id/currentUserNo"
+            cardView:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/currentGoalDesc"
+            android:layout_width="250dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins"
+            android:text="TextView"
+            android:textColor="#696969"
+            android:textSize="13sp"
+            android:textStyle="italic"
+            cardView:layout_constraintBottom_toBottomOf="parent"
+            cardView:layout_constraintEnd_toEndOf="parent"
+            cardView:layout_constraintHorizontal_bias="0.157"
+            cardView:layout_constraintStart_toStartOf="parent"
+            cardView:layout_constraintTop_toBottomOf="@+id/currentGoalName"
+            cardView:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/currentGoalCreatedTime"
+            android:layout_width="250dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins"
+            cardView:layout_constraintBottom_toBottomOf="parent"
+            cardView:layout_constraintEnd_toEndOf="parent"
+            cardView:layout_constraintHorizontal_bias="0.157"
+            cardView:layout_constraintStart_toStartOf="parent"
+            cardView:layout_constraintTop_toBottomOf="@+id/currentGoalDesc"
+            cardView:layout_constraintVertical_bias="0.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

@@ -232,4 +232,8 @@
     <string name="pending_help_2">Pending Help</string>
     <string name="patience_text">Please be patient while they get back to you!</string>
 
+    <!-- strings for org_page.xml -->
+    <string name="view_requested_help">Requested Help from Users</string>
+    <string name="currently_helping_users">Currently Helping</string>
+
 </resources>

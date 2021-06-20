@@ -42,6 +42,12 @@ public class ConfirmHelpGoal extends AppCompatActivity {
         timestarted = findViewById(R.id.selectedHelpGoalDate);
         getHelpB = findViewById(R.id.getSelectedHelpButton);
         returnArrow = findViewById(R.id.returnArrow10);
+        returnArrow.setOnClickListener(v -> {
+            Intent returnPrev = new Intent(this, SelectHelpGoal.class);
+            returnPrev.putExtra("username", uniqueString);
+            startActivity(returnPrev);
+
+        });
         putText();
 
         getHelpB.setOnClickListener(new View.OnClickListener() {
