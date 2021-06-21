@@ -141,7 +141,6 @@
         android:layout_height="50dp"
         android:background="@drawable/manageadmin_box"
         android:fontFamily="@font/poppins"
-
         android:text="@string/adminUpdateUserButton"
         android:textColor="@color/black"
         android:textSize="20sp"
