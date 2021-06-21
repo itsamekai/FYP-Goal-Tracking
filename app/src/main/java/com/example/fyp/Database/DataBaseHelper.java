@@ -16,6 +16,7 @@ import com.example.fyp.ObjectClass.Services;
 import com.example.fyp.ObjectClass.UserHelp;
 import com.example.fyp.ObjectClass.Users;
 import com.example.fyp.ObjectClass.UsersGoal;
+import com.example.fyp.ObjectClass.Achievements;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -87,6 +88,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String USERHELP_ID = "userhelp_id";
     public static final String HELPED = "helped";
 
+    //Achievements Table
+    public static final String ACHIEVEMENTS_TABLE = "AchievementsTable";
+    public static final String ACHIEVEMENT_ID = "achievement_id";
+    public static final String ACHIEVEMENT_DESC = "achievement_desc";
+    public static final String ACHIEVEMENT_IMAGE = "achievement_img";
+    public static final String ACHIEVEMENT_REQUIRED = "achievement_required";
+
+
 
 
 
@@ -115,6 +124,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         String createOrgServicesTable = "CREATE TABLE " + ORGSERVICES_TABLE + " (" + ORG_HAS_SERVICE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ORGID + " INTEGER NOT NULL, " + SERVICEID + " INTEGER NOT NULL);";
 
+        String createAchievementsTable = "CREATE TABLE " + ACHIEVEMENTS_TABLE + " (" + ACHIEVEMENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ACHIEVEMENT_REQUIRED + " INTEGER NOT NULL, " + ACHIEVEMENT_DESC + " TEXT NOT NULL, " +  ACHIEVEMENT_IMAGE + " BLOB NOT NULL);";
+
         String createUserHelpTable = "CREATE TABLE " + USERHELP_TABLE + " (" + USERHELP_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + SERVICE_ID + " INTEGER NOT NULL, " + ORG_ID + " INTEGER, "
                 + USER_ID + " INTEGER NOT NULL, " + GOAL_ID + " INTEGER NOT NULL, " + HELPED + " INTEGER DEFAULT 0, " +
                 "FOREIGN KEY (" + SERVICE_ID + ") REFERENCES " + ORGSERVICES_TABLE + "(" + SERVICE_ID + "), " +
@@ -129,6 +140,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL(createServicesTable);
         db.execSQL(createOrgServicesTable);
         db.execSQL(createUserHelpTable);
+        db.execSQL(createAchievementsTable);
 
 
     }
@@ -252,6 +264,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return c;
     }
+    
+
 
     // update senior address,phoneNo , about
 
@@ -852,6 +866,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return id;
     }
+
+    public int checkGoalsAccomplished(String u){
+        int accomplishedGoal = 0;
+        String sql = "SELECT COUNT(*) FROM UserGoalTable WHERE accomplished = 1";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if(c.moveToFirst()) {
+            accomplishedGoal = c.getInt(0);
+        }
+        return accomplishedGoal;
+    }
+
 
 
 
