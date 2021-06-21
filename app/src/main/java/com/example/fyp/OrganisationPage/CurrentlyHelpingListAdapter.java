@@ -56,7 +56,17 @@ public class CurrentlyHelpingListAdapter extends RecyclerView.Adapter<CurrentlyH
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "test", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "test", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(context, CurrentlyHelpingGoal.class);
+                i.putExtra("username", CurrentlyHelpingList.uniqueString);
+                i.putExtra("category_name", String.valueOf(category.get(position)));
+                i.putExtra("full_name", String.valueOf(full_name.get(position)));
+                i.putExtra("phone_no", String.valueOf(phone_no.get(position)));
+                i.putExtra("goal_name", String.valueOf(goal_name.get(position)));
+                i.putExtra("goal_description", String.valueOf(goal_desc.get(position)));
+                i.putExtra("goal_created", String.valueOf(goal_created_time.get(position)));
+                activity.startActivityForResult(i, 1);
+
             }
         });
     }

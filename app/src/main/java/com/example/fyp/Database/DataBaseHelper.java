@@ -719,8 +719,30 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return c;
     }
 
+    // This method gets the goals that the users requested help for but have not gotten help yet from the POs
     public Cursor getPendingGoals(String username) {
-        String sql = "SELECT ug.goal_name, ug.goal_desc, ug.datetime_created FROM UserGoalTable ug INNER JOIN Users u ON ug.user_id = u.user_id WHERE u.username ='" + username + "' AND ug.accomplished = '0' AND ug.requested = '1';";
+        String sql = "select DISTINCT ug.goal_name, ug.goal_desc, ug.datetime_created FROM UserGoalTable ug " +
+                "INNER JOIN Users u ON ug.user_id = u.user_id " +
+                "INNER JOIN UserHelp uh ON u.user_id = uh.user_id " +
+                "WHERE ug.user_id = (SELECT user_id FROM Users WHERE username = '" + username +"') " +
+                "AND ug.goal_id IN (SELECT goal_id FROM UserHelp WHERE org_id IS NULL and helped = 0);";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = null;
+        if (db != null) {
+            c = db.rawQuery(sql, null);
+        }
+        return c;
+    }
+
+    // this methods gets the goals that the users have requested help for and have already gotten help from POs (PO has chose to help the user with the goal)
+    public Cursor showExistingHelpGoals(String username) {
+        String sql = "SELECT DISTINCT ug.goal_name, ug.goal_desc, ug.datetime_created, o.org_name, o.ContactNo  FROM UserGoalTable ug " +
+                "INNER JOIN Users u ON ug.user_id = u.user_id " +
+                "INNER JOIN UserHelp uh ON u.user_id = uh.user_id " +
+                "INNER JOIN OrgUsers o ON uh.org_id = o.org_id " +
+                "WHERE ug.user_id = (SELECT user_id FROM Users WHERE username = '" + username + "') " +
+                "AND ug.goal_id IN (SELECT goal_id FROM UserHelp WHERE org_id NOT NULL and helped = 1) " +
+                "AND uh.org_id IN (SELECT o.org_id FROM OrgUsers o INNER JOIN UserHelp uh ON o.org_id = uh.org_id WHERE uh.helped = 1);";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = null;
         if (db != null) {
@@ -766,6 +788,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return c;
     }
+
+    public String getOrgName(String email) {
+        String name = "";
+        String sql = "SELECT org_name FROM OrgUsers WHERE email_address ='" + email + "'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if(c.moveToFirst()) {
+            name = c.getString(0);
+        }
+        return name;
+    }
+
 
 
     public boolean addServices(Services s) {

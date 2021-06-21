@@ -33,9 +33,11 @@ public class ChooseHelp extends AppCompatActivity {
             startActivity(ret);
         });
 
-//        existingHelp.setOnClickListener(v -> {
-//            Intent existing = new Intent(this, )
-//        });
+        existingHelp.setOnClickListener(v -> {
+            Intent existing = new Intent(this, ExistingHelp.class);
+            existing.putExtra("username", uniqueString);
+            startActivity(existing);
+        });
 
         getHelp.setOnClickListener(v -> {
             Intent newHelp = new Intent(this, SelectHelpGoal.class);
@@ -48,6 +50,8 @@ public class ChooseHelp extends AppCompatActivity {
             pending.putExtra("username", uniqueString);
             startActivity(pending);
         });
+
+
 
     }
 }
