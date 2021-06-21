@@ -101,9 +101,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String DATETIME_ACHIEVED = "datetime_achieved";
 
 
-
-
-
     public DataBaseHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
@@ -129,8 +126,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         String createOrgServicesTable = "CREATE TABLE " + ORGSERVICES_TABLE + " (" + ORG_HAS_SERVICE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ORGID + " INTEGER NOT NULL, " + SERVICEID + " INTEGER NOT NULL);";
 
-        String createAchievementsTable = "CREATE TABLE " + ACHIEVEMENTS_TABLE + " (" + ACHIEVEMENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ACHIEVEMENT_REQUIRED + " INTEGER NOT NULL, " + ACHIEVEMENT_DESC + " TEXT NOT NULL, " +  ACHIEVEMENT_IMAGE + " BLOB NOT NULL);";
-
         String createUserHelpTable = "CREATE TABLE " + USERHELP_TABLE + " (" + USERHELP_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + SERVICE_ID + " INTEGER NOT NULL, " + ORG_ID + " INTEGER, "
                 + USER_ID + " INTEGER NOT NULL, " + GOAL_ID + " INTEGER NOT NULL, " + HELPED + " INTEGER DEFAULT 0, " +
                 "FOREIGN KEY (" + SERVICE_ID + ") REFERENCES " + ORGSERVICES_TABLE + "(" + SERVICE_ID + "), " +
@@ -138,7 +133,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY (" + USER_ID + ") REFERENCES " + USERS_TABLE + "(" + USER_ID + ")," +
                 "FOREIGN KEY (" + GOAL_ID + ") REFERENCES " + USERGOAL_TABLE + "(" + GOAL_ID + "));";
 
-        String createUserAchievementTable = "CREATE TABLE " + USERACHIEVEMENT_TABLE + " (" + USER_ACHIEVED_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ACHIEVEMENT_ID + " INTEGER NOT NULL, " + USER_ID + " INTEGER NOT NULL, " + DATETIME_ACHIEVED + " TEXT NOT NULL);";
+        String createAchievementsTable = "CREATE TABLE " + ACHIEVEMENTS_TABLE + " (" + ACHIEVEMENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ACHIEVEMENT_REQUIRED + " INTEGER NOT NULL, " + ACHIEVEMENT_DESC + " TEXT NOT NULL, " +  ACHIEVEMENT_IMAGE + " BLOB NOT NULL);";
+
+        String createUserAchievementTable = "CREATE TABLE " + USERACHIEVEMENT_TABLE + " (" + USER_ACHIEVED_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ACHIEVEMENT_ID + " INTEGER NOT NULL, " + USER_ID + " INTEGER NOT NULL, " + DATETIME_ACHIEVED + " STRING NOT NULL, " +
+                "FOREIGN KEY (" + ACHIEVEMENT_ID + ") REFERENCES " + ACHIEVEMENTS_TABLE + "(" + ACHIEVEMENT_ID + "), " +
+                "FOREIGN KEY (" + USER_ID + ") REFERENCES " + USERS_TABLE + "(" + USER_ID + "));";
 
         db.execSQL(createUsersTable);
         db.execSQL(createOrgUsersTable);
