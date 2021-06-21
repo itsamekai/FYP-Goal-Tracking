@@ -8,7 +8,9 @@ public class Achievements {
     private String achievement_desc;
     private byte[] achievement_img;
 
-    public Achievements(String achievement_desc, byte[] achievement_img){
+    public Achievements(int achievement_id, int required, String achievement_desc, byte[] achievement_img){
+        this.achievement_id = achievement_id;
+        this.required = required;
         this.achievement_desc = achievement_desc;
         this.achievement_img = achievement_img;
     }

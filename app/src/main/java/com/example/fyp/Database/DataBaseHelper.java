@@ -95,6 +95,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String ACHIEVEMENT_IMAGE = "achievement_img";
     public static final String ACHIEVEMENT_REQUIRED = "achievement_required";
 
+    //UserAchievement Table
+    public static final String USERACHIEVEMENT_TABLE = "UserAchievement";
+    public static final String USER_ACHIEVED_ID = "user_achieved_id";
+    public static final String DATETIME_ACHIEVED = "datetime_achieved";
+
 
 
 
@@ -133,6 +138,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY (" + USER_ID + ") REFERENCES " + USERS_TABLE + "(" + USER_ID + ")," +
                 "FOREIGN KEY (" + GOAL_ID + ") REFERENCES " + USERGOAL_TABLE + "(" + GOAL_ID + "));";
 
+        String createUserAchievementTable = "CREATE TABLE " + USERACHIEVEMENT_TABLE + " (" + USER_ACHIEVED_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ACHIEVEMENT_ID + " INTEGER NOT NULL, " + USER_ID + " INTEGER NOT NULL, " + DATETIME_ACHIEVED + " TEXT NOT NULL);";
+
         db.execSQL(createUsersTable);
         db.execSQL(createOrgUsersTable);
         db.execSQL(createCategoryTable);
@@ -141,6 +148,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL(createOrgServicesTable);
         db.execSQL(createUserHelpTable);
         db.execSQL(createAchievementsTable);
+        db.execSQL(createUserAchievementTable);
 
 
     }
