@@ -27,6 +27,7 @@
         <activity android:name=".OrganisationPage.orgPage" />
         <activity android:name=".Admin.CategoryPage.UpdateCategory" />
         <activity android:name=".Admin.CategoryPage.CreateCategory" />
+        <activity android:name=".Admin.CategoryPage.CreateAchievement" />
         <activity android:name=".Admin.OrganisationPage.ApproveOrganisation" />
         <activity android:name=".Admin.OrganisationPage.ShowUnapprovedOrg" />
         <activity android:name=".Admin.OrganisationPage.ViewOrganisation" />
@@ -37,7 +38,6 @@
         <activity android:name=".Admin.AdminPage.DeleteAdmin" />
         <activity android:name=".Admin.OrganisationPage.ManageOrganisationPage" />
         <activity android:name=".Admin.CategoryPage.ManageCategoryPage" />
-        <activity android:name=".Admin.CategoryPage.CreateAchievement" />
         <activity android:name=".Admin.AdminPage.ManageAdminPage" />
         <activity android:name=".Admin.MainAdminPage" />
         <activity android:name=".Goals.SetGoal" />
