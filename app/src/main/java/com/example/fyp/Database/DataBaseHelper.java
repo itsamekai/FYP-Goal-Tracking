@@ -539,6 +539,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public boolean addAchievement(Achievements a) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
+        cv.put(ACHIEVEMENT_REQUIRED, a.getRequired());
         cv.put(ACHIEVEMENT_NAME, a.getAchievement_name());
         cv.put(ACHIEVEMENT_DESC, a.getAchievement_desc());
         cv.put(ACHIEVEMENT_IMAGE, a.getAchievement_img());

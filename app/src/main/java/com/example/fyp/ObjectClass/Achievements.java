@@ -8,7 +8,7 @@ public class Achievements {
     private String achievement_desc , achievement_name;
     private byte[] achievement_img;
 
-    public Achievements( String achievement_desc,String achievement_name, byte[] achievement_img){
+    public Achievements( Integer required,String achievement_desc,String achievement_name, byte[] achievement_img){
 
         this.required = required;
         this.achievement_desc = achievement_desc;

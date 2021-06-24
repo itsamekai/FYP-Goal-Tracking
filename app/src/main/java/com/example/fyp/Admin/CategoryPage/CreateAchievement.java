@@ -33,6 +33,7 @@ public class CreateAchievement extends AppCompatActivity {
     public Button createB;
     public EditText achName;
     public EditText achDesc;
+    public EditText numberOfGoalsRequired;
     public DataBaseHelper db;
     private static int GET_FROM_GALLERY = 1;
     public byte[] image;
@@ -50,6 +51,7 @@ public class CreateAchievement extends AppCompatActivity {
         createB = findViewById(R.id.createAchievementb);
         achName = findViewById(R.id.achievementName);
         achDesc = findViewById(R.id.achievementDesc);
+        numberOfGoalsRequired = findViewById(R.id.numberOfGoalsReq);
 
 
         // return previous
@@ -73,10 +75,11 @@ public class CreateAchievement extends AppCompatActivity {
                 Toast.makeText(this, "Please fill in all the fields.", Toast.LENGTH_SHORT).show();
             } else {
                 db = new DataBaseHelper(CreateAchievement.this);
+                String numberOfGoalsRequired1 = numberOfGoalsRequired.getText().toString();
                 if (db.checkCategoryDuplicate(achName.getText().toString()) != 0) {
                     Toast.makeText(this, "Achievement already exists.", Toast.LENGTH_SHORT).show();
                 } else {
-                    Achievements a = new Achievements(achName.getText().toString(), achDesc.getText().toString(), image);
+                    Achievements a = new Achievements(Integer.parseInt(numberOfGoalsRequired1),achName.getText().toString(), achDesc.getText().toString(), image);
 
                     db = new DataBaseHelper(CreateAchievement.this);
 
