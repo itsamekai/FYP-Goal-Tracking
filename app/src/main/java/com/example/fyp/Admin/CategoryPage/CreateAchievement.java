@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fyp.Database.DataBaseHelper;
+import com.example.fyp.ObjectClass.Achievements;
 import com.example.fyp.ObjectClass.Category;
 import com.example.fyp.ObjectClass.Services;
 import com.example.fyp.R;
@@ -29,6 +30,9 @@ public class CreateAchievement extends AppCompatActivity {
     public ImageView setimagebutton;
     public ImageView medalimage;
     public ImageView arrowBack;
+    public Button createB;
+    public EditText achName;
+    public EditText achDesc;
     public DataBaseHelper db;
     private static int GET_FROM_GALLERY = 1;
     public byte[] image;
@@ -43,6 +47,10 @@ public class CreateAchievement extends AppCompatActivity {
         arrowBack = findViewById(R.id.adminArrowBack9);
         medalimage = findViewById(R.id.categoryUploadImageUpdate);
         setimagebutton = findViewById(R.id.seticon);
+        createB = findViewById(R.id.createAchievementb);
+        achName = findViewById(R.id.achievementName);
+        achDesc = findViewById(R.id.achievementDesc);
+
 
         // return previous
         arrowBack.setOnClickListener(v -> {
@@ -59,7 +67,35 @@ public class CreateAchievement extends AppCompatActivity {
             }
         });
 
+        // creates achievement
+        createB.setOnClickListener(v -> {
+            if (CheckIfEmpty()) {
+                Toast.makeText(this, "Please fill in all the fields.", Toast.LENGTH_SHORT).show();
+            } else {
+                db = new DataBaseHelper(CreateAchievement.this);
+                if (db.checkCategoryDuplicate(achName.getText().toString()) != 0) {
+                    Toast.makeText(this, "Achievement already exists.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Achievements a = new Achievements(achName.getText().toString(), achDesc.getText().toString(), image);
+
+                    db = new DataBaseHelper(CreateAchievement.this);
+
+                    boolean add = db.addAchievement(a);
+                    if (add) {
+                        Toast.makeText(this, "Successfully created!", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(this, ManageCategoryPage.class);
+                        i.putExtra("username", uniqueString);
+                        startActivity(i);
+                    } else {
+                        Toast.makeText(this, "Failed to create achievement.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+            }
+
+        });
     }
+
     // open photo gallery
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -71,7 +107,7 @@ public class CreateAchievement extends AppCompatActivity {
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
                 db = new DataBaseHelper(this);
-                setimagebutton.setImageBitmap(bitmap);
+                medalimage.setImageBitmap(bitmap);
                 image = getBytes(bitmap);
 
             } catch (FileNotFoundException e) {
@@ -88,5 +124,12 @@ public class CreateAchievement extends AppCompatActivity {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
         return stream.toByteArray();
+    }
+
+    // checks if empty, if empty return true, else false
+    public boolean CheckIfEmpty() {
+        if (achName.getText().toString().matches("") || achDesc.getText().toString().matches("") || image == null) {
+            return true;
+        } else return false;
     }
 }

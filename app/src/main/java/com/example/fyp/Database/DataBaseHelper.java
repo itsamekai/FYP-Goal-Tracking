@@ -91,6 +91,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     //Achievements Table
     public static final String ACHIEVEMENTS_TABLE = "AchievementsTable";
     public static final String ACHIEVEMENT_ID = "achievement_id";
+    public static final String ACHIEVEMENT_NAME = "achievement_name";
     public static final String ACHIEVEMENT_DESC = "achievement_desc";
     public static final String ACHIEVEMENT_IMAGE = "achievement_img";
     public static final String ACHIEVEMENT_REQUIRED = "achievement_required";
@@ -133,7 +134,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY (" + USER_ID + ") REFERENCES " + USERS_TABLE + "(" + USER_ID + ")," +
                 "FOREIGN KEY (" + GOAL_ID + ") REFERENCES " + USERGOAL_TABLE + "(" + GOAL_ID + "));";
 
-        String createAchievementsTable = "CREATE TABLE " + ACHIEVEMENTS_TABLE + " (" + ACHIEVEMENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ACHIEVEMENT_REQUIRED + " INTEGER NOT NULL, " + ACHIEVEMENT_DESC + " TEXT NOT NULL, " +  ACHIEVEMENT_IMAGE + " BLOB NOT NULL);";
+        String createAchievementsTable = "CREATE TABLE " + ACHIEVEMENTS_TABLE + " (" + ACHIEVEMENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ACHIEVEMENT_REQUIRED + " INTEGER NOT NULL, " + ACHIEVEMENT_DESC + " TEXT NOT NULL, " + ACHIEVEMENT_NAME + " TEXT NOT NULL, " + ACHIEVEMENT_IMAGE + " BLOB NOT NULL);";
 
         String createUserAchievementTable = "CREATE TABLE " + USERACHIEVEMENT_TABLE + " (" + USER_ACHIEVED_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ACHIEVEMENT_ID + " INTEGER NOT NULL, " + USER_ID + " INTEGER NOT NULL, " + DATETIME_ACHIEVED + " STRING NOT NULL, " +
                 "FOREIGN KEY (" + ACHIEVEMENT_ID + ") REFERENCES " + ACHIEVEMENTS_TABLE + "(" + ACHIEVEMENT_ID + "), " +
@@ -529,6 +530,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cv.put(CATEGORY_DESC, c.getCategory_desc());
         cv.put(CATEGORY_IMAGE, c.getImage());
         long insert = database.insert(CATEGORY_TABLE, null, cv);
+        database.close();
+        if (insert == -1) return false;
+        else return true;
+    }
+
+    // add achievement to the table
+    public boolean addAchievement(Achievements a) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(ACHIEVEMENT_NAME, a.getAchievement_name());
+        cv.put(ACHIEVEMENT_DESC, a.getAchievement_desc());
+        cv.put(ACHIEVEMENT_IMAGE, a.getAchievement_img());
+        long insert = database.insert(ACHIEVEMENTS_TABLE, null, cv);
         database.close();
         if (insert == -1) return false;
         else return true;

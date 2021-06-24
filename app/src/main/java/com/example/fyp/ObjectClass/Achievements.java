@@ -5,13 +5,14 @@ import java.util.Arrays;
 public class Achievements {
 
     private int achievement_id, required;
-    private String achievement_desc;
+    private String achievement_desc , achievement_name;
     private byte[] achievement_img;
 
-    public Achievements(int achievement_id, int required, String achievement_desc, byte[] achievement_img){
-        this.achievement_id = achievement_id;
+    public Achievements( String achievement_desc,String achievement_name, byte[] achievement_img){
+
         this.required = required;
         this.achievement_desc = achievement_desc;
+        this.achievement_name = achievement_name;
         this.achievement_img = achievement_img;
     }
 
@@ -25,6 +26,8 @@ public class Achievements {
 
     public String getAchievement_desc() { return achievement_desc; }
 
+    public String getAchievement_name() { return achievement_name; }
+
     public void setAchievement_desc(String achievement_desc) { this.achievement_desc = achievement_desc; }
 
     public byte[] getAchievement_img() { return achievement_img; }
@@ -37,6 +40,7 @@ public class Achievements {
                 "achievement_id=" + achievement_id +
                 ", required ='" + required + '\'' +
                 ", achievement_desc='" + achievement_desc + '\'' +
+                ", achievement_name='" + achievement_name + '\'' +
                 ", achievement_img=" + Arrays.toString(achievement_img) +
                 '}';
     }

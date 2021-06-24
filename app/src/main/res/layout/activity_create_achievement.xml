@@ -46,7 +46,7 @@
         app:srcCompat="@drawable/arrow" />
 
     <EditText
-        android:id="@+id/categoryDesc"
+        android:id="@+id/achievementDesc"
         android:layout_width="310dp"
         android:layout_height="95dp"
         android:layout_marginTop="10dp"
@@ -64,7 +64,7 @@
         app:layout_constraintVertical_bias="0.776" />
 
     <EditText
-        android:id="@+id/textView52"
+        android:id="@+id/achievementName"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:autofillHints="false"
