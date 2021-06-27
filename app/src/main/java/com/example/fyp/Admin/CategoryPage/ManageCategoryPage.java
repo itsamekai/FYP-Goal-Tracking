@@ -15,7 +15,7 @@ public class ManageCategoryPage extends AppCompatActivity {
     public ImageView returnButton;
     public TextView createButton;
     public TextView updateButton;
-    public TextView createAchievemenButton1;
+    public TextView createAchievementButton1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +44,11 @@ public class ManageCategoryPage extends AppCompatActivity {
             startActivity(update);
         });
 
-        createAchievemenButton1 = (TextView) findViewById(R.id.createAchievementButton);
-        createAchievemenButton1.setOnClickListener(v ->{
+        createAchievementButton1 = (TextView) findViewById(R.id.createAchievementButton);
+        createAchievementButton1.setOnClickListener(v ->{
             Intent create1 = new Intent(this, CreateAchievement.class);
             create1.putExtra("username", uniqueString);
             startActivity(create1);
         });
-
     }
 }

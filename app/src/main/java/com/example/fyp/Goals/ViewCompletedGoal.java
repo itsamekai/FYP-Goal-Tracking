@@ -42,11 +42,6 @@ public class ViewCompletedGoal extends AppCompatActivity {
         });
 
 
-
-
-
-
-
     }
 
     public void fillTextViews() {

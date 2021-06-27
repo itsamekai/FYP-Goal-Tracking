@@ -22,6 +22,7 @@ public class ViewUncompletedGoal extends AppCompatActivity {
     public Button deleteGoal, finishGoal;
     public ImageView arrowback;
     public String uniqueString, goal_name;
+    public int u;
     public DataBaseHelper db;
 
     @Override
@@ -123,6 +124,18 @@ public class ViewUncompletedGoal extends AppCompatActivity {
                     i.putExtra("username", uniqueString);
                     startActivity(i);
                 }
+
+
+                int count = db.checkGoalsAccomplished(u); //retrieves goal count of how many goals they have completed/accomplished
+                if (count == 1) {
+
+                    //if the accomplished goal is 1, make sure it matches with required fields in the database
+                    //if they match with the database fields, then medals will be given to them
+                    //have to make sure to check for no duplicated rewards/achievements
+
+                    if (db.checkCategoryDuplicate())
+                }
+
                 else Toast.makeText(getApplicationContext(), "can't update?", Toast.LENGTH_SHORT).show();
             }
         });

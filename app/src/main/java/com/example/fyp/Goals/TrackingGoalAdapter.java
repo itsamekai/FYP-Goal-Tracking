@@ -58,8 +58,6 @@ public class TrackingGoalAdapter extends RecyclerView.Adapter<TrackingGoalAdapte
                 activity.startActivityForResult(i, 1);
             }
         });
-
-
     }
 
     @Override

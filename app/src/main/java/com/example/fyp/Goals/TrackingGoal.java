@@ -50,7 +50,7 @@ public class TrackingGoal extends AppCompatActivity {
 
 
 
-        recyclerView = findViewById(R.id.TrackGoalRecyclerView);
+        recyclerView = findViewById(R.id.GoalsAccomplishedRecyclerView);
         db = new DataBaseHelper(this);
         goalName = new ArrayList<>();
         goalDesc = new ArrayList<>();
@@ -80,7 +80,7 @@ public class TrackingGoal extends AppCompatActivity {
 
     private void setAllGoalCount() {
         total = db.TotalGoals(uniqueString);
-        goalCounter = findViewById(R.id.goalCounter);
+        goalCounter = findViewById(R.id.accomplishedTotal);
         goalCompleted = findViewById(R.id.completeCounter);
         goalUncompleted = findViewById(R.id.uncompleteCounter);
         goalCounter.setText(String.valueOf(total) + " Goals");

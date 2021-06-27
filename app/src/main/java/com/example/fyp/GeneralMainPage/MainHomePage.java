@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import com.example.fyp.Database.DataBaseHelper;
 import com.example.fyp.GeneralMainPage.OrgHelp.ChooseHelp;
 import com.example.fyp.GeneralMainPage.Profile.ProfilePage;
+import com.example.fyp.Goals.CheckAccomplishedGoal;
 import com.example.fyp.Goals.HistoryGoals;
 import com.example.fyp.Goals.TrackingGoal;
 import com.example.fyp.Login.LoginPage;
@@ -29,6 +31,7 @@ public class MainHomePage extends AppCompatActivity {
     public ImageView trackGoalsB;
     public ImageView viewHistoryGoals;
     public ImageView getHelpB;
+    public ImageView rewardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,9 +100,11 @@ public class MainHomePage extends AppCompatActivity {
             startActivity(HelpPage);
         });
 
-
-
-
-
+        rewardView = (ImageView) findViewById(R.id.view_medal);
+        rewardView.setOnClickListener(v -> {
+            Intent ViewRewardPage = new Intent(this, CheckAccomplishedGoal.class);
+            ViewRewardPage.putExtra("username", uniqueString);
+            startActivity(ViewRewardPage);
+        });
     }
 }

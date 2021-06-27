@@ -2,7 +2,6 @@ package com.example.fyp.GeneralMainPage.OrgHelp;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,9 +67,9 @@ public class PendingHelpAdapter extends RecyclerView.Adapter<PendingHelpAdapter.
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            GoalName = itemView.findViewById(R.id.pendingGoalName);
-            GoalDesc = itemView.findViewById(R.id.pendingGoalDesc);
-            GoalStart = itemView.findViewById(R.id.pendingDateTime);
+            GoalName = itemView.findViewById(R.id.accomplishedAchievement);
+            GoalDesc = itemView.findViewById(R.id.nameOfAccomplishedUser);
+            GoalStart = itemView.findViewById(R.id.accomplishedDateTime);
             cardView = itemView.findViewById(R.id.cardView5);
         }
     }

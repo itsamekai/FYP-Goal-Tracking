@@ -14,7 +14,7 @@
         android:layout_height="186dp"
         android:layout_marginTop="60dp"
         android:contentDescription="@string/box_for_display"
-        app:layout_constraintBottom_toTopOf="@+id/TrackGoalRecyclerView"
+        app:layout_constraintBottom_toTopOf="@+id/GoalsAccomplishedRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -34,7 +34,7 @@
         app:srcCompat="@drawable/addbutton" />
 
     <TextView
-        android:id="@+id/goalCounter"
+        android:id="@+id/accomplishedTotal"
         android:layout_width="130dp"
         android:layout_height="40dp"
         android:textSize="20sp"
@@ -117,7 +117,7 @@
         app:layout_constraintVertical_bias="0.244" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/TrackGoalRecyclerView"
+        android:id="@+id/GoalsAccomplishedRecyclerView"
         android:layout_width="380dp"
         android:layout_height="484dp"
         android:layout_marginTop="60dp"

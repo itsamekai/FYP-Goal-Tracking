@@ -14,7 +14,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/pendingGoalName"
+            android:id="@+id/accomplishedAchievement"
             android:layout_width="200dp"
             android:layout_height="24dp"
             android:fontFamily="@font/poppins"
@@ -30,7 +30,7 @@
             cardView:layout_constraintVertical_bias="0.224" />
 
         <TextView
-            android:id="@+id/pendingGoalDesc"
+            android:id="@+id/nameOfAccomplishedUser"
             android:layout_width="250dp"
             android:layout_height="25dp"
             android:layout_marginTop="4dp"
@@ -40,14 +40,14 @@
             android:textSize="13sp"
             android:textStyle="italic"
             cardView:layout_constraintBottom_toBottomOf="parent"
-            cardView:layout_constraintEnd_toEndOf="@+id/pendingGoalName"
+            cardView:layout_constraintEnd_toEndOf="@+id/accomplishedAchievement"
             cardView:layout_constraintHorizontal_bias="0.0"
-            cardView:layout_constraintStart_toStartOf="@+id/pendingGoalName"
-            cardView:layout_constraintTop_toBottomOf="@+id/pendingGoalName"
+            cardView:layout_constraintStart_toStartOf="@+id/accomplishedAchievement"
+            cardView:layout_constraintTop_toBottomOf="@+id/accomplishedAchievement"
             cardView:layout_constraintVertical_bias="0.065" />
 
         <TextView
-            android:id="@+id/pendingDateTime"
+            android:id="@+id/accomplishedDateTime"
             android:layout_width="250dp"
             android:layout_height="25dp"
             android:layout_marginTop="8dp"
@@ -56,10 +56,10 @@
             android:textColor="@color/black"
             android:fontFamily="@font/poppins"
             cardView:layout_constraintBottom_toBottomOf="parent"
-            cardView:layout_constraintEnd_toEndOf="@+id/pendingGoalDesc"
+            cardView:layout_constraintEnd_toEndOf="@+id/nameOfAccomplishedUser"
             cardView:layout_constraintHorizontal_bias="0.0"
-            cardView:layout_constraintStart_toStartOf="@+id/pendingGoalDesc"
-            cardView:layout_constraintTop_toBottomOf="@+id/pendingGoalDesc"
+            cardView:layout_constraintStart_toStartOf="@+id/nameOfAccomplishedUser"
+            cardView:layout_constraintTop_toBottomOf="@+id/nameOfAccomplishedUser"
             cardView:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
