@@ -22,12 +22,14 @@ public class CheckAccomplishedGoalAdapter extends RecyclerView.Adapter<CheckAcco
     private Context context;
     private Activity activity;
     private ArrayList AccomplishedAchievement;
+    private ArrayList accomplishedDesc;
     private ArrayList AccomplishedDateTime;
 
-    public CheckAccomplishedGoalAdapter(Activity activity, Context context, ArrayList accomplishedAchievement, ArrayList accomplishedDateTime) {
+    public CheckAccomplishedGoalAdapter(Activity activity, Context context, ArrayList accomplishedAchievement,ArrayList accomplishedDesc, ArrayList accomplishedDateTime) {
         this.activity = activity;
         this.context = context;
         this.AccomplishedAchievement = accomplishedAchievement;
+        this.accomplishedDesc = accomplishedDesc;
         this.AccomplishedDateTime = accomplishedDateTime;
     }
 
@@ -44,6 +46,7 @@ public class CheckAccomplishedGoalAdapter extends RecyclerView.Adapter<CheckAcco
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void onBindViewHolder(@NonNull final CheckAccomplishedGoalAdapter.MyViewHolder holder, int position) {
         holder.accomplishedAchievement.setText(String.valueOf(AccomplishedAchievement.get(position)));
+        holder.accomplishedDesc.setText(String.valueOf(accomplishedDesc.get(position)));
         holder.accomplishedDateTime.setText(String.valueOf(AccomplishedDateTime.get(position)));
     }
 
@@ -54,12 +57,13 @@ public class CheckAccomplishedGoalAdapter extends RecyclerView.Adapter<CheckAcco
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView accomplishedAchievement, accomplishedDateTime;
+        TextView accomplishedAchievement,accomplishedDesc, accomplishedDateTime;
         CardView cardView;
 
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
             accomplishedAchievement = itemView.findViewById(R.id.accomplishedAchievement);
+            accomplishedDesc = itemView.findViewById(R.id.accomplishedDesc1);
             accomplishedDateTime = itemView.findViewById(R.id.accomplishedDateTime);
             cardView = itemView.findViewById(R.id.cardView3);
 

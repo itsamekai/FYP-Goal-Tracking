@@ -21,7 +21,7 @@ public class CheckAccomplishedGoal extends AppCompatActivity {
     public ImageView returnButton;
     public TextView accomplishedTotal;
     public RecyclerView recyclerView;
-    public ArrayList<String> accomplishedAchievement, accomplishedDateTime;
+    public ArrayList<String> accomplishedAchievement,accomplishedDesc, accomplishedDateTime;
     public DataBaseHelper db;
     public CheckAccomplishedGoalAdapter checkAccomplishedGoalAdapter;
     int total = 0;
@@ -44,10 +44,11 @@ public class CheckAccomplishedGoal extends AppCompatActivity {
         recyclerView = findViewById(R.id.GoalsAccomplishedRecyclerView);
         db = new DataBaseHelper(this);
         accomplishedAchievement = new ArrayList<>();
+        accomplishedDesc = new ArrayList<>();
         accomplishedDateTime = new ArrayList<>();
         putDataInArray();
         SetAllGoalCount();
-        checkAccomplishedGoalAdapter = new CheckAccomplishedGoalAdapter(CheckAccomplishedGoal.this, this, accomplishedAchievement, accomplishedDateTime);
+        checkAccomplishedGoalAdapter = new CheckAccomplishedGoalAdapter(CheckAccomplishedGoal.this, this, accomplishedAchievement, accomplishedDesc, accomplishedDateTime);
         recyclerView.setAdapter(checkAccomplishedGoalAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(CheckAccomplishedGoal.this));
     }
@@ -59,13 +60,14 @@ public class CheckAccomplishedGoal extends AppCompatActivity {
     }
 
     private void putDataInArray() {
-        Cursor c = db.HistoryGoals(uniqueString);
+        Cursor c = db.retrieveAccomplishedGoals(uniqueString);
         if (c.getCount() != 0) {
             while (c.moveToNext()) {
                 //to see how many total accomplishments there are in total
                 counter++;
                 accomplishedAchievement.add(c.getString(0));
-                accomplishedDateTime.add(c.getString(1));
+                accomplishedDesc.add(c.getString(1));
+                accomplishedDateTime.add(c.getString(2));
             }
         }
 

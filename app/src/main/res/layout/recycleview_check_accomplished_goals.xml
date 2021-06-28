@@ -29,18 +29,37 @@
             cardView:layout_constraintHorizontal_bias="0.0"
             cardView:layout_constraintStart_toStartOf="@+id/accomplishedDateTime"
             cardView:layout_constraintTop_toTopOf="parent"
-            cardView:layout_constraintVertical_bias="0.974" />
+            cardView:layout_constraintVertical_bias="0.618" />
+
+        <TextView
+            android:id="@+id/accomplishedDesc1"
+            android:layout_width="250dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="48dp"
+            android:fontFamily="@font/poppins"
+            android:text="TextView"
+            android:textColor="#696969"
+            android:textSize="13sp"
+            android:textStyle="italic"
+            cardView:layout_constraintBottom_toBottomOf="parent"
+            cardView:layout_constraintEnd_toEndOf="@+id/accomplishedDateTime"
+            cardView:layout_constraintHorizontal_bias="0.0"
+            cardView:layout_constraintStart_toStartOf="@+id/accomplishedDateTime"
+            cardView:layout_constraintTop_toBottomOf="accomplishedDesc2"
+            cardView:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/accomplishedDateTime"
             android:layout_width="250dp"
             android:layout_height="25dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="16dp"
             android:fontFamily="@font/poppins"
             android:text="TextView"
             android:textColor="@color/black"
             android:textSize="16sp"
             cardView:layout_constraintBottom_toBottomOf="parent"
             tools:layout_editor_absoluteX="43dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

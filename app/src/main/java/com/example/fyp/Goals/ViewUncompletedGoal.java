@@ -133,7 +133,7 @@ public class ViewUncompletedGoal extends AppCompatActivity {
                     //if they match with the database fields, then medals will be given to them
                     //have to make sure to check for no duplicated rewards/achievements
 
-                 //   if (db.checkCategoryDuplicate())
+                    //if (db.checkCategoryDuplicate())
                 }
 
                 else Toast.makeText(getApplicationContext(), "can't update?", Toast.LENGTH_SHORT).show();

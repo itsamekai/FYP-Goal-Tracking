@@ -273,8 +273,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return c;
     }
 
+    // retrieveAccomplishedGoals for CheckAccomplishedGoals.java
     public Cursor retrieveAccomplishedGoals(String u) {
-        String sql = "SELECT a.achievement_desc, ua.datetime_achieved FROM UserAchievement ua INNER JOIN AchievementsTable a ON ua.achievement_id = a.achievement_id WHERE ua.user_id = (SELECT user_id FROM Users WHERE username = '" + u + "')";
+        String sql = "SELECT ug.goal_name, ug.goal_desc, ug.datetime_completed " +
+                "FROM UserGoalTable ug " +
+                "INNER JOIN Users u ON ug.user_id = u.user_id " +
+                "WHERE ug.accomplished = 1 " +
+                "AND u.username = '" + u + "';";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = null;
         if (db != null) {
@@ -939,6 +944,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return id;
     }
 
+    // should be able to remove
     public int checkGoalsAccomplished(int u) {
         int accomplishedGoal = 0;
         String sql = "SELECT COUNT(*) FROM UserGoalTable WHERE user_id = '" + u + "' AND accomplished = 1";
