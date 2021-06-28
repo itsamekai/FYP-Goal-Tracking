@@ -53,12 +53,13 @@ public class CheckAccomplishedGoal extends AppCompatActivity {
     }
 
     private void SetAllGoalCount(){
+
          accomplishedTotal = findViewById(R.id.RewardCount);
          accomplishedTotal.setText(String.valueOf(counter));
     }
 
     private void putDataInArray() {
-        Cursor c = db.retrieveAccomplishedGoals(uniqueString);
+        Cursor c = db.HistoryGoals(uniqueString);
         if (c.getCount() != 0) {
             while (c.moveToNext()) {
                 //to see how many total accomplishments there are in total
