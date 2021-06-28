@@ -235,10 +235,15 @@
     <!-- strings for org_page.xml -->
     <string name="view_requested_help">Requested Help from Users</string>
     <string name="currently_helping_users">Currently Helping</string>
+    <string name="add_services">Add Services</string>
 
     <!-- strings for activity_existing_help.xml -->
     <string name="existing_help_2">Existing Help</string>
     <string name="existinghelp_text">Contact them whenever needed.</string>
 
+    <!-- strings for activity_add_service.xml -->
+    <string name="service_type">Service Type</string>
+    <string name="add_selected_button">Add Selected Service</string>
+    <string name="choose_service">Select a Service.</string>
 
 </resources>

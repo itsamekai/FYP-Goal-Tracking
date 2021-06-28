@@ -6,8 +6,7 @@ public class OrgServices {
     private int org_id;
     private int service_id;
 
-    public OrgServices(int org_has_service_id, int org_id,int service_id ) {
-        this.org_has_service_id = org_has_service_id;
+    public OrgServices(int org_id,int service_id ) {
         this.org_id = org_id;
         this.service_id = service_id;
     }

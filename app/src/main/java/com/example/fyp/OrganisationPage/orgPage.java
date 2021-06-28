@@ -15,7 +15,7 @@ import com.example.fyp.R;
 
 public class orgPage extends AppCompatActivity {
 
-    public Button requested, current;
+    public Button requested, current, addServices;
     public ImageView logOut, settings;
     public TextView name;
     public String uniqueString;
@@ -45,6 +45,13 @@ public class orgPage extends AppCompatActivity {
         current = findViewById(R.id.currentlyHelping);
         current.setOnClickListener(v -> {
             Intent i = new Intent(this, CurrentlyHelpingList.class);
+            i.putExtra("username", uniqueString);
+            startActivity(i);
+        });
+
+        addServices = findViewById(R.id.AddServicesB);
+        addServices.setOnClickListener(v -> {
+            Intent i = new Intent(this, AddService.class);
             i.putExtra("username", uniqueString);
             startActivity(i);
         });

@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import androidx.annotation.Nullable;
 
 import com.example.fyp.ObjectClass.Category;
+import com.example.fyp.ObjectClass.OrgServices;
 import com.example.fyp.ObjectClass.OrgUsers;
 import com.example.fyp.ObjectClass.Services;
 import com.example.fyp.ObjectClass.UserAchievement;
@@ -817,6 +818,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return c;
     }
 
+
     public String getOrgName(String email) {
         String name = "";
         String sql = "SELECT org_name FROM OrgUsers WHERE email_address ='" + email + "'";
@@ -863,6 +865,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         else return true;
 
     }
+
 
     public int updateRequested(String user_id, String goalName) {
         SQLiteDatabase database = this.getWritableDatabase();
@@ -925,6 +928,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return name;
     }
 
+    // gets service id of the service name.
     public int getServiceID(String name) {
         int id = 0;
         String sql = "SELECT service_id FROM Services WHERE service_name = '" + name + "'";
@@ -944,6 +948,38 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return accomplishedGoal;
     }
+
+    // get the service name and description. displays when the org wants to create the services
+    // where statement ensures that there is no duplicate (eg if the org is already helping in this service, then it will not be shown again)
+    public Cursor getService(int org_id) {
+        String sql = "SELECT service_name, service_desc FROM Services WHERE service_id NOT IN (select service_id from OrgServices WHERE org_id = "+ org_id +");";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = null;
+        if (db != null) {
+            c = db.rawQuery(sql, null);
+        }
+        return c;
+    }
+
+    // insert into orgservices table after selecitng services.
+    public boolean addDedicatedServicesForOrg(OrgServices os) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(ORGID, os.getOrg_id());
+        cv.put(SERVICEID, os.getService_id());
+        long insert = database.insert(ORGSERVICES_TABLE, null, cv);
+        database.close();
+        if (insert == -1) return false;
+        else return true;
+
+    }
+
+
+
+
+
+
+
 }
 
 
