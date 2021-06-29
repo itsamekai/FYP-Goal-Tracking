@@ -16,14 +16,14 @@ import com.example.fyp.R;
 
 import java.util.ArrayList;
 
-public class CheckAccomplishedGoal extends AppCompatActivity {
+public class CheckAccomplishedAchievement extends AppCompatActivity {
 
     public ImageView returnButton;
     public TextView accomplishedTotal;
     public RecyclerView recyclerView;
     public ArrayList<String> accomplishedAchievement,accomplishedDesc, accomplishedDateTime;
     public DataBaseHelper db;
-    public CheckAccomplishedGoalAdapter checkAccomplishedGoalAdapter;
+    public CheckAccomplishedAchievementAdapter checkAccomplishedGoalAdapter;
     int total = 0;
     int counter = 0;
     public static String uniqueString;
@@ -31,7 +31,7 @@ public class CheckAccomplishedGoal extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_check_accomplished_goal);
+        setContentView(R.layout.activity_check_accomplished_achievement);
         uniqueString = getIntent().getStringExtra("username");
 
         returnButton = findViewById(R.id.returnArrow4);
@@ -48,9 +48,9 @@ public class CheckAccomplishedGoal extends AppCompatActivity {
         accomplishedDateTime = new ArrayList<>();
         putDataInArray();
         SetAllGoalCount();
-        checkAccomplishedGoalAdapter = new CheckAccomplishedGoalAdapter(CheckAccomplishedGoal.this, this, accomplishedAchievement, accomplishedDesc, accomplishedDateTime);
+        checkAccomplishedGoalAdapter = new CheckAccomplishedAchievementAdapter(CheckAccomplishedAchievement.this, this, accomplishedAchievement, accomplishedDesc, accomplishedDateTime);
         recyclerView.setAdapter(checkAccomplishedGoalAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(CheckAccomplishedGoal.this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(CheckAccomplishedAchievement.this));
     }
 
     private void SetAllGoalCount(){
@@ -60,7 +60,7 @@ public class CheckAccomplishedGoal extends AppCompatActivity {
     }
 
     private void putDataInArray() {
-        Cursor c = db.retrieveAccomplishedGoals(uniqueString);
+        Cursor c = db.retrieveAchievements(uniqueString);
         if (c.getCount() != 0) {
             while (c.moveToNext()) {
                 //to see how many total accomplishments there are in total

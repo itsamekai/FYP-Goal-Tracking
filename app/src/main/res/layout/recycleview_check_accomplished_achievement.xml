@@ -4,10 +4,10 @@
     xmlns:cardView="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardView5"
     android:layout_width="match_parent"
-    android:layout_height="140dp"
+    android:layout_height="160dp"
     cardView:cardCornerRadius="15dp"
-    cardView:cardElevation="8dp"
-    android:layout_margin="8dp">
+    cardView:cardElevation="20dp"
+    android:layout_margin="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
@@ -17,50 +17,66 @@
         <TextView
             android:id="@+id/accomplishedAchievement"
             android:layout_width="200dp"
-            android:layout_height="24dp"
+            android:layout_height="30dp"
             android:layout_marginBottom="20dp"
             android:fontFamily="@font/poppins"
+            android:scrollHorizontally="false"
             android:text="TextView"
             android:textColor="@color/black"
-            android:textSize="17sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             cardView:layout_constraintBottom_toTopOf="@+id/accomplishedDateTime"
             cardView:layout_constraintEnd_toEndOf="@+id/accomplishedDateTime"
             cardView:layout_constraintHorizontal_bias="0.0"
             cardView:layout_constraintStart_toStartOf="@+id/accomplishedDateTime"
             cardView:layout_constraintTop_toTopOf="parent"
-            cardView:layout_constraintVertical_bias="0.618" />
+            cardView:layout_constraintVertical_bias="0.363" />
 
         <TextView
             android:id="@+id/accomplishedDesc1"
             android:layout_width="250dp"
-            android:layout_height="25dp"
+            android:layout_height="30dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/poppins"
+            android:scrollHorizontally="false"
             android:text="TextView"
-            android:textColor="#696969"
-            android:textSize="13sp"
-            android:textStyle="italic"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
             cardView:layout_constraintBottom_toTopOf="@+id/accomplishedDateTime"
             cardView:layout_constraintEnd_toEndOf="@+id/accomplishedDateTime"
-            cardView:layout_constraintHorizontal_bias="0.0"
+            cardView:layout_constraintHorizontal_bias="1.0"
             cardView:layout_constraintStart_toStartOf="@+id/accomplishedDateTime"
             cardView:layout_constraintTop_toBottomOf="@+id/accomplishedAchievement"
-            cardView:layout_constraintVertical_bias="1.0" />
+            cardView:layout_constraintVertical_bias="0.833" />
 
         <TextView
             android:id="@+id/accomplishedDateTime"
             android:layout_width="250dp"
-            android:layout_height="25dp"
-            android:layout_marginBottom="16dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="24dp"
             android:fontFamily="@font/poppins"
+            android:scrollHorizontally="false"
             android:text="TextView"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="12sp"
+            android:textStyle="bold"
             cardView:layout_constraintBottom_toBottomOf="parent"
             cardView:layout_constraintEnd_toEndOf="parent"
-            cardView:layout_constraintHorizontal_bias="0.102"
+            cardView:layout_constraintHorizontal_bias="0.103"
             cardView:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView12"
+            android:layout_width="69dp"
+            android:layout_height="51dp"
+            cardView:layout_constraintBottom_toBottomOf="parent"
+            cardView:layout_constraintEnd_toEndOf="parent"
+            cardView:layout_constraintHorizontal_bias="0.917"
+            cardView:layout_constraintStart_toStartOf="parent"
+            cardView:layout_constraintTop_toTopOf="parent"
+            cardView:layout_constraintVertical_bias="0.483"
+            cardView:srcCompat="@drawable/achievementmedal" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

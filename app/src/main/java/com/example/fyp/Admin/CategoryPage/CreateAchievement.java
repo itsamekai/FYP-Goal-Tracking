@@ -12,13 +12,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fyp.Database.DataBaseHelper;
 import com.example.fyp.ObjectClass.Achievements;
-import com.example.fyp.ObjectClass.Category;
-import com.example.fyp.ObjectClass.Services;
 import com.example.fyp.R;
 
 import java.io.ByteArrayOutputStream;
@@ -45,7 +42,7 @@ public class CreateAchievement extends AppCompatActivity {
         setContentView(R.layout.activity_create_achievement);
         String uniqueString = getIntent().getStringExtra("username");
 
-        arrowBack = findViewById(R.id.adminArrowBack9);
+        arrowBack = findViewById(R.id.orgArrowBack);
         medalimage = findViewById(R.id.categoryUploadImageUpdate);
         setimagebutton = findViewById(R.id.seticon);
         createB = findViewById(R.id.createAchievementb);

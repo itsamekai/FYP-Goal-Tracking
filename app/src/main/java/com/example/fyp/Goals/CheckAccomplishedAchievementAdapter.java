@@ -17,7 +17,7 @@ import com.example.fyp.R;
 
 import java.util.ArrayList;
 
-public class CheckAccomplishedGoalAdapter extends RecyclerView.Adapter<CheckAccomplishedGoalAdapter.MyViewHolder> {
+public class CheckAccomplishedAchievementAdapter extends RecyclerView.Adapter<CheckAccomplishedAchievementAdapter.MyViewHolder> {
 
     private Context context;
     private Activity activity;
@@ -25,7 +25,7 @@ public class CheckAccomplishedGoalAdapter extends RecyclerView.Adapter<CheckAcco
     private ArrayList accomplishedDesc;
     private ArrayList AccomplishedDateTime;
 
-    public CheckAccomplishedGoalAdapter(Activity activity, Context context, ArrayList accomplishedAchievement,ArrayList accomplishedDesc, ArrayList accomplishedDateTime) {
+    public CheckAccomplishedAchievementAdapter(Activity activity, Context context, ArrayList accomplishedAchievement, ArrayList accomplishedDesc, ArrayList accomplishedDateTime) {
         this.activity = activity;
         this.context = context;
         this.AccomplishedAchievement = accomplishedAchievement;
@@ -38,13 +38,13 @@ public class CheckAccomplishedGoalAdapter extends RecyclerView.Adapter<CheckAcco
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.recycleview_check_accomplished_goals, parent, false);
-        return new CheckAccomplishedGoalAdapter.MyViewHolder(view);
+        View view = inflater.inflate(R.layout.recycleview_check_accomplished_achievement, parent, false);
+        return new CheckAccomplishedAchievementAdapter.MyViewHolder(view);
     }
 
     @Override
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public void onBindViewHolder(@NonNull final CheckAccomplishedGoalAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final CheckAccomplishedAchievementAdapter.MyViewHolder holder, int position) {
         holder.accomplishedAchievement.setText(String.valueOf(AccomplishedAchievement.get(position)));
         holder.accomplishedDesc.setText(String.valueOf(accomplishedDesc.get(position)));
         holder.accomplishedDateTime.setText(String.valueOf(AccomplishedDateTime.get(position)));

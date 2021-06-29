@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,7 +12,7 @@ import android.widget.Toast;
 import com.example.fyp.Database.DataBaseHelper;
 import com.example.fyp.GeneralMainPage.OrgHelp.ChooseHelp;
 import com.example.fyp.GeneralMainPage.Profile.ProfilePage;
-import com.example.fyp.Goals.CheckAccomplishedGoal;
+import com.example.fyp.Goals.CheckAccomplishedAchievement;
 import com.example.fyp.Goals.HistoryGoals;
 import com.example.fyp.Goals.TrackingGoal;
 import com.example.fyp.Login.LoginPage;
@@ -102,7 +101,7 @@ public class MainHomePage extends AppCompatActivity {
 
         rewardView = (ImageView) findViewById(R.id.view_medal);
         rewardView.setOnClickListener(v -> {
-            Intent ViewRewardPage = new Intent(this, CheckAccomplishedGoal.class);
+            Intent ViewRewardPage = new Intent(this, CheckAccomplishedAchievement.class);
             ViewRewardPage.putExtra("username", uniqueString);
             startActivity(ViewRewardPage);
         });

@@ -246,4 +246,17 @@
     <string name="add_selected_button">Add Selected Service</string>
     <string name="choose_service">Select a Service.</string>
 
+    <!-- strings for activity_organisation_settings_page.xml -->
+    <string name="edit_org_details">Edit Details</string>
+
+    <!-- strings for activity_orgnisation_edit_detials.xml -->
+    <string name="organisation_name">Organisation Name:</string>
+    <string name="org_email_address">Email Address:</string>
+    <string name="org_password">Password:</string>
+    <string name="org_phone_no">Phone Number:</string>
+    <string name="org_PIC">Person-In-Charge:</string>
+    <string name="org_address">Address:</string>
+    <string name="org_update_detail_button">Update</string>
+
+
 </resources>

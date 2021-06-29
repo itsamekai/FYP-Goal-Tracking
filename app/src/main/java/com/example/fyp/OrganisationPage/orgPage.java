@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.fyp.Database.DataBaseHelper;
 import com.example.fyp.Login.LoginPage;
+import com.example.fyp.OrganisationProfile.OrganisationSettingsPage;
 import com.example.fyp.R;
 
 public class orgPage extends AppCompatActivity {
@@ -35,7 +36,7 @@ public class orgPage extends AppCompatActivity {
             Toast.makeText(this, "Successfully logged out.", Toast.LENGTH_SHORT).show();
         });
 
-        requested = findViewById(R.id.requestedHelp);
+        requested = findViewById(R.id.OrgUpdateDetails);
         requested.setOnClickListener(v -> {
             Intent i = new Intent(this, RequestedHelp.class);
             i.putExtra("username", uniqueString);
@@ -49,9 +50,16 @@ public class orgPage extends AppCompatActivity {
             startActivity(i);
         });
 
-        addServices = findViewById(R.id.AddServicesB);
+        addServices = findViewById(R.id.orgUpdateDetailsButton);
         addServices.setOnClickListener(v -> {
             Intent i = new Intent(this, AddService.class);
+            i.putExtra("username", uniqueString);
+            startActivity(i);
+        });
+
+        settings = findViewById(R.id.orgPageSettings);
+        settings.setOnClickListener(v -> {
+            Intent i = new Intent(this, OrganisationSettingsPage.class);
             i.putExtra("username", uniqueString);
             startActivity(i);
         });

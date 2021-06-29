@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/requestedHelp"
+        android:id="@+id/OrgUpdateDetails"
         android:layout_width="240dp"
         android:layout_height="50dp"
         android:layout_marginTop="170dp"
@@ -54,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/requestedHelp" />
+        app:layout_constraintTop_toBottomOf="@+id/OrgUpdateDetails" />
 
     <ImageView
         android:id="@+id/orgLogOut"
@@ -83,7 +83,7 @@
         app:srcCompat="@drawable/homeicon2" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/orgPageSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
@@ -99,7 +99,7 @@
         app:srcCompat="@drawable/settingsicon" />
 
     <Button
-        android:id="@+id/AddServicesB"
+        android:id="@+id/orgUpdateDetailsButton"
         android:layout_width="240dp"
         android:layout_height="50dp"
         android:layout_marginTop="40dp"

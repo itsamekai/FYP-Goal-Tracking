@@ -288,6 +288,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return c;
     }
 
+    // retrieveAchievements
+    public Cursor retrieveAchievements(String u) {
+        String sql = "SELECT a.achievement_name, a.achievement_desc, ua.datetime_achieved " +
+                "FROM AchievementsTable a " +
+                "INNER JOIN UserAchievement ua ON a.achievement_id = ua.achievement_id ";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = null;
+        if (db != null) {
+            c = db.rawQuery(sql,null);
+        }
+        return c;
+    }
+
     // update senior address,phoneNo , about
 
     public int updateSenior(String username, String address, int phoneNumb, String about) {
@@ -300,6 +314,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         database.close();
         return update;
 
+    }
+
+    public int updateOrg(String email, int contactNo, String contactPerson, String address, String organisationName) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(ORG_EMAILADDRESS, email);
+        cv.put(ORG_CONTACT_NO, contactNo);
+        cv.put(ORG_CONTACT_NAME, contactPerson);
+        cv.put(ORG_ADDRESS, address);
+        cv.put(ORG_NAME, organisationName);
+        int update = database.update(ORGSERVICES_TABLE, cv, "email=?", new String[]{email});
+        database.close();
+        return update;
     }
 
     // update category des
@@ -560,8 +587,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         else return true;
     }
 
-
-
     // add category to the table
     public boolean addProfileP(Users addProfilePicture) {
         SQLiteDatabase database = this.getWritableDatabase();
@@ -637,7 +662,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             return false;
         } else return true;
     }
-
     // retrieves category_id from category table for inserting goals
 
     public Cursor getUsersGoals() {
@@ -826,6 +850,55 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return name;
     }
 
+    //orgnisation name
+
+    public String getOrganisationName(String orgname) {
+        String getorgname="";
+        String sql = "SELECT org_name FROM OrgUsers WHERE email_address ='" + orgname +"'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if (c.moveToFirst()){
+            getorgname = c.getString(0);
+        }
+        return getorgname;
+   }
+
+   //phone number of organisation
+    public String getOrgPhoneNumber(String phoneno){
+        String getphoneno="";
+        String sql = "SELECT ContactNo FROM OrgUsers WHERE email_address ='" + phoneno +"'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if (c.moveToFirst()){
+            getphoneno = c.getString(0);
+        }
+        return getphoneno;
+    }
+
+    //person in charge of organisation
+    public String getOrgPIC(String pic){
+        String getpic="";
+        String sql = "SELECT contact_person FROM OrgUsers WHERE email_address ='" + pic +"'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if (c.moveToFirst()){
+            getpic = c.getString(0);
+        }
+        return getpic;
+    }
+
+    //address of organisation
+    public String getOrgAddress(String address){
+        String getaddress="";
+        String sql = "SELECT address FROM OrgUsers WHERE email_address ='" + address +"'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if (c.moveToFirst()){
+            getaddress = c.getString(0);
+        }
+        return getaddress;
+    }
+
 
     public boolean addServices(Services s) {
         SQLiteDatabase database = this.getWritableDatabase();
@@ -838,11 +911,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         if (insert == -1) return false;
         else return true;
     }
-
-
-
-
-
 
     public int updateService(String category_name, String category_desc) {
         SQLiteDatabase database = this.getWritableDatabase();
@@ -940,6 +1008,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return id;
     }
 
+    // should be able to remove
+    public int checkGoalsAccomplished(int u) {
+        int accomplishedGoal = 0;
+        String sql = "SELECT COUNT(*) FROM UserGoalTable WHERE user_id = '" + u + "' AND accomplished = 1";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            accomplishedGoal = c.getInt(0);
+        }
+        return accomplishedGoal;
+    }
 
     // get the service name and description. displays when the org wants to create the services
     // where statement ensures that there is no duplicate (eg if the org is already helping in this service, then it will not be shown again)
@@ -987,7 +1065,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // only 1 goal can be given out at a time
     public int getMatchingAchievement(int userid) {
         int achievementid = 0;
-        String sql = "SELECT achievement_id FROM AchievemewntsTable WHERE achievement_required = (SELECT COUNT(accomplished) FROM UserGoalTable WHERE accomplished = 1 AND user_id = " + userid + ")";
+        String sql = "SELECT achievement_id FROM AchievementsTable WHERE achievement_required = (SELECT COUNT(accomplished) FROM UserGoalTable WHERE accomplished = 1 AND user_id = " + userid + ")";
         Cursor c = getReadableDatabase().rawQuery(sql, null);
         if (c.moveToFirst()) {
             achievementid = c.getInt(0);

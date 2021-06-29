@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/adminpage_background"
+    tools:context=".OrganisationProfile.OrganisationSettingsPage">
+
+    <TextView
+        android:id="@+id/SettingsTitle"
+        android:layout_width="190dp"
+        android:layout_height="68dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="Settings"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.073" />
+
+    <ImageView
+        android:id="@+id/orgArrowBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.097"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.056"
+        app:srcCompat="@drawable/arrow" />
+
+    <Button
+        android:id="@+id/OrgUpdateDetails"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:background="@drawable/orghomepage_button_border"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/edit_org_details"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SettingsTitle"
+        app:layout_constraintVertical_bias="0.237" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

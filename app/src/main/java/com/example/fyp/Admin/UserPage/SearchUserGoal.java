@@ -35,7 +35,7 @@ public class SearchUserGoal extends AppCompatActivity {
 
         String uniqueString = getIntent().getStringExtra("username");
 
-        returnarrow = findViewById(R.id.adminArrowBack9);
+        returnarrow = findViewById(R.id.orgArrowBack);
         returnarrow.setOnClickListener(v -> {
             Intent returnPrev = new Intent(this, MainAdminPage.class);
             returnPrev.putExtra("username", uniqueString);

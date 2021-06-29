@@ -59,7 +59,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
-        android:id="@+id/adminArrowBack9"
+        android:id="@+id/orgArrowBack"
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:layout_constraintBottom_toTopOf="@+id/GoalRecyclerView"
