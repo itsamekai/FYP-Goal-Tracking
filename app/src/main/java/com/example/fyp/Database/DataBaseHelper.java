@@ -560,16 +560,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         else return true;
     }
 
-    //add user achievement to the table
-    public boolean addUserAchievement(UserAchievement ua) {
-        SQLiteDatabase database = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put(DATETIME_ACHIEVED, ua.getDatetime_achieved());
-        long insert = database.insert(USERACHIEVEMENT_TABLE, null, cv);
-        database.close();
-        if (insert == -1) return false;
-        else return true;
-    }
 
 
     // add category to the table
@@ -647,6 +637,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             return false;
         } else return true;
     }
+
     // retrieves category_id from category table for inserting goals
 
     public Cursor getUsersGoals() {
@@ -848,6 +839,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         else return true;
     }
 
+
+
+
+
+
     public int updateService(String category_name, String category_desc) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -944,16 +940,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return id;
     }
 
-    // should be able to remove
-    public int checkGoalsAccomplished(int u) {
-        int accomplishedGoal = 0;
-        String sql = "SELECT COUNT(*) FROM UserGoalTable WHERE user_id = '" + u + "' AND accomplished = 1";
-        Cursor c = getReadableDatabase().rawQuery(sql, null);
-        if (c.moveToFirst()) {
-            accomplishedGoal = c.getInt(0);
-        }
-        return accomplishedGoal;
-    }
 
     // get the service name and description. displays when the org wants to create the services
     // where statement ensures that there is no duplicate (eg if the org is already helping in this service, then it will not be shown again)
@@ -979,6 +965,35 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         else return true;
 
     }
+
+    // adds user achievement
+    public boolean addUserAchievement(UserAchievement ua) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("Singapore"));
+        ContentValues cv = new ContentValues();
+        cv.put(ACHIEVEMENT_ID, ua.getAchievement_id());
+        cv.put(USER_ID, ua.getUser_id());
+        cv.put(DATETIME_ACHIEVED, sdf.format(new Date()));
+
+        long insert = database.insert(USERACHIEVEMENT_TABLE, null, cv);
+        database.close();
+        if (insert == -1) return false;
+        else return true;
+    }
+
+    public int getMatchingAchievement(int userid) {
+        int achievementid = 0;
+        String sql = "SELECT achievement_id FROM AchievementsTable WHERE achievement_required = (SELECT COUNT(accomplished) FROM UserGoalTable WHERE accomplished = 1 AND user_id = " + userid + ")";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            achievementid = c.getInt(0);
+        }
+        return achievementid;
+    }
+
+
+
 
 
 

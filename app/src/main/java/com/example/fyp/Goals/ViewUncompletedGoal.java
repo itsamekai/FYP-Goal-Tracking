@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fyp.Database.DataBaseHelper;
+import com.example.fyp.ObjectClass.UserAchievement;
 import com.example.fyp.R;
 
 public class ViewUncompletedGoal extends AppCompatActivity {
@@ -117,24 +118,30 @@ public class ViewUncompletedGoal extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 db = new DataBaseHelper(getApplicationContext());
                 String id = String.valueOf(db.getUserID(uniqueString));
+                // puts accomplished to 1
+                // its incremented at this point
                 int finished = db.updateGoal(id, goal_name);
                 if (finished > 0) {
+                    // assume users start with 0 accomplished
+                    // gives achievement after completing x amt of goals
+                    int u = db.getUserID(uniqueString);
+                    int a = db.getMatchingAchievement(u);
+                    if (a != 0) {
+                        UserAchievement ua = new UserAchievement(a, u);
+                        if (db.addUserAchievement(ua)) {
+                            Toast.makeText(getApplicationContext(), "You have earned a new achievement! Check it out!", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(getApplicationContext(), TrackingGoal.class);
+                            i.putExtra("username", uniqueString);
+                            startActivity(i);
+                        }
+                        else Toast.makeText(getApplicationContext(), "error in giving achievements, check", Toast.LENGTH_LONG).show();
+                    }
                     Toast.makeText(getApplicationContext(), "Goal Finished!", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(getApplicationContext(), TrackingGoal.class);
                     i.putExtra("username", uniqueString);
                     startActivity(i);
                 }
 
-
-                int count = db.checkGoalsAccomplished(u); //retrieves goal count of how many goals they have completed/accomplished
-                if (count == 1) {
-
-                    //if the accomplished goal is 1, make sure it matches with required fields in the database
-                    //if they match with the database fields, then medals will be given to them
-                    //have to make sure to check for no duplicated rewards/achievements
-
-                    //if (db.checkCategoryDuplicate())
-                }
 
                 else Toast.makeText(getApplicationContext(), "can't update?", Toast.LENGTH_SHORT).show();
             }

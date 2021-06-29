@@ -9,11 +9,9 @@ public class UserAchievement {
     private int user_id;
     private String datetime_achieved;
 
-    public UserAchievement(int user_achieved_id, int achievement_id, int user_id, String datetime_achieved){
-        this.user_achieved_id = user_achieved_id;
+    public UserAchievement(int achievement_id, int user_id){
         this.achievement_id = achievement_id;
         this.user_id = user_id;
-        this.datetime_achieved = datetime_achieved;
     }
 
     public int getUser_achieved_id() { return user_achieved_id; }
