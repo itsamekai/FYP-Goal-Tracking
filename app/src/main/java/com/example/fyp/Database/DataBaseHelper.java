@@ -982,9 +982,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         else return true;
     }
 
+    // get achievement id where the required is = the accomplished amt of goals
+    // only 1 id can be get, so it assumes that your user accomplished goals starts from 0.
+    // only 1 goal can be given out at a time
     public int getMatchingAchievement(int userid) {
         int achievementid = 0;
-        String sql = "SELECT achievement_id FROM AchievementsTable WHERE achievement_required = (SELECT COUNT(accomplished) FROM UserGoalTable WHERE accomplished = 1 AND user_id = " + userid + ")";
+        String sql = "SELECT achievement_id FROM AchievemewntsTable WHERE achievement_required = (SELECT COUNT(accomplished) FROM UserGoalTable WHERE accomplished = 1 AND user_id = " + userid + ")";
         Cursor c = getReadableDatabase().rawQuery(sql, null);
         if (c.moveToFirst()) {
             achievementid = c.getInt(0);

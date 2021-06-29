@@ -124,6 +124,7 @@ public class ViewUncompletedGoal extends AppCompatActivity {
                 if (finished > 0) {
                     // assume users start with 0 accomplished
                     // gives achievement after completing x amt of goals
+                    // can only give ONE achievement at a time
                     int u = db.getUserID(uniqueString);
                     int a = db.getMatchingAchievement(u);
                     if (a != 0) {
