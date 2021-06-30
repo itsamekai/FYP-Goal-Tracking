@@ -52,46 +52,46 @@ public class OrganisationEditDetails extends AppCompatActivity {
         ArrowBack = (ImageView) findViewById(R.id.orgEditArrow);
         ArrowBack.setOnClickListener(v -> {
             Intent returnPage = new Intent(this, OrganisationSettingsPage.class);
-            returnPage.putExtra("email", uniqueString);
+            returnPage.putExtra("username", uniqueString);
             startActivity(returnPage);
         });
 
         //get organisation name to display
 
         organisation_name = (TextView) findViewById(R.id.viewOrgName1);
-        String uniqueString1 = getIntent().getStringExtra("email");
+        String uniqueString1 = getIntent().getStringExtra("username");
         db = new DataBaseHelper(this);
         organisation_name.setText(db.getOrganisationName(uniqueString1));
 
         organisation_name2 = (TextView) findViewById(R.id.viewOrgName2);
-        String uniqueString2 = getIntent().getStringExtra("email");
+        String uniqueString2 = getIntent().getStringExtra("username");
         db = new DataBaseHelper(this);
         organisation_name2.setText(db.getOrganisationName(uniqueString2));
 
         //get email address of organisation to display
 
         email_address = (TextView) findViewById(R.id.viewEmail);
-        String uniqueString3 = getIntent().getStringExtra("email");
+        String uniqueString3 = getIntent().getStringExtra("username");
         db = new DataBaseHelper(this);
         email_address.setText(db.getOrgName(uniqueString3));
 
         //get phone number of orgnisation to display
 
         phone_no = (EditText) findViewById(R.id.editPhoneNo);
-        String uniqueString4 = getIntent().getStringExtra("email");
+        String uniqueString4 = getIntent().getStringExtra("username");
         db = new DataBaseHelper(this);
         phone_no.setText(db.getOrgPhoneNumber(uniqueString4));
 
         //get person-in-charge of organisation to display
 
         pic = (EditText) findViewById(R.id.editPIC);
-        String uniqueString5 = getIntent().getStringExtra("email");
+        String uniqueString5 = getIntent().getStringExtra("username");
         db = new DataBaseHelper(this);
         pic.setText(db.getOrgPIC(uniqueString5));
 
         //get address of organisation to display
         address = findViewById(R.id.editAddress);
-        String uniqueString6 = getIntent().getStringExtra("email");
+        String uniqueString6 = getIntent().getStringExtra("username");
         db = new DataBaseHelper(this);
         address.setText(db.getOrgAddress(uniqueString6));
 
@@ -103,7 +103,7 @@ public class OrganisationEditDetails extends AppCompatActivity {
             } else {
                 OrgUsers organisation;
                 db = new DataBaseHelper(this);
-                String orgid = organisation_name2.getText().toString();
+                String orgName = organisation_name2.getText().toString();
                 String emailAddress = email_address.getText().toString();
                 String contactNo = phone_no.getText().toString();
                 String PIC = pic.getText().toString();
@@ -115,9 +115,9 @@ public class OrganisationEditDetails extends AppCompatActivity {
                         Toast.makeText(this, "Failed to update.", Toast.LENGTH_SHORT).show();
 
                     } else {
-                        String uniqueString = getIntent().getStringExtra("email");
+                        String uniqueString = getIntent().getStringExtra("username");
                         Intent returnPage = new Intent(this, orgPage.class);
-                        returnPage.putExtra("email", uniqueString);
+                        returnPage.putExtra("username", uniqueString);
                         startActivity(returnPage);
                         Toast.makeText(this, "Update Successful", Toast.LENGTH_SHORT).show();
                     }

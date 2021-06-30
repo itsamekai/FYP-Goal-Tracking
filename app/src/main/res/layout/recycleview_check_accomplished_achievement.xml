@@ -67,16 +67,16 @@
             cardView:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView12"
-            android:layout_width="69dp"
-            android:layout_height="51dp"
+            android:id="@+id/imageView10"
+            android:layout_width="90dp"
+            android:layout_height="76dp"
             cardView:layout_constraintBottom_toBottomOf="parent"
             cardView:layout_constraintEnd_toEndOf="parent"
-            cardView:layout_constraintHorizontal_bias="0.917"
+            cardView:layout_constraintHorizontal_bias="0.947"
             cardView:layout_constraintStart_toStartOf="parent"
             cardView:layout_constraintTop_toTopOf="parent"
-            cardView:layout_constraintVertical_bias="0.483"
             cardView:srcCompat="@drawable/achievementmedal" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
