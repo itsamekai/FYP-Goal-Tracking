@@ -34,7 +34,7 @@ public class HistoryGoals extends AppCompatActivity {
         setContentView(R.layout.activity_history_goals);
         uniqueString = getIntent().getStringExtra("username");
 
-        returnprev = findViewById(R.id.returnArrow6);
+        returnprev = findViewById(R.id.orgEditArrow);
         returnprev.setOnClickListener(v -> {
             Intent i = new Intent(this, MainHomePage.class);
             i.putExtra("username", uniqueString);

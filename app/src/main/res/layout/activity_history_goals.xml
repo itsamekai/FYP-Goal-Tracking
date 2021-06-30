@@ -8,7 +8,7 @@
     tools:context=".Goals.HistoryGoals">
 
     <ImageView
-        android:id="@+id/returnArrow6"
+        android:id="@+id/orgEditArrow"
         android:layout_width="34dp"
         android:layout_height="32dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView6"

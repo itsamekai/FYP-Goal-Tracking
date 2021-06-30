@@ -27,7 +27,7 @@ public class OrganisationSettingsPage extends AppCompatActivity {
         ArrowBack = (ImageView) findViewById(R.id.orgArrowBack);
         ArrowBack.setOnClickListener(v -> {
             Intent returnPage = new Intent(this, orgPage.class);
-            returnPage.putExtra("username", uniqueString);
+            returnPage.putExtra("email", uniqueString);
             startActivity(returnPage);
         });
 
@@ -36,7 +36,7 @@ public class OrganisationSettingsPage extends AppCompatActivity {
         EditDetailsButton = findViewById(R.id.OrgUpdateDetails);
         EditDetailsButton.setOnClickListener(v -> {
             Intent i = new Intent(this, OrganisationEditDetails.class);
-            i.putExtra("username", uniqueString);
+            i.putExtra("email", uniqueString);
             startActivity(i);
         });
 
