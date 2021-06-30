@@ -60,7 +60,7 @@ public class CheckAccomplishedAchievement extends AppCompatActivity {
     }
 
     private void putDataInArray() {
-        Cursor c = db.retrieveAchievements(uniqueString);
+        Cursor c = db.retrieveAchievements(db.getUserID(uniqueString));
         if (c.getCount() != 0) {
             while (c.moveToNext()) {
                 //to see how many total accomplishments there are in total
