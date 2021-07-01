@@ -41,6 +41,7 @@ public class OrganisationEditDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organisation_edit_details);
+        uniqueString = getIntent().getStringExtra("username");
 
         organisation_name3 = findViewById(R.id.viewOrgName2);
         email_address = findViewById(R.id.viewEmail);
