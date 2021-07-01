@@ -23,6 +23,8 @@ import com.example.fyp.R;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UpdateOrganisation extends AppCompatActivity {
 
@@ -153,34 +155,77 @@ public class UpdateOrganisation extends AppCompatActivity {
                 String password = UpdateOrgPassword.getText().toString();
                 String contactNumber = UpdateOrgPhoneNo.getText().toString();
                 String contactperson = UpdateOrgPIC.getText().toString();
-                String  address = UpdateOrgAddress.getText().toString();
+                String address = UpdateOrgAddress.getText().toString();
 
+                if (checkAll(password,contactNumber)) {
+                    int updated = db.updateOrgAdmin(passToNext, password, Integer.parseInt(contactNumber), contactperson, address);
+                    if (updated == 0) {
+                        Toast.makeText(this, "Failed to update.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        int updateService = db.updateOrgAdmin(passToNext, password, Integer.parseInt(contactNumber), contactperson, address);
+                        if (updateService != 0) {
+                            Intent returnPage = new Intent(this, ManageOrganisationPage.class);
+                            returnPage.putExtra("username", uniqueString);
+                            startActivity(returnPage);
+                            Toast.makeText(this, "Update Successful", Toast.LENGTH_SHORT).show();
+                        } else
+                            Toast.makeText(this, "Failed to update service.", Toast.LENGTH_SHORT).show();
 
-                int updated = db.updateOrgAdmin(passToNext,password,Integer.parseInt(contactNumber),contactperson,address);
-                if (updated == 0) {
-                    Toast.makeText(this, "Failed to update.", Toast.LENGTH_SHORT).show();
-                } else {
-                    int updateService = db.updateOrgAdmin(passToNext,password,Integer.parseInt(contactNumber),contactperson,address);
-                    if (updateService != 0) {
-                        Intent returnPage = new Intent(this, ManageOrganisationPage.class);
-                        returnPage.putExtra("username", uniqueString);
-                        startActivity(returnPage);
-                        Toast.makeText(this, "Update Successful", Toast.LENGTH_SHORT).show();
                     }
-                    else Toast.makeText(this, "Failed to update service.", Toast.LENGTH_SHORT).show();
 
+                } else {
+                    Toast.makeText(this, validateMessage(), Toast.LENGTH_LONG).show();
                 }
 
-            }
+                }
         });
     }
-    // checkifempty(Desc)
+
+
+    // checkifempty(Password,PhoneNo,PIC,Address)
     private boolean checkIfEmpty() {
-        if ( UpdateOrgPassword.getText().toString().matches("")) {
+        if ( UpdateOrgPassword.getText().toString().matches("") || UpdateOrgPhoneNo.getText().toString().matches("") || UpdateOrgPIC.getText().toString().matches("") || UpdateOrgAddress.getText().toString().matches("") )  {
             return true;
         }
 
         else return false;
     }
+
+    //starts with 8 or 9 and at least 8 digits
+    private boolean checkValidPhoneNumber(String contactNum) {
+        String regex = "^[89]\\d{7}$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(contactNum);
+        return m.matches();
+    }
+    // check password complexity
+    private boolean checkValidPassword(String password) {
+        String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(password);
+        return m.matches();
+    }
+
+    private String validateMessage() {
+        String word = "";
+        if (!checkValidPassword(UpdateOrgPassword.getText().toString())) {
+            word += "Email does not meet requirements.\n";
+        }
+
+        if (!checkValidPhoneNumber(UpdateOrgPhoneNo.getText().toString())) {
+            word += "Invalid phone number.";
+        }
+        return word;
+    }
+
+    private boolean checkAll(String pass, String contactNum){
+        if (checkValidPassword(pass) && checkValidPhoneNumber(contactNum)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
 
 }
