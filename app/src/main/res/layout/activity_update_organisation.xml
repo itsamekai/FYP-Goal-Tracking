@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Admin.OrganisationPage.UpdateOrganisation"
-    android:background="@drawable/approveorg_background">
+    android:background="@drawable/approveorg_background"
+    tools:context=".Admin.OrganisationPage.UpdateOrganisation">
 
     <ImageView
         android:id="@+id/adminArrowBack4"
@@ -37,85 +37,78 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.103" />
 
-    <EditText
-        android:id="@+id/UpdateOrgName"
-        android:layout_width="275dp"
-        android:layout_height="50dp"
-        android:background="@drawable/manageadmin_box"
-        android:ems="10"
-        android:fontFamily="@font/poppins"
-        android:gravity="center"
-        android:hint="@string/org_name"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
+    <Spinner
+        android:id="@+id/dropdownBox2"
+        android:layout_width="266dp"
+        android:layout_height="49dp"
+        android:contentDescription="@string/dropDownBox"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.468"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11"
-        app:layout_constraintVertical_bias="0.166" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.329" />
 
-    <EditText
+    <TextView
         android:id="@+id/UpdateOrgEmail"
         android:layout_width="275dp"
         android:layout_height="50dp"
         android:background="@drawable/manageadmin_box"
+        android:ems="10"
         android:fontFamily="@font/poppins"
         android:gravity="center"
         android:hint="@string/email_address"
         android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:ems="10"
-        android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UpdateOrgName"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.422"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/UpdateOrgPassword"
         android:layout_width="275dp"
         android:layout_height="50dp"
         android:background="@drawable/manageadmin_box"
+        android:ems="10"
         android:fontFamily="@font/poppins"
         android:gravity="center"
         android:hint="@string/orgLogin_password"
         android:importantForAutofill="no"
+        android:inputType="textPassword"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:ems="10"
-        android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UpdateOrgEmail"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.515" />
 
     <EditText
         android:id="@+id/UpdateOrgPhoneNo"
         android:layout_width="275dp"
         android:layout_height="50dp"
         android:background="@drawable/manageadmin_box"
+        android:ems="10"
         android:fontFamily="@font/poppins"
         android:gravity="center"
         android:hint="@string/orgPhoneNo"
         android:importantForAutofill="no"
+        android:inputType="phone"
         android:textColor="@color/black"
-        android:ems="10"
-        android:inputType="textPersonName"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UpdateOrgPassword"
-        app:layout_constraintVertical_bias="0.064" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.615" />
 
     <EditText
         android:id="@+id/updateOrgPIC"
@@ -127,51 +120,50 @@
         android:gravity="center"
         android:hint="Person In Charge"
         android:importantForAutofill="no"
-        android:inputType="phone"
+        android:inputType="textPersonName"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UpdateOrgPhoneNo"
-        app:layout_constraintVertical_bias="0.079" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.707" />
 
     <EditText
         android:id="@+id/updateOrgAddress"
         android:layout_width="275dp"
         android:layout_height="50dp"
         android:background="@drawable/manageadmin_box"
+        android:ems="10"
         android:fontFamily="@font/poppins"
         android:gravity="center"
         android:hint="@string/Address"
         android:importantForAutofill="no"
+        android:inputType="textPostalAddress"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:ems="10"
-        android:inputType="textPostalAddress"
-        app:layout_constraintBottom_toTopOf="@+id/orgUpdateButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/updateOrgPIC"
-        app:layout_constraintVertical_bias="0.4" />
-
-    <Button
-        android:id="@+id/orgUpdateButton"
-        android:layout_width="143dp"
-        android:layout_height="50dp"
-        android:background="@drawable/manageadmin_box"
-        android:fontFamily="@font/poppins"
-        android:text="@string/adminUpdateUserButton"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/updateOrgPIC"
-        app:layout_constraintVertical_bias="0.635" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.803" />
+
+    <Button
+        android:id="@+id/orgUpdateButton"
+        android:layout_width="158dp"
+        android:layout_height="38dp"
+        android:background="@drawable/manageadmin_box"
+        android:fontFamily="@font/poppins"
+        android:text="Update"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.901" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

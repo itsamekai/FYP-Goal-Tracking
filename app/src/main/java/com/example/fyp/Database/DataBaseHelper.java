@@ -291,9 +291,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // retrieveAchievements
     public Cursor retrieveAchievements(int u) {
         String sql = "SELECT a.achievement_name, a.achievement_desc, ua.datetime_achieved " +
-                " FROM AchievementsTable a " +
+                "FROM AchievementsTable a " +
                 "INNER JOIN UserAchievement ua ON a.achievement_id = ua.achievement_id " +
-                "WHERE ua.user_id = '" + u +"';";
+                "WHERE ua.user_id = ' " + u + " ' " ;
+
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = null;
@@ -328,6 +329,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cv.put(ORG_ADDRESS, address);
         //cv.put(ORG_NAME, organisationName);
         int update = database.update(ORGUSER_TABLE, cv, "email_address=?", new String[]{email_address});
+        database.close();
+        return update;
+    }
+    //update organisation (admin) password, contactNo, person-in-charge, address
+    public int updateOrgAdmin(String org_name , String password, int contactNo, String contactPerson, String address) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(ORG_PASSWORD, password);
+        cv.put(ORG_CONTACT_NO, contactNo);
+        cv.put(ORG_CONTACT_NAME, contactPerson);
+        cv.put(ORG_ADDRESS, address);
+        //cv.put(ORG_NAME, organisationName);
+        int update = database.update(ORGUSER_TABLE, cv, "org_name=?", new String[]{org_name});
         database.close();
         return update;
     }
@@ -844,7 +858,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public String getOrgName(String email) {
         String name = "";
-        String sql = "SELECT email_address FROM OrgUsers WHERE email_address ='" + email + "'";
+        String sql = "SELECT org_name FROM OrgUsers WHERE email_address ='" + email + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = getReadableDatabase().rawQuery(sql, null);
         if (c.moveToFirst()) {
@@ -901,6 +915,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return getaddress;
     }
+
 
     public boolean addServices(Services s) {
         SQLiteDatabase database = this.getWritableDatabase();
@@ -1073,6 +1088,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             achievementid = c.getInt(0);
         }
         return achievementid;
+    }
+
+    public Cursor retrieveOrgDetails(int orgD) {
+
+        String sql = "SELECT org_name, email_address, password, ContactNo, contact_name, address  FROM OrgUsers '" + orgD +"'" ;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = null;
+        if (db != null) {
+            c = db.rawQuery(sql,null);
+        }
+        return c;
     }
 
 
