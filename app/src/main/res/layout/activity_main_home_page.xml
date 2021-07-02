@@ -21,8 +21,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.047"
-        app:srcCompat="@drawable/profilepicture"
-        app:shapeAppearanceOverlay="@style/Circular"/>
+        app:shapeAppearanceOverlay="@style/Circular"
+        app:srcCompat="@drawable/profilepicture" />
 
     <ImageView
         android:id="@+id/logout_button"
@@ -173,11 +173,11 @@
         android:id="@+id/friends_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:contentDescription="@string/friend_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/home_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.365"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.97"
         app:srcCompat="@drawable/friendicon" />
@@ -186,11 +186,11 @@
         android:id="@+id/addFriends_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
         android:contentDescription="@string/add_friend_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/friends_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.634"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.97"
         app:srcCompat="@drawable/addfriendicon" />
@@ -199,13 +199,11 @@
         android:id="@+id/profile_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
-        android:layout_marginRight="25dp"
         android:contentDescription="@string/profile_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.631"
-        app:layout_constraintStart_toEndOf="@+id/addFriends_button"
+        app:layout_constraintHorizontal_bias="0.909"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.97"
         app:srcCompat="@drawable/profileicon" />
@@ -230,8 +228,6 @@
         android:id="@+id/friend_string"
         android:layout_width="60dp"
         android:layout_height="15dp"
-        android:layout_marginEnd="232dp"
-        android:layout_marginRight="232dp"
         android:fontFamily="@font/segoe"
         android:gravity="center"
         android:text="@string/friend_string"
@@ -239,8 +235,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.914"
-        app:layout_constraintStart_toEndOf="@+id/home_string"
+        app:layout_constraintHorizontal_bias="0.367"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/friends_button"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -248,9 +244,6 @@
         android:id="@+id/addFriends_string"
         android:layout_width="82dp"
         android:layout_height="18dp"
-        android:layout_marginEnd="132dp"
-        android:layout_marginRight="132dp"
-        android:layout_marginBottom="1dp"
         android:fontFamily="@font/segoe"
         android:gravity="center"
         android:text="@string/add_friend_string"
@@ -258,6 +251,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.653"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addFriends_button"
         app:layout_constraintVertical_bias="0.0" />
 
