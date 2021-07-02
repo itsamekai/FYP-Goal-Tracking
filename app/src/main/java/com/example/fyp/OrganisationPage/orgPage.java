@@ -65,7 +65,7 @@ public class orgPage extends AppCompatActivity {
         });
 
         db = new DataBaseHelper(this);
-        name.setText(db.getOrgName(uniqueString));
+        name.setText(db.getOrganisationName(uniqueString));
 
 
 

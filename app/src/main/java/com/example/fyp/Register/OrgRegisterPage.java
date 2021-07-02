@@ -98,9 +98,9 @@ public class OrgRegisterPage extends AppCompatActivity {
 
     }
 
-    //starts with 8 or 9 and at least 8 digits
+    //starts with 6/8/9 and at least 8 digits
     private boolean checkValidPhoneNumber(String phoneNumber) {
-        String regex = "^[89]\\d{7}$";
+        String regex = "^[689]\\d{7}$";
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(phoneNumber);
         return m.matches();
