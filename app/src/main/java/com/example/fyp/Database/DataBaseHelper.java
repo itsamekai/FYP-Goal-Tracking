@@ -377,6 +377,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
+    //retrieve achievement icon
+    public Bitmap retrieveAchievementImage(String u){
+        String sql = "SELECT achievement_img FROM AchievementsTable WHERE username='" + u + "'";
+        Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+        if (cursor.moveToFirst()){
+            byte[] imgByte = cursor.getBlob(0);
+            cursor.close();
+            if (imgByte != null){
+                return BitmapFactory.decodeByteArray(imgByte,0, imgByte.length);
+            }
+        }
+        if (cursor != null && !cursor.isClosed()){
+            cursor.close();
+        }
+        return null;
+    }
+
 
     // checks for username duplicates in database
     public int checkUsernameDuplicate(String u) {

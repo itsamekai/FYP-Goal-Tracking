@@ -5,12 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fyp.Database.DataBaseHelper;
-import com.example.fyp.GeneralMainPage.MainHomePage;
 import com.example.fyp.R;
 
 public class ViewCompletedGoal extends AppCompatActivity {
@@ -27,9 +25,9 @@ public class ViewCompletedGoal extends AppCompatActivity {
 
         goal_name = getIntent().getStringExtra("goal_name");
         uniqueString = getIntent().getStringExtra("username");
-        returnarrow = findViewById(R.id.returnArrow7);
+        returnarrow = findViewById(R.id.viewAccomplishedAchArrow);
         cGoalName = findViewById(R.id.createdGoalName);
-        cGoalStart = findViewById(R.id.completedGoalStart);
+        cGoalStart = findViewById(R.id.achDesc);
         cGoalEnd = findViewById(R.id.completedGoalEnd);
         cGoalDesc = findViewById(R.id.goalDescriptions);
 

@@ -40,7 +40,7 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/dateEnded"
-        app:layout_constraintEnd_toStartOf="@+id/completedGoalStart"
+        app:layout_constraintEnd_toStartOf="@+id/achDesc"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/createdGoalName"
         app:layout_constraintVertical_bias="0.0" />
@@ -134,7 +134,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/completedGoalStart"
+        android:id="@+id/achDesc"
         android:layout_width="170dp"
         android:layout_height="40dp"
         android:layout_marginTop="124dp"
@@ -170,7 +170,7 @@
         app:layout_constraintBottom_toTopOf="@+id/goalDesciption"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dateEnded"
-        app:layout_constraintTop_toBottomOf="@+id/completedGoalStart" />
+        app:layout_constraintTop_toBottomOf="@+id/achDesc" />
 
     <ImageView
         android:id="@+id/imageView7"
@@ -184,7 +184,7 @@
         app:srcCompat="@drawable/development" />
 
     <ImageView
-        android:id="@+id/returnArrow7"
+        android:id="@+id/viewAccomplishedAchArrow"
         android:layout_width="45dp"
         android:layout_height="42dp"
         android:layout_marginEnd="348dp"
