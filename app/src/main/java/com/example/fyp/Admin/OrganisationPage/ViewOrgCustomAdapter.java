@@ -60,7 +60,7 @@ public class ViewOrgCustomAdapter extends RecyclerView.Adapter<ViewOrgCustomAdap
             organisationName = itemView.findViewById(R.id.organisationName);
             personInCharge = itemView.findViewById(R.id.personInCharge);
             OrganisationPhoneNo = itemView.findViewById(R.id.OrganisationPhoneNo);
-            mainLayout = itemView.findViewById(R.id.mainLayout);
+            //mainLayout = itemView.findViewById(R.id.mainLayout);
 
         }
     }

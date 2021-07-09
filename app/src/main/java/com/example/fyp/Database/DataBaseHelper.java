@@ -290,7 +290,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     // retrieveAchievements
     public Cursor retrieveAchievements(int u) {
-        String sql = "SELECT a.achievement_name, a.achievement_desc, ua.datetime_achieved " +
+        String sql = "SELECT a.achievement_name, a.achievement_desc, ua.datetime_achieved" +
                 "FROM AchievementsTable a " +
                 "INNER JOIN UserAchievement ua ON a.achievement_id = ua.achievement_id " +
                 "WHERE ua.user_id = ' " + u + " ' " ;

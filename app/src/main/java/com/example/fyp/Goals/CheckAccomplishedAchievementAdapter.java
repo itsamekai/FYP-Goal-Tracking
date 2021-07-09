@@ -56,7 +56,7 @@ public class CheckAccomplishedAchievementAdapter extends RecyclerView.Adapter<Ch
         holder.accomplishedAchievement.setText(String.valueOf(AccomplishedAchievement.get(position)));
         holder.accomplishedDesc.setText(String.valueOf(accomplishedDesc.get(position)));
         holder.accomplishedDateTime.setText(String.valueOf(AccomplishedDateTime.get(position)));
-        //holder.image.setImageBitmap(Array.get(position));
+        //holder.image.setImageBitmap(Array.get(Array, position));
     }
 
     @Override

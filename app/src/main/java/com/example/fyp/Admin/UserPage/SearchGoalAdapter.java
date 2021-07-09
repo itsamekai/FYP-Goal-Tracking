@@ -74,7 +74,7 @@ public class SearchGoalAdapter extends RecyclerView.Adapter<SearchGoalAdapter.My
             viewGoalCategory = itemView.findViewById(R.id.viewGoalCategory);
             viewGoalName = itemView.findViewById(R.id.viewGoalName);
             Accomplished = itemView.findViewById(R.id.Accomplished);
-            mainLayout = itemView.findViewById(R.id.mainLayout3);
+            //mainLayout = itemView.findViewById(R.id.mainLayout3);
         }
     }
 }

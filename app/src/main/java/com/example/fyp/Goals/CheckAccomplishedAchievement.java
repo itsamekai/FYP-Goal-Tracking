@@ -15,6 +15,7 @@ import com.example.fyp.Database.DataBaseHelper;
 import com.example.fyp.GeneralMainPage.MainHomePage;
 import com.example.fyp.R;
 
+import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -60,6 +61,7 @@ public class CheckAccomplishedAchievement extends AppCompatActivity {
 
         putDataInArray();
         SetAllGoalCount();
+        //Array();
         checkAccomplishedGoalAdapter = new CheckAccomplishedAchievementAdapter(CheckAccomplishedAchievement.this, this, accomplishedAchievement, accomplishedDesc, accomplishedDateTime, achievementIcon);
         recyclerView.setAdapter(checkAccomplishedGoalAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(CheckAccomplishedAchievement.this));
@@ -82,7 +84,16 @@ public class CheckAccomplishedAchievement extends AppCompatActivity {
                 accomplishedDateTime.add(c.getString(2));
             }
         }
-
     }
 
+   // private void Array() {
+   //     Cursor c = db.retrieveImage(getIntent().getStringExtra("username")) {
+   //         if (c.getCount() != 0) {
+     //           while (c.moveToNext()) {
+       //             counter++;
+         //           achievementIcon.setImageBitmap(c.getBlob(0));
+           //     }
+           // }
+       // }
+   // }
 }
