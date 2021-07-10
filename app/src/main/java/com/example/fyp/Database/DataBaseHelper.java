@@ -193,7 +193,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put(USERNAME, "testadmin");
         cv.put(PASSWORD, "Admin123!");
-        cv.put(FULLNAME, "alyssa noob");
+        cv.put(FULLNAME, "admin");
         cv.put(DOB, "12/5/2021");
         cv.put(USER_PHONE_NO, 81112354);
         cv.put(USER_ROLE, "Admin");
@@ -293,13 +293,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         String sql = "SELECT a.achievement_name, a.achievement_desc, ua.datetime_achieved" +
                 "FROM AchievementsTable a " +
                 "INNER JOIN UserAchievement ua ON a.achievement_id = ua.achievement_id " +
-                "WHERE ua.user_id = ' " + u + " ' " ;
+                "WHERE ua.user_id = ' " + u + " ' ";
 
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = null;
         if (db != null) {
-            c = db.rawQuery(sql,null);
+            c = db.rawQuery(sql, null);
         }
         return c;
     }
@@ -332,8 +332,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         database.close();
         return update;
     }
+
     //update organisation (admin) password, contactNo, person-in-charge, address
-    public int updateOrgAdmin(String org_name , String password, int contactNo, String contactPerson, String address) {
+    public int updateOrgAdmin(String org_name, String password, int contactNo, String contactPerson, String address) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(ORG_PASSWORD, password);
@@ -378,17 +379,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     //retrieve achievement icon
-    public Bitmap retrieveAchievementImage(String u){
+    public Bitmap retrieveAchievementImage(String u) {
         String sql = "SELECT achievement_img FROM AchievementsTable WHERE username='" + u + "'";
         Cursor cursor = getReadableDatabase().rawQuery(sql, null);
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             byte[] imgByte = cursor.getBlob(0);
             cursor.close();
-            if (imgByte != null){
-                return BitmapFactory.decodeByteArray(imgByte,0, imgByte.length);
+            if (imgByte != null) {
+                return BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
             }
         }
-        if (cursor != null && !cursor.isClosed()){
+        if (cursor != null && !cursor.isClosed()) {
             cursor.close();
         }
         return null;
@@ -887,47 +888,47 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     //orgnisation name
 
     public String getOrganisationName(String orgname) {
-        String getorgname="";
-        String sql = "SELECT org_name FROM OrgUsers WHERE email_address ='" + orgname +"'";
+        String getorgname = "";
+        String sql = "SELECT org_name FROM OrgUsers WHERE email_address ='" + orgname + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = getReadableDatabase().rawQuery(sql, null);
-        if (c.moveToFirst()){
+        if (c.moveToFirst()) {
             getorgname = c.getString(0);
         }
         return getorgname;
-   }
+    }
 
-   //phone number of organisation
-    public String getOrgPhoneNumber(String phoneno){
-        String getphoneno="";
-        String sql = "SELECT ContactNo FROM OrgUsers WHERE email_address ='" + phoneno +"'";
+    //phone number of organisation
+    public String getOrgPhoneNumber(String phoneno) {
+        String getphoneno = "";
+        String sql = "SELECT ContactNo FROM OrgUsers WHERE email_address ='" + phoneno + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = getReadableDatabase().rawQuery(sql, null);
-        if (c.moveToFirst()){
+        if (c.moveToFirst()) {
             getphoneno = c.getString(0);
         }
         return getphoneno;
     }
 
     //person in charge of organisation
-    public String getOrgPIC(String pic){
-        String getpic="";
-        String sql = "SELECT contact_name FROM OrgUsers WHERE email_address ='" + pic +"'";
+    public String getOrgPIC(String pic) {
+        String getpic = "";
+        String sql = "SELECT contact_name FROM OrgUsers WHERE email_address ='" + pic + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = getReadableDatabase().rawQuery(sql, null);
-        if (c.moveToFirst()){
+        if (c.moveToFirst()) {
             getpic = c.getString(0);
         }
         return getpic;
     }
 
     //address of organisation
-    public String getOrgAddress(String address){
-        String getaddress="";
-        String sql = "SELECT address FROM OrgUsers WHERE email_address ='" + address +"'";
+    public String getOrgAddress(String address) {
+        String getaddress = "";
+        String sql = "SELECT address FROM OrgUsers WHERE email_address ='" + address + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = getReadableDatabase().rawQuery(sql, null);
-        if (c.moveToFirst()){
+        if (c.moveToFirst()) {
             getaddress = c.getString(0);
         }
         return getaddress;
@@ -1056,7 +1057,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // get the service name and description. displays when the org wants to create the services
     // where statement ensures that there is no duplicate (eg if the org is already helping in this service, then it will not be shown again)
     public Cursor getService(int org_id) {
-        String sql = "SELECT service_name, service_desc FROM Services WHERE service_id NOT IN (select service_id from OrgServices WHERE org_id = "+ org_id +");";
+        String sql = "SELECT service_name, service_desc FROM Services WHERE service_id NOT IN (select service_id from OrgServices WHERE org_id = " + org_id + ");";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = null;
         if (db != null) {
@@ -1108,26 +1109,69 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public Cursor retrieveOrgDetails(int orgD) {
-
-        String sql = "SELECT org_name, email_address, password, ContactNo, contact_name, address  FROM OrgUsers '" + orgD +"'" ;
-
+        String sql = "SELECT org_name, email_address, password, ContactNo, contact_name, address  FROM OrgUsers '" + orgD + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = null;
         if (db != null) {
-            c = db.rawQuery(sql,null);
+            c = db.rawQuery(sql, null);
         }
         return c;
     }
 
+    // checks if organisation is verified.
+    // returns true if verified.
+    public boolean checkOrgVerified(String email) {
+        String sql = "SELECT verified FROM OrgUsers WHERE email_address ='" + email + "'";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            int bool = c.getInt(0);
+            if (bool == 1) return true;
+        }
+        return false;
+    }
 
+    // checks if the organisation currently has any services that they can help in.
+    // returns false if there is, true if there isn't.
+    public boolean checkServicesAvailableForOrg(int id) {
+        String sql = "SELECT (SELECT COUNT(*) from OrgServices where org_id ='" + id + "'), (SELECT COUNT(*) from Services)";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = null;
+        int first = 0;
+        int second = 0;
+        if (db != null) {
+            c = db.rawQuery(sql, null);
+        }
+        if (c.getCount() != 0) {
+            while (c.moveToNext()) {
+                first = c.getInt(0);
+                second = c.getInt(1);
+            }
+        }
+        if (first == second) return false;
+        return true;
+    }
 
+    // checks if there are any requested help from users.
+    // returns true if there is.
+    public boolean checkIfRequestedHelpExists() {
+        String sql = "SELECT COUNT(*) FROM UserHelp WHERE helped = 0 AND org_id IS NULL";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            int count = c.getInt(0);
+            if (count > 0) return true;
+        }
+        return false;
+    }
 
-
-
-
-
-
-
+    public boolean checkIfHelping(int id) {
+        String sql = "SELECT COUNT(*) FROM UserHelp WHERE helped = 1 AND org_id = '" + id + "'";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            int count = c.getInt(0);
+            if (count > 0) return true;
+        }
+        return false;
+    }
 }
 
 

@@ -2,6 +2,7 @@ package com.example.fyp.OrganisationPage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -21,12 +22,15 @@ public class orgPage extends AppCompatActivity {
     public TextView name;
     public String uniqueString;
     public DataBaseHelper db;
+    public boolean verified = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_org_page);
         uniqueString = getIntent().getStringExtra("username");
+        db = new DataBaseHelper(this);
+        verified = db.checkOrgVerified(uniqueString);
 
         name = findViewById(R.id.logged_in_org_name);
 
@@ -36,25 +40,49 @@ public class orgPage extends AppCompatActivity {
             Toast.makeText(this, "Successfully logged out.", Toast.LENGTH_SHORT).show();
         });
 
+        // add verification to see if org is verified (verified = 1)
         requested = findViewById(R.id.OrgUpdateDetails);
         requested.setOnClickListener(v -> {
-            Intent i = new Intent(this, RequestedHelp.class);
-            i.putExtra("username", uniqueString);
-            startActivity(i);
+            if (verified) {
+                if (db.checkIfRequestedHelpExists()) {
+                    Intent i = new Intent(this, RequestedHelp.class);
+                    i.putExtra("username", uniqueString);
+                    startActivity(i);
+                }
+                else showWarningNotNeeded();
+
+            } else {
+                showWarningNotVerified();
+            }
+
         });
 
         current = findViewById(R.id.currentlyHelping);
         current.setOnClickListener(v -> {
-            Intent i = new Intent(this, CurrentlyHelpingList.class);
-            i.putExtra("username", uniqueString);
-            startActivity(i);
+            if (verified) {
+                if (db.checkIfHelping(db.getOrgID(uniqueString))) {
+                    Intent i = new Intent(this, CurrentlyHelpingList.class);
+                    i.putExtra("username", uniqueString);
+                    startActivity(i);
+                }
+                else showWarningNotHelping();
+
+            } else {
+                showWarningNotVerified();
+            }
+
         });
 
         addServices = findViewById(R.id.orgUpdateDetailsButton);
         addServices.setOnClickListener(v -> {
-            Intent i = new Intent(this, AddService.class);
-            i.putExtra("username", uniqueString);
-            startActivity(i);
+            if (db.checkServicesAvailableForOrg(db.getOrgID(uniqueString))) {
+                Intent i = new Intent(this, AddService.class);
+                i.putExtra("username", uniqueString);
+                startActivity(i);
+            } else {
+                showWarningNoServices();
+            }
+
         });
 
         settings = findViewById(R.id.orgPageSettings);
@@ -64,11 +92,46 @@ public class orgPage extends AppCompatActivity {
             startActivity(i);
         });
 
-        db = new DataBaseHelper(this);
+
         name.setText(db.getOrganisationName(uniqueString));
 
 
+    }
 
+    // pop up window to show no permission.
+    private void showWarningNotVerified() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("Your organisation has to be verified first by an admin.");
+        dialog.setTitle("Error");
+        dialog.setPositiveButton("OK", null);
+        dialog.show();
 
+    }
+
+    // pop up window to show no more services left to add.
+    private void showWarningNoServices() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("There is no more services that your organisation can help in.");
+        dialog.setTitle("Message");
+        dialog.setPositiveButton("OK", null);
+        dialog.show();
+    }
+
+    // pop up window to show that there is currently no users that are requesting help.
+    private void showWarningNotNeeded() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("There are currently no users requesting for help. Check back later.");
+        dialog.setTitle("Message");
+        dialog.setPositiveButton("OK", null);
+        dialog.show();
+    }
+
+    // pop up window to show that the org is currently not helping any users with their goals.
+    private void showWarningNotHelping() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("Your organisation is currently not helping any users. Check the requested help page.");
+        dialog.setTitle("Message");
+        dialog.setPositiveButton("OK", null);
+        dialog.show();
     }
 }
