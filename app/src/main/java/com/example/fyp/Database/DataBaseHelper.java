@@ -290,10 +290,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     // retrieveAchievements
     public Cursor retrieveAchievements(int u) {
-        String sql = "SELECT a.achievement_name, a.achievement_desc, ua.datetime_achieved" +
+        String sql = "SELECT a.achievement_name, a.achievement_desc, ua.datetime_achieved " +
                 "FROM AchievementsTable a " +
                 "INNER JOIN UserAchievement ua ON a.achievement_id = ua.achievement_id " +
-                "WHERE ua.user_id = ' " + u + " ' ";
+                "WHERE ua.user_id = '" + u + "'";
 
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -1163,6 +1163,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
+    // checks if the organisation is helping anyone.
+    // returns true if there is.
     public boolean checkIfHelping(int id) {
         String sql = "SELECT COUNT(*) FROM UserHelp WHERE helped = 1 AND org_id = '" + id + "'";
         Cursor c = getReadableDatabase().rawQuery(sql, null);
@@ -1172,6 +1174,71 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return false;
     }
+
+    // checks if there is any existing ongoing goals by the user.
+    // returns true if there is.
+    public boolean checkExistingOnGoingGoals(int id) {
+        String sql = "SELECT COUNT(*) FROM UserGoalTable WHERE user_id = '" + id + "' AND accomplished = 0";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            int count = c.getInt(0);
+            if (count > 0) return true;
+        }
+        return false;
+    }
+
+    // checks if there is any completed goal by the user.
+    // returns true if there is
+    public boolean checkCompletedGoalCount(int id) {
+        String sql = "SELECT COUNT(*) FROM UserGoalTable WHERE user_id ='" + id + "' AND accomplished = 1";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            int count = c.getInt(0);
+            if (count > 0) return true;
+        }
+        return false;
+    }
+
+    // this is for get help from organisations (get help page)
+    // checks if the user has any goals that can they can request help from
+    public boolean checkExistingOnGoingGoalsHelp(int id) {
+        String sql = "SELECT COUNT(*) FROM UserGoalTable WHERE user_id = '" + id + "' AND accomplished = 0 AND requested = 0";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            int count = c.getInt(0);
+            if (count > 0) return true;
+        }
+        return false;
+    }
+
+    // this is for show pending help (get help page)
+    // checks if the user has any help that are pending (they request help and the organisation -
+    // still has not decided to help the user yet, so the goal is pending.
+    // returns true if there is any pending goal.
+    public boolean checkPendingGoalCount(int id) {
+        String sql = "SELECT COUNT(*) FROM UserHelp WHERE user_id = '" + id + "' AND helped = 0";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            int count = c.getInt(0);
+            if (count > 0) return true;
+        }
+        return false;
+    }
+
+    // this is for show existing help (get help page)
+    // checks if the user has any goals that the organisation is helping with.
+    // returns true if there are.
+    public boolean checkExistingHelpGoalCount(int id) {
+        String sql = "SELECT COUNT(*) FROM UserHelp WHERE user_id = '" + id + "' AND helped = 1 AND org_id NOT NULL";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            int count = c.getInt(0);
+            if (count > 0) return true;
+        }
+        return false;
+    }
+
+
 }
 
 

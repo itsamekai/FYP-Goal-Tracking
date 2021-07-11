@@ -2,6 +2,7 @@ package com.example.fyp.GeneralMainPage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -32,13 +33,16 @@ public class MainHomePage extends AppCompatActivity {
     public ImageView getHelpB;
     public ImageView rewardView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_home_page);
-        String uniqueString = getIntent().getStringExtra("username");
-
         db = new DataBaseHelper(this);
+        String uniqueString = getIntent().getStringExtra("username");
+        int userid = db.getUserID(uniqueString);
+
+
         Bitmap image = db.retrieveImage(getIntent().getStringExtra("username"));
         System.out.println(image);
         if (image != null) {
@@ -79,17 +83,29 @@ public class MainHomePage extends AppCompatActivity {
         // Tracking of Goals
         trackGoalsB = (ImageView) findViewById(R.id.monitor_button);
         trackGoalsB.setOnClickListener(v -> {
-            Intent trackGoalsPage = new Intent(this, TrackingGoal.class);
-            trackGoalsPage.putExtra("username", uniqueString);
-            startActivity(trackGoalsPage);
+            if (db.checkExistingOnGoingGoals(userid)) {
+                Intent trackGoalsPage = new Intent(this, TrackingGoal.class);
+                trackGoalsPage.putExtra("username", uniqueString);
+                startActivity(trackGoalsPage);
+            }
+            else {
+                showWarningNoExistingGoal();
+            }
+
         });
 
         //History Goals
         viewHistoryGoals = (ImageView) findViewById(R.id.history_button);
         viewHistoryGoals.setOnClickListener(v -> {
-            Intent HistoryGoalPage = new Intent(this, HistoryGoals.class);
-            HistoryGoalPage.putExtra("username", uniqueString);
-            startActivity(HistoryGoalPage);
+            if (db.checkCompletedGoalCount(userid)) {
+                Intent HistoryGoalPage = new Intent(this, HistoryGoals.class);
+                HistoryGoalPage.putExtra("username", uniqueString);
+                startActivity(HistoryGoalPage);
+            }
+            else {
+                showWarningNoCompletedGoals();
+            }
+
         });
 
         getHelpB = (ImageView) findViewById(R.id.help_button);
@@ -106,4 +122,25 @@ public class MainHomePage extends AppCompatActivity {
             startActivity(ViewRewardPage);
         });
     }
+
+    // warning for monitoring goals.
+    private void showWarningNoExistingGoal() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("You do not have any on going goals.");
+        dialog.setTitle("Error");
+        dialog.setPositiveButton("OK", null);
+        dialog.show();
+    }
+
+    // warning for history goals.
+    private void showWarningNoCompletedGoals() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("You do not have any goals completed yet.");
+        dialog.setTitle("Error");
+        dialog.setPositiveButton("OK", null);
+        dialog.show();
+    }
+
+
+
 }
