@@ -7,6 +7,36 @@
     android:background="@drawable/categorypage_background"
     tools:context=".Admin.CategoryPage.CreateCategory">
 
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="213dp"
+        android:layout_height="68dp"
+        android:layout_marginTop="76dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/category_page2_string"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="92dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="52dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="start"
+        android:text="Name:"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.139"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
     <EditText
         android:id="@+id/createCategoryName"
         android:layout_width="300dp"
@@ -21,24 +51,25 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/textView19"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.387"
+        app:layout_constraintHorizontal_bias="0.439"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
-    <Button
-        android:id="@+id/UploadCategoryButton"
-        android:layout_width="200dp"
-        android:layout_height="52dp"
-        android:background="@drawable/managecategorypage_border"
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="144dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins"
-        android:text="@string/category_create_button"
-        android:textAllCaps="false"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="start"
+        android:text="Description:"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/createCategoryDesc"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.431"
+        app:layout_constraintHorizontal_bias="0.16"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categoryUploadImage" />
+        app:layout_constraintTop_toBottomOf="@+id/createCategoryName" />
 
     <EditText
         android:id="@+id/createCategoryDesc"
@@ -54,40 +85,9 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/textView21"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.405"
+        app:layout_constraintHorizontal_bias="0.432"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView19" />
-
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="213dp"
-        android:layout_height="68dp"
-        android:layout_marginTop="72dp"
-        android:fontFamily="@font/poppins"
-        android:gravity="center"
-        android:text="@string/category_page2_string"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/categoryUploadImage"
-        android:layout_width="174dp"
-        android:layout_height="123dp"
-        android:layout_marginStart="134dp"
-        android:layout_marginLeft="134dp"
-        android:layout_marginEnd="151dp"
-        android:layout_marginRight="151dp"
-        app:layout_constraintBottom_toTopOf="@+id/UploadCategoryButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createCategoryUpload"
-        app:layout_constraintVertical_bias="0.261"
-        app:srcCompat="@drawable/uploadimage" />
 
     <TextView
         android:id="@+id/textView21"
@@ -100,7 +100,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/createCategoryUpload"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.198"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/createCategoryDesc" />
 
@@ -116,40 +116,39 @@
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/categoryUploadImage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.14"
+        app:layout_constraintHorizontal_bias="0.138"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
-    <TextView
-        android:id="@+id/textView18"
-        android:layout_width="92dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="28dp"
+    <Button
+        android:id="@+id/UploadCategoryButton"
+        android:layout_width="200dp"
+        android:layout_height="52dp"
+        android:background="@drawable/managecategorypage_border"
         android:fontFamily="@font/poppins"
-        android:gravity="start"
-        android:text="Name:"
-        android:textColor="@color/black"
-        android:textSize="20sp"
+        android:text="@string/category_create_button"
+        android:textAllCaps="false"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.141"
+        app:layout_constraintHorizontal_bias="0.424"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintTop_toBottomOf="@+id/categoryUploadImage" />
 
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="144dp"
-        android:layout_height="29dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/poppins"
-        android:gravity="start"
-        android:text="Description:"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/createCategoryDesc"
+    <ImageView
+        android:id="@+id/categoryUploadImage"
+        android:layout_width="174dp"
+        android:layout_height="123dp"
+        android:layout_marginStart="134dp"
+        android:layout_marginLeft="134dp"
+        android:layout_marginEnd="151dp"
+        android:layout_marginRight="151dp"
+        app:layout_constraintBottom_toTopOf="@+id/UploadCategoryButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.164"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createCategoryName" />
+        app:layout_constraintTop_toBottomOf="@+id/createCategoryUpload"
+        app:layout_constraintVertical_bias="0.261"
+        app:srcCompat="@drawable/uploadimage" />
 
     <ImageView
         android:id="@+id/adminArrowBack8"
