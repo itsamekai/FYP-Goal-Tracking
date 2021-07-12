@@ -1,3 +1,4 @@
+
 package com.example.fyp.OrganisationProfile;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +43,7 @@ public class OrganisationEditDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organisation_edit_details);
         uniqueString = getIntent().getStringExtra("username");
+
 
         organisation_name3 = findViewById(R.id.viewOrgName2);
         email_address = findViewById(R.id.viewEmail);
@@ -95,6 +97,7 @@ public class OrganisationEditDetails extends AppCompatActivity {
         String uniqueString6 = getIntent().getStringExtra("username");
         db = new DataBaseHelper(this);
         address.setText(db.getOrgAddress(uniqueString6));
+
 
         updateButton = findViewById(R.id.orgUpdateDetailsButton);
         updateButton.setOnClickListener(v -> {
@@ -175,4 +178,4 @@ public class OrganisationEditDetails extends AppCompatActivity {
         }
     }
 
-    }
+}

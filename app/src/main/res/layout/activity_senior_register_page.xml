@@ -105,6 +105,7 @@
         android:ems="10"
         android:inputType="phone"
         android:hint="@string/seniorPhoneNo"
+        android:maxLength="8"
         android:importantForAutofill="no"
         android:drawableLeft="@drawable/phone_call"
         android:drawableStart="@drawable/phone_call"

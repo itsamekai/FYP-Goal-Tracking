@@ -104,7 +104,7 @@ public class ProfilePageEdit extends AppCompatActivity {
         aboutD.setText(db.getUserAbout(uniqueString6));
 
         // update button
-        phonenumber2 = findViewById(R.id.phonenumber1);
+
         updateb = (Button) findViewById(R.id.updatebutton);
         updateb.setOnClickListener(v -> {
             if (checkIfEmpty()) {

@@ -125,6 +125,7 @@
         android:fontFamily="@font/poppins"
         android:gravity="center"
         android:hint="@string/adminPhoneInput"
+        android:maxLength="8"
         android:importantForAutofill="no"
         android:textColor="@color/black"
         android:textSize="20sp"
