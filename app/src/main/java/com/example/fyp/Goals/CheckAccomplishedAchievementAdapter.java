@@ -29,16 +29,16 @@ public class CheckAccomplishedAchievementAdapter extends RecyclerView.Adapter<Ch
     private ArrayList AccomplishedAchievement;
     private ArrayList accomplishedDesc;
     private ArrayList AccomplishedDateTime;
-    private ImageView Image;
+    private ArrayList ImageList;
     public DataBaseHelper db;
 
-    public CheckAccomplishedAchievementAdapter(Activity activity, Context context, ArrayList accomplishedAchievement, ArrayList accomplishedDesc, ArrayList accomplishedDateTime, ImageView image) {
+    public CheckAccomplishedAchievementAdapter(Activity activity, Context context, ArrayList accomplishedAchievement, ArrayList accomplishedDesc, ArrayList accomplishedDateTime, ArrayList ImageList) {
         this.activity = activity;
         this.context = context;
         this.AccomplishedAchievement = accomplishedAchievement;
         this.accomplishedDesc = accomplishedDesc;
         this.AccomplishedDateTime = accomplishedDateTime;
-        this.Image = image;
+        this.ImageList = ImageList;
     }
 
 
@@ -56,6 +56,7 @@ public class CheckAccomplishedAchievementAdapter extends RecyclerView.Adapter<Ch
         holder.accomplishedAchievement.setText(String.valueOf(AccomplishedAchievement.get(position)));
         holder.accomplishedDesc.setText(String.valueOf(accomplishedDesc.get(position)));
         holder.accomplishedDateTime.setText(String.valueOf(AccomplishedDateTime.get(position)));
+        holder.image.setImageBitmap((Bitmap) ImageList.get(position));
         //holder.image.setImageBitmap(Array.get(Array, position));
     }
 

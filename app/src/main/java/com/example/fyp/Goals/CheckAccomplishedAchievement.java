@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,6 +27,8 @@ public class CheckAccomplishedAchievement extends AppCompatActivity {
     public TextView accomplishedTotal;
     public RecyclerView recyclerView;
     public ArrayList<String> accomplishedAchievement,accomplishedDesc, accomplishedDateTime;
+    public ArrayList<byte[]> pre_image;
+    public ArrayList<Bitmap> image;
     public DataBaseHelper db;
     public CheckAccomplishedAchievementAdapter checkAccomplishedGoalAdapter;
     int total = 0;
@@ -45,24 +48,26 @@ public class CheckAccomplishedAchievement extends AppCompatActivity {
             startActivity(returnback);
         });
 
-        db = new DataBaseHelper(this);
-        Bitmap image = db.retrieveImage(getIntent().getStringExtra("username"));
-        System.out.println(image);
-        if (image != null) {
-            achievementIcon = (ImageView) findViewById(R.id.imageView10);
-            achievementIcon.setImageBitmap(db.retrieveImage(getIntent().getStringExtra("username")));
-        }
+//        db = new DataBaseHelper(this);
+//        Bitmap image = db.retrieveImage(getIntent().getStringExtra("username"));
+//        System.out.println(image);
+//        if (image != null) {
+//            achievementIcon = (ImageView) findViewById(R.id.imageView10);
+//            achievementIcon.setImageBitmap(db.retrieveImage(getIntent().getStringExtra("username")));
+//        }
 
         recyclerView = findViewById(R.id.GoalsAccomplishedRecyclerView);
         db = new DataBaseHelper(this);
         accomplishedAchievement = new ArrayList<>();
         accomplishedDesc = new ArrayList<>();
         accomplishedDateTime = new ArrayList<>();
+        image = new ArrayList<>();
+        pre_image = new ArrayList<>();
 
         putDataInArray();
         SetAllGoalCount();
-        //Array();
-        checkAccomplishedGoalAdapter = new CheckAccomplishedAchievementAdapter(CheckAccomplishedAchievement.this, this, accomplishedAchievement, accomplishedDesc, accomplishedDateTime, achievementIcon);
+
+        checkAccomplishedGoalAdapter = new CheckAccomplishedAchievementAdapter(CheckAccomplishedAchievement.this, this, accomplishedAchievement, accomplishedDesc, accomplishedDateTime, image);
         recyclerView.setAdapter(checkAccomplishedGoalAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(CheckAccomplishedAchievement.this));
     }
@@ -82,8 +87,14 @@ public class CheckAccomplishedAchievement extends AppCompatActivity {
                 accomplishedAchievement.add(c.getString(0));
                 accomplishedDesc.add(c.getString(1));
                 accomplishedDateTime.add(c.getString(2));
+                pre_image.add(c.getBlob(3));
             }
         }
+        for (int i = 0; pre_image.size() > i; i++) {
+            image.add(BitmapFactory.decodeByteArray(pre_image.get(i), 0, pre_image.get(i).length));
+        }
+        // to test.
+        System.out.println("array size: " + image.size());
     }
 
    // private void Array() {
