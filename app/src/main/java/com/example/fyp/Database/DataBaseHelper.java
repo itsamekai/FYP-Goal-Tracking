@@ -550,9 +550,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
-    // gets org name, org contact name, contact number from database
+    // gets org name, org contact name, contact number , services from database
     public Cursor readOrgData() {
-        String sql = "SELECT org_name, contact_name, ContactNo FROM " + ORGUSER_TABLE;
+        String sql = "SELECT org_name, contact_name, ContactNo , service_name " +
+        "FROM OrgUsers og "+
+        "INNER JOIN OrgServices os ON og.org_id = os.org_id " +
+                " INNER JOIN Services s ON os.service_id = s.service_id " ;
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;

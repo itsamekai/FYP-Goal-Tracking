@@ -19,13 +19,14 @@ import java.util.ArrayList;
 public class ViewOrgCustomAdapter extends RecyclerView.Adapter<ViewOrgCustomAdapter.MyViewHolder> {
 
     private Context context;
-    private ArrayList org_name, org_incharge, org_phone;
+    private ArrayList org_name, org_incharge, org_phone, org_service;
 
-    public ViewOrgCustomAdapter(Context context, ArrayList org_name, ArrayList org_incharge, ArrayList org_phone) {
+    public ViewOrgCustomAdapter(Context context, ArrayList org_name, ArrayList org_incharge, ArrayList org_phone,ArrayList org_service) {
         this.context = context;
         this.org_name = org_name;
         this.org_incharge = org_incharge;
         this.org_phone = org_phone;
+        this.org_service = org_service;
     }
 
 
@@ -43,6 +44,7 @@ public class ViewOrgCustomAdapter extends RecyclerView.Adapter<ViewOrgCustomAdap
             holder.organisationName.setText(String.valueOf(org_name.get(position)));
             holder.personInCharge.setText(String.valueOf(org_incharge.get(position)));
             holder.OrganisationPhoneNo.setText(String.valueOf(org_phone.get(position)));
+            holder.OrganisationServices.setText(String.valueOf(org_service.get(position)));
     }
 
     @Override
@@ -52,7 +54,7 @@ public class ViewOrgCustomAdapter extends RecyclerView.Adapter<ViewOrgCustomAdap
 
      public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView organisationName, personInCharge, OrganisationPhoneNo;
+        TextView organisationName, personInCharge, OrganisationPhoneNo, OrganisationServices;
         LinearLayout mainLayout;
 
          MyViewHolder(@NonNull View itemView) {
@@ -60,6 +62,7 @@ public class ViewOrgCustomAdapter extends RecyclerView.Adapter<ViewOrgCustomAdap
             organisationName = itemView.findViewById(R.id.organisationName);
             personInCharge = itemView.findViewById(R.id.personInCharge);
             OrganisationPhoneNo = itemView.findViewById(R.id.OrganisationPhoneNo);
+             OrganisationServices = itemView.findViewById(R.id.OrgService);
             //mainLayout = itemView.findViewById(R.id.mainLayout);
 
         }

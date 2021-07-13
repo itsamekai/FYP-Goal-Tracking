@@ -30,7 +30,7 @@
             cardView:layout_constraintHorizontal_bias="0.0"
             cardView:layout_constraintStart_toStartOf="@+id/inchargestring"
             cardView:layout_constraintTop_toTopOf="parent"
-            cardView:layout_constraintVertical_bias="0.294" />
+            cardView:layout_constraintVertical_bias="0.183" />
 
         <TextView
             android:id="@+id/inchargestring"
@@ -43,10 +43,10 @@
             android:textStyle="bold"
             cardView:layout_constraintBottom_toBottomOf="parent"
             cardView:layout_constraintEnd_toEndOf="parent"
-            cardView:layout_constraintHorizontal_bias="0.14"
+            cardView:layout_constraintHorizontal_bias="0.199"
             cardView:layout_constraintStart_toStartOf="parent"
             cardView:layout_constraintTop_toTopOf="parent"
-            cardView:layout_constraintVertical_bias="0.58000004" />
+            cardView:layout_constraintVertical_bias="0.368" />
 
         <TextView
             android:id="@+id/phoneNostring"
@@ -61,10 +61,28 @@
             android:textStyle="bold"
             cardView:layout_constraintBottom_toBottomOf="parent"
             cardView:layout_constraintEnd_toEndOf="parent"
-            cardView:layout_constraintHorizontal_bias="0.12"
+            cardView:layout_constraintHorizontal_bias="0.188"
             cardView:layout_constraintStart_toStartOf="parent"
             cardView:layout_constraintTop_toTopOf="parent"
-            cardView:layout_constraintVertical_bias="0.823" />
+            cardView:layout_constraintVertical_bias="0.558" />
+
+        <TextView
+            android:id="@+id/OrgServiceString"
+            android:layout_width="134dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            android:fontFamily="@font/segoe"
+            android:text="Org Services:"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            cardView:layout_constraintBottom_toBottomOf="parent"
+            cardView:layout_constraintEnd_toEndOf="parent"
+            cardView:layout_constraintHorizontal_bias="0.218"
+            cardView:layout_constraintStart_toStartOf="parent"
+            cardView:layout_constraintTop_toTopOf="parent"
+            cardView:layout_constraintVertical_bias="0.776" />
 
         <TextView
             android:id="@+id/organisationName"
@@ -81,7 +99,7 @@
             cardView:layout_constraintHorizontal_bias="0.0"
             cardView:layout_constraintStart_toStartOf="@+id/personInCharge"
             cardView:layout_constraintTop_toTopOf="parent"
-            cardView:layout_constraintVertical_bias="0.294" />
+            cardView:layout_constraintVertical_bias="0.183" />
 
         <TextView
             android:id="@+id/personInCharge"
@@ -95,10 +113,10 @@
             android:textSize="20sp"
             cardView:layout_constraintBottom_toBottomOf="parent"
             cardView:layout_constraintEnd_toEndOf="parent"
-            cardView:layout_constraintHorizontal_bias="0.692"
+            cardView:layout_constraintHorizontal_bias="0.695"
             cardView:layout_constraintStart_toStartOf="parent"
             cardView:layout_constraintTop_toTopOf="parent"
-            cardView:layout_constraintVertical_bias="0.566" />
+            cardView:layout_constraintVertical_bias="0.382" />
 
         <TextView
             android:id="@+id/OrganisationPhoneNo"
@@ -110,10 +128,25 @@
             android:textSize="20sp"
             cardView:layout_constraintBottom_toBottomOf="parent"
             cardView:layout_constraintEnd_toEndOf="parent"
-            cardView:layout_constraintHorizontal_bias="0.64"
+            cardView:layout_constraintHorizontal_bias="0.735"
             cardView:layout_constraintStart_toStartOf="parent"
             cardView:layout_constraintTop_toTopOf="parent"
-            cardView:layout_constraintVertical_bias="0.823" />
+            cardView:layout_constraintVertical_bias="0.558" />
+
+        <TextView
+            android:id="@+id/OrgService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/segoe"
+            android:text="OrgService"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            cardView:layout_constraintBottom_toBottomOf="parent"
+            cardView:layout_constraintEnd_toEndOf="parent"
+            cardView:layout_constraintHorizontal_bias="0.701"
+            cardView:layout_constraintStart_toStartOf="parent"
+            cardView:layout_constraintTop_toTopOf="parent"
+            cardView:layout_constraintVertical_bias="0.735" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
