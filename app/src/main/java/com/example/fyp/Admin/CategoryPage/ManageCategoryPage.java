@@ -2,12 +2,14 @@ package com.example.fyp.Admin.CategoryPage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fyp.Admin.MainAdminPage;
+import com.example.fyp.Database.DataBaseHelper;
 import com.example.fyp.R;
 
 public class ManageCategoryPage extends AppCompatActivity {
@@ -16,6 +18,7 @@ public class ManageCategoryPage extends AppCompatActivity {
     public TextView createButton;
     public TextView updateButton;
     public TextView createAchievementButton1;
+    public DataBaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +41,17 @@ public class ManageCategoryPage extends AppCompatActivity {
         });
 
         updateButton = (TextView) findViewById(R.id.updateCategoryButton);
-        updateButton.setOnClickListener(v ->{
-            Intent update = new Intent(this, UpdateCategory.class);
-            update.putExtra("username", uniqueString);
-            startActivity(update);
+        updateButton.setOnClickListener(v -> {
+
+                   if (db.checkCategoryCount()) {
+                       Intent update = new Intent(this, UpdateCategory.class);
+                       update.putExtra("username", uniqueString);
+                       startActivity(update);
+                   }
+
+                else {
+                   showWarningNoCategoryCreated();
+                }
         });
 
         createAchievementButton1 = (TextView) findViewById(R.id.createAchievementButton);
@@ -50,5 +60,13 @@ public class ManageCategoryPage extends AppCompatActivity {
             create1.putExtra("username", uniqueString);
             startActivity(create1);
         });
+    }
+
+    private void showWarningNoCategoryCreated() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("There is no category.");
+        dialog.setTitle("Message");
+        dialog.setPositiveButton("OK", null);
+        dialog.show();
     }
 }

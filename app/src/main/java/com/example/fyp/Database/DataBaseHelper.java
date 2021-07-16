@@ -291,7 +291,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // retrieveAchievements
     public Cursor retrieveAchievements(int u) {
         String sql = "SELECT a.achievement_name, a.achievement_desc, ua.datetime_achieved, a.achievement_img " +
-                "FROM AchievementsTable a " +
+                " FROM AchievementsTable a " +
                 "INNER JOIN UserAchievement ua ON a.achievement_id = ua.achievement_id " +
                 "WHERE ua.user_id = '" + u + "'";
 
@@ -553,9 +553,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // gets org name, org contact name, contact number , services from database
     public Cursor readOrgData() {
         String sql = "SELECT org_name, contact_name, ContactNo , service_name " +
-        "FROM OrgUsers og "+
-        "INNER JOIN OrgServices os ON og.org_id = os.org_id " +
-                " INNER JOIN Services s ON os.service_id = s.service_id " ;
+                "FROM OrgUsers og " +
+                "INNER JOIN OrgServices os ON og.org_id = os.org_id " +
+                " INNER JOIN Services s ON os.service_id = s.service_id ";
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;
@@ -564,6 +564,24 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return cursor;
     }
+
+    //public Cursor readOrgDataTwo(int u) {
+    //  String sql = "SELECT ou.org_name, ou.contact_name, ou.ContactNo, s.service_name " +
+    //        "FROM OrgUsers ou " +
+    //      "INNER JOIN OrgServices os ON ou.org_id = os.org_id " +
+    //    "INNER JOIN Services s ON os.service_id = s.service_id " +
+    //  "WHERE os.org_has_service_id = '" + u + "'";
+
+
+    //SQLiteDatabase db = this.getReadableDatabase();
+
+    //Cursor cursor = null;
+    //if (db != null) {
+    //  cursor = db.rawQuery(sql, null);
+    //}
+
+    //return cursor;
+    //}
 
     public Cursor readUnapprovedOrgData() {
         String sql = "SELECT org_name FROM " + ORGUSER_TABLE + " WHERE verified = 0";
@@ -1241,7 +1259,60 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
+    public boolean checkApproveOrg(int id) {
+        String sql = "SELECT COUNT(*) FROM OrgUsers WHERE org_id = '" + id + "' AND verified = 0";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            int count = c.getInt(0);
+            if (count > 0) return true;
+        }
+        return false;
+    }
 
+    //can only update category if there is category created
+    //count of category >= 1
+    public boolean checkCategoryCount() {
+        String sql = "SELECT COUNT(*) FROM Category ";
+       // String sql = "SELECT COUNT(*) FROM Category WHERE category_id = '" + id + "' AND category_id NOT NULL";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            int count = c.getInt(0);
+            if (count > 0) return true;
+        }
+        return false;
+    }
+
+    //checks if there is any user goals available to search or view
+    public boolean checkViewUserGoals() {
+        String sql = "SELECT COUNT(*) FROM UserGoalTable";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            int count = c.getInt(0);
+            if (count > 0) return true;
+        }
+        return false;
+    }
+
+    //view org in manage organisation if there is any org users
+    public boolean checkViewOrganisation() {
+        String sql = "SELECT COUNT(*) FROM OrgUsers";
+        Cursor c = getReadableDatabase().rawQuery(sql,null);
+        if (c.moveToFirst()) {
+            int count = c.getInt(0);
+            if (count > 0) return true;
+        }
+        return false;
+    }
+    //update org in manage organisation if there is any org users created
+    public boolean checkUpdateOrganisation() {
+        String sql = "SELECT COUNT(*) FROM OrgUsers";
+        Cursor c = getReadableDatabase().rawQuery(sql,null);
+        if (c.moveToFirst()) {
+            int count = c.getInt(0);
+            if (count > 0) return true;
+        }
+        return false;
+    }
 }
 
 

@@ -2,6 +2,7 @@ package com.example.fyp.Admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -25,12 +26,14 @@ public class MainAdminPage extends AppCompatActivity {
     public ImageView approveOrgPage;
     public DataBaseHelper db;
     public TextView adminName;
+    public int rowCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_main_page);
         String uniqueString = getIntent().getStringExtra("username");
+
 
         // get admin name
         adminName = (TextView) findViewById(R.id.AdminName);
@@ -57,9 +60,18 @@ public class MainAdminPage extends AppCompatActivity {
         // goes to view users page
            UsersPage = (ImageView) findViewById(R.id.ViewUsersButton);
            UsersPage.setOnClickListener(v -> {
-               Intent userPage = new Intent(this, SearchUserGoal.class);
-               userPage.putExtra("username", uniqueString);
-               startActivity(userPage);
+
+               if (rowCount >= 1) {
+                   if (db.checkViewUserGoals()) {
+                       Intent userPage = new Intent(this, SearchUserGoal.class);
+                       userPage.putExtra("username", uniqueString);
+                       startActivity(userPage);
+                   }
+               }
+
+               else {
+                   showWarningUnableToViewGoals();
+               }
            });
 
 
@@ -80,6 +92,13 @@ public class MainAdminPage extends AppCompatActivity {
             startActivity(orgPage);
         });
 
+    }
 
+    private void showWarningUnableToViewGoals() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("There is no goals available to view");
+        dialog.setTitle("Message");
+        dialog.setPositiveButton("OK", null);
+        dialog.show();
     }
 }

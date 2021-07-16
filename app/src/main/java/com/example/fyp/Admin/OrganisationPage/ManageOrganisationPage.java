@@ -2,12 +2,14 @@ package com.example.fyp.Admin.OrganisationPage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fyp.Admin.MainAdminPage;
+import com.example.fyp.Database.DataBaseHelper;
 import com.example.fyp.R;
 
 public class ManageOrganisationPage extends AppCompatActivity {
@@ -16,6 +18,8 @@ public class ManageOrganisationPage extends AppCompatActivity {
     public TextView updateOrg;
     public TextView viewOrg;
     public TextView approveOrg;
+    public DataBaseHelper db;
+    public int orgCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +36,18 @@ public class ManageOrganisationPage extends AppCompatActivity {
 
         viewOrg = (TextView) findViewById(R.id.ViewOrganisationButton);
         viewOrg.setOnClickListener(v ->{
-            Intent vieworg = new Intent(this, ViewOrganisation.class);
-            vieworg.putExtra("username", uniqueString);
-            startActivity(vieworg);
+
+            if (orgCount >= 1) {
+                if (db.checkViewOrganisation()) {
+                    Intent vieworg = new Intent(this, ViewOrganisation.class);
+                    vieworg.putExtra("username", uniqueString);
+                    startActivity(vieworg);
+                }
+            }
+
+            else {
+                showWarningNoOrganisationCreated();
+            }
         });
 
 
@@ -47,9 +60,40 @@ public class ManageOrganisationPage extends AppCompatActivity {
 
         approveOrg = (TextView) findViewById(R.id.ApproveOrganisationButton);
         approveOrg.setOnClickListener(v ->{
-            Intent approveorg = new Intent(this, ShowUnapprovedOrg.class);
-            approveorg.putExtra("username", uniqueString);
-            startActivity(approveorg);
+            if (db.checkApproveOrg(db.getOrgID(uniqueString))) {
+                Intent approveorg = new Intent(this, ShowUnapprovedOrg.class);
+                approveorg.putExtra("username", uniqueString);
+                startActivity(approveorg);
+            }
+            else {
+                showWarningOrganisationApproved();
+            }
         });
     }
+
+    private void showWarningNoOrganisationCreated() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("There is no organisation available for viewing.");
+        dialog.setTitle("Message");
+        dialog.setPositiveButton("OK", null);
+        dialog.show();
+    }
+
+    private void showWarningNoOrganisationForUpdate() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("There is no organisation available for update.");
+        dialog.setTitle("Message");
+        dialog.setPositiveButton("OK", null);
+        dialog.show();
+    }
+
+    private void showWarningOrganisationApproved() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("There is no organisation available for approve.");
+        dialog.setTitle("Message");
+        dialog.setPositiveButton("OK", null);
+        dialog.show();
+    }
+
+
     }
