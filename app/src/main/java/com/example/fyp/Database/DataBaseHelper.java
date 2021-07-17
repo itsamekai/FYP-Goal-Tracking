@@ -1259,21 +1259,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
-    public boolean checkApproveOrg(int id) {
-        String sql = "SELECT COUNT(*) FROM OrgUsers WHERE org_id = '" + id + "' AND verified = 0";
-        Cursor c = getReadableDatabase().rawQuery(sql, null);
-        if (c.moveToFirst()) {
-            int count = c.getInt(0);
-            if (count > 0) return true;
-        }
-        return false;
-    }
-
     //can only update category if there is category created
     //count of category >= 1
     public boolean checkCategoryCount() {
-        String sql = "SELECT COUNT(*) FROM Category ";
-       // String sql = "SELECT COUNT(*) FROM Category WHERE category_id = '" + id + "' AND category_id NOT NULL";
+        String sql = "SELECT COUNT(category_name) FROM Category";
+       // String sql = "SELECT COUNT(*) FROM Category WHERE category_id = '" + id + "'";
         Cursor c = getReadableDatabase().rawQuery(sql, null);
         if (c.moveToFirst()) {
             int count = c.getInt(0);
@@ -1303,10 +1293,21 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return false;
     }
+
     //update org in manage organisation if there is any org users created
     public boolean checkUpdateOrganisation() {
         String sql = "SELECT COUNT(*) FROM OrgUsers";
         Cursor c = getReadableDatabase().rawQuery(sql,null);
+        if (c.moveToFirst()) {
+            int count = c.getInt(0);
+            if (count > 0) return true;
+        }
+        return false;
+    }
+
+    public boolean checkApproveOrg() {
+        String sql = "SELECT COUNT(*) FROM OrgUsers WHERE verified = 0";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
         if (c.moveToFirst()) {
             int count = c.getInt(0);
             if (count > 0) return true;

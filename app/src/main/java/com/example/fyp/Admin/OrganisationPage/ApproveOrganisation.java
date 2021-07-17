@@ -26,6 +26,7 @@ public class ApproveOrganisation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_approve_organisation);
+        String uniqueString = getIntent().getStringExtra("username");
 
         // name used to retrieve from sql (where org_name = name;)
         if (getIntent().hasExtra("name")) {
@@ -45,6 +46,7 @@ public class ApproveOrganisation extends AppCompatActivity {
 
         returnprev.setOnClickListener(v -> {
             Intent i = new Intent(this, ShowUnapprovedOrg.class);
+            i.putExtra("username", uniqueString);
             startActivity(i);
         });
 

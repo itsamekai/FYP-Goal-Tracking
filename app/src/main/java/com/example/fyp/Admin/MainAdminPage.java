@@ -26,7 +26,6 @@ public class MainAdminPage extends AppCompatActivity {
     public ImageView approveOrgPage;
     public DataBaseHelper db;
     public TextView adminName;
-    public int rowCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +60,12 @@ public class MainAdminPage extends AppCompatActivity {
            UsersPage = (ImageView) findViewById(R.id.ViewUsersButton);
            UsersPage.setOnClickListener(v -> {
 
-               if (rowCount >= 1) {
                    if (db.checkViewUserGoals()) {
                        Intent userPage = new Intent(this, SearchUserGoal.class);
                        userPage.putExtra("username", uniqueString);
                        startActivity(userPage);
                    }
-               }
+
 
                else {
                    showWarningUnableToViewGoals();

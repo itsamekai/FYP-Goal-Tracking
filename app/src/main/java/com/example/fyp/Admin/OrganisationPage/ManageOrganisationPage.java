@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ public class ManageOrganisationPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_organisation_page);
+        db = new DataBaseHelper(this);
         String uniqueString = getIntent().getStringExtra("username");
 
         returnButton = (ImageView) findViewById(R.id.adminArrowBack3);
@@ -37,13 +39,11 @@ public class ManageOrganisationPage extends AppCompatActivity {
         viewOrg = (TextView) findViewById(R.id.ViewOrganisationButton);
         viewOrg.setOnClickListener(v ->{
 
-            if (orgCount >= 1) {
                 if (db.checkViewOrganisation()) {
                     Intent vieworg = new Intent(this, ViewOrganisation.class);
                     vieworg.putExtra("username", uniqueString);
                     startActivity(vieworg);
                 }
-            }
 
             else {
                 showWarningNoOrganisationCreated();
@@ -53,14 +53,21 @@ public class ManageOrganisationPage extends AppCompatActivity {
 
         updateOrg = (TextView) findViewById(R.id.UpdateOrganisationButton);
         updateOrg.setOnClickListener(v ->{
-            Intent updateorg = new Intent(this, UpdateOrganisation.class);
-            updateorg.putExtra("username", uniqueString);
-            startActivity(updateorg);
+
+            if (db.checkUpdateOrganisation()) {
+                Intent updateorg = new Intent(this, UpdateOrganisation.class);
+                updateorg.putExtra("username", uniqueString);
+                startActivity(updateorg);
+            }
+
+            else {
+                showWarningNoOrganisationForUpdate();
+            }
         });
 
         approveOrg = (TextView) findViewById(R.id.ApproveOrganisationButton);
         approveOrg.setOnClickListener(v ->{
-            if (db.checkApproveOrg(db.getOrgID(uniqueString))) {
+            if (db.checkApproveOrg()) {
                 Intent approveorg = new Intent(this, ShowUnapprovedOrg.class);
                 approveorg.putExtra("username", uniqueString);
                 startActivity(approveorg);

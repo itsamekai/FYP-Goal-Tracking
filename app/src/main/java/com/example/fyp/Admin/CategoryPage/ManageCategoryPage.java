@@ -24,6 +24,7 @@ public class ManageCategoryPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_category_page);
+        db = new DataBaseHelper(this);
         String uniqueString = getIntent().getStringExtra("username");
 
         returnButton = (ImageView) findViewById(R.id.adminArrowBack2);
@@ -64,7 +65,7 @@ public class ManageCategoryPage extends AppCompatActivity {
 
     private void showWarningNoCategoryCreated() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setMessage("There is no category.");
+        dialog.setMessage("There is no category created for update.");
         dialog.setTitle("Message");
         dialog.setPositiveButton("OK", null);
         dialog.show();
