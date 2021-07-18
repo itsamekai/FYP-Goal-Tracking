@@ -59,7 +59,6 @@ public class ManageOrganisationPage extends AppCompatActivity {
                 updateorg.putExtra("username", uniqueString);
                 startActivity(updateorg);
             }
-
             else {
                 showWarningNoOrganisationForUpdate();
             }

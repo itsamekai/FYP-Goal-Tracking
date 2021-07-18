@@ -555,7 +555,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         String sql = "SELECT org_name, contact_name, ContactNo , service_name " +
                 "FROM OrgUsers og " +
                 "INNER JOIN OrgServices os ON og.org_id = os.org_id " +
-                " INNER JOIN Services s ON os.service_id = s.service_id ";
+                "INNER JOIN Services s ON os.service_id = s.service_id ";
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;
@@ -1305,6 +1305,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
+    //only can click onto button if there is an organisation that is not approved available
     public boolean checkApproveOrg() {
         String sql = "SELECT COUNT(*) FROM OrgUsers WHERE verified = 0";
         Cursor c = getReadableDatabase().rawQuery(sql, null);

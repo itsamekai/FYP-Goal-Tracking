@@ -40,11 +40,11 @@ public class ViewOrgCustomAdapter extends RecyclerView.Adapter<ViewOrgCustomAdap
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-        public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-            holder.organisationName.setText(String.valueOf(org_name.get(position)));
-            holder.personInCharge.setText(String.valueOf(org_incharge.get(position)));
-            holder.OrganisationPhoneNo.setText(String.valueOf(org_phone.get(position)));
-            holder.OrganisationServices.setText(String.valueOf(org_service.get(position)));
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
+        holder.organisationName.setText(String.valueOf(org_name.get(position)));
+        holder.personInCharge.setText(String.valueOf(org_incharge.get(position)));
+        holder.OrganisationPhoneNo.setText(String.valueOf(org_phone.get(position)));
+        holder.OrganisationServices.setText(String.valueOf(org_service.get(position)));
     }
 
     @Override
@@ -52,18 +52,18 @@ public class ViewOrgCustomAdapter extends RecyclerView.Adapter<ViewOrgCustomAdap
         return org_name.size();
     }
 
-     public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView organisationName, personInCharge, OrganisationPhoneNo, OrganisationServices;
         LinearLayout mainLayout;
 
-         MyViewHolder(@NonNull View itemView) {
+        MyViewHolder(@NonNull View itemView) {
             super(itemView);
             organisationName = itemView.findViewById(R.id.organisationName);
             personInCharge = itemView.findViewById(R.id.personInCharge);
             OrganisationPhoneNo = itemView.findViewById(R.id.OrganisationPhoneNo);
             OrganisationServices = itemView.findViewById(R.id.OrgService);
-            mainLayout = itemView.findViewById(R.id.OrgRecyclerView);
+            //mainLayout = itemView.findViewById(R.id.mainLayout);
 
         }
     }
