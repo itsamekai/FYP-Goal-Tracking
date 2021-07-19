@@ -33,6 +33,7 @@ public class ViewUncompletedGoal extends AppCompatActivity {
 
         uniqueString = getIntent().getStringExtra("username");
         goal_name = getIntent().getStringExtra("goal_name");
+        System.out.println(goal_name);
 
         selectedGoalName = findViewById(R.id.goalChoosenName);
         goalDesc = findViewById(R.id.goalChosenDesc);
@@ -87,16 +88,58 @@ public class ViewUncompletedGoal extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 db = new DataBaseHelper(getApplicationContext());
                 int id = db.getUserID(uniqueString);
-                boolean b = db.checkHelpReqAlr();
-                if (b) {
-                    Toast.makeText(getApplicationContext(), "Pls contact Admin for more details", Toast.LENGTH_SHORT).show();
+                System.out.println("id: " + id);
+                int goal_id = db.getGoalID(id, goal_name);
+                System.out.println("goal id: " + goal_id);
+                System.out.println(db.checkHelpReqAlr(goal_id, id));
+
+
+                //boolean b = db.checkHelpReqAlr();
+
+
+
+                // deletes child > parent
+
+                // checks if the user has asked for help from org.
+                if (db.checkHelpReqAlr(goal_id, id)) {
+                    // if true, delete from the user help table first.
+                    if (db.deleteGoalFromUserHelp(id, goal_id)) {
+                        // if delete from user help table successful, delete from the usergoal table.
+                        if (db.deleteGoalFromUserGoal(id, goal_name)) {
+                            Toast.makeText(getApplicationContext(), "Goal deleted", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(getApplicationContext(), TrackingGoal.class);
+                            i.putExtra("username", uniqueString);
+                            startActivity(i);
+                        }
+                        // else for line 108.
+                        else {
+                            Toast.makeText(getApplicationContext(), "Error in deleting from user goal table", Toast.LENGTH_SHORT).show();
+                        }
                     }
+                    // else for line 106.
+                    else {
+                        Toast.makeText(getApplicationContext(), "Error in deleting from user help table", Toast.LENGTH_SHORT).show();
+                    }
+
+                    }
+                else if (!db.checkHelpReqAlr(goal_id, id)) {
+                    if (db.deleteGoalFromUserGoal(id, goal_name)) {
+                        Toast.makeText(getApplicationContext(), "Goal deleted", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(getApplicationContext(), TrackingGoal.class);
+                        i.putExtra("username", uniqueString);
+                        startActivity(i);
+                    }
+
+                    // error for line 126.
+                    else {
+                        Toast.makeText(getApplicationContext(), "Error in deleting from user goal table, contact admin", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+
                 else {
-                    db.deleteGoal(id, goal_name);
-                    Toast.makeText(getApplicationContext(), "Goal deleted", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(getApplicationContext(), TrackingGoal.class);
-                    i.putExtra("username", uniqueString);
-                    startActivity(i);
+                    System.out.println("error 3");
+                    Toast.makeText(getApplicationContext(), "Error in deleting from user help table", Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -797,9 +797,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return c;
     }
 
-    public boolean deleteGoal(int user_id, String goalName) {
+    // deletes a goal.
+    // returns true if deleted.
+    public boolean deleteGoalFromUserGoal(int user_id, String goalName) {
         SQLiteDatabase database = this.getWritableDatabase();
         return database.delete(USERGOAL_TABLE, "user_id ='" + user_id + "' AND goal_name = '" + goalName + "'", null) > 0;
+    }
+
+    public boolean deleteGoalFromUserHelp(int user_id, int goal_id) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        return database.delete(USERHELP_TABLE, "user_id ='" + user_id + "' AND goal_id = '" + goal_id + "'", null) > 0;
     }
 
     public int updateGoal(String user_id, String goalName) {
@@ -1316,9 +1323,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
-    //check if help has been requested to org by user
-    public boolean checkHelpReqAlr() {
-        String sql = "SELECT COUNT(*) FROM UserGoalTable WHERE requested = 1";
+    //check if help for the specific goal being deleted has been requested to org by user
+    // requested == 1 means the user is getting help
+    public boolean checkHelpReqAlr(int goal_id, int user_id) {
+        String sql = "SELECT COUNT(*) FROM UserGoalTable WHERE goal_id = '" + goal_id + "' AND user_id = '" + user_id + "' AND requested = 1";
         Cursor c = getReadableDatabase().rawQuery(sql,null);
         if (c.moveToFirst()) {
             int count = c.getInt(0);
