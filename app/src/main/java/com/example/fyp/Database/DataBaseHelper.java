@@ -552,7 +552,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     // gets org name, org contact name, contact number , services from database
     public Cursor readOrgData() {
-        String sql = "SELECT org_name, contact_name, ContactNo , service_name " +
+        String sql = "SELECT org_name, contact_name, ContactNo, service_name " +
                 "FROM OrgUsers og " +
                 "INNER JOIN OrgServices os ON og.org_id = os.org_id " +
                 "INNER JOIN Services s ON os.service_id = s.service_id ";
@@ -1309,6 +1309,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public boolean checkApproveOrg() {
         String sql = "SELECT COUNT(*) FROM OrgUsers WHERE verified = 0";
         Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            int count = c.getInt(0);
+            if (count > 0) return true;
+        }
+        return false;
+    }
+
+    //check if help has been requested to org by user
+    public boolean checkHelpReqAlr() {
+        String sql = "SELECT COUNT(*) FROM UserGoalTable WHERE requested = 1";
+        Cursor c = getReadableDatabase().rawQuery(sql,null);
         if (c.moveToFirst()) {
             int count = c.getInt(0);
             if (count > 0) return true;

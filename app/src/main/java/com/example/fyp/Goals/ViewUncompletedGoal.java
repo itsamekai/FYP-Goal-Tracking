@@ -87,15 +87,17 @@ public class ViewUncompletedGoal extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 db = new DataBaseHelper(getApplicationContext());
                 int id = db.getUserID(uniqueString);
-                if (db.deleteGoal(id, goal_name)) {
-                    Toast.makeText(getApplicationContext(), "Goal deleted.", Toast.LENGTH_SHORT).show();
+                boolean b = db.checkHelpReqAlr();
+                if (b) {
+                    Toast.makeText(getApplicationContext(), "Pls contact Admin for more details", Toast.LENGTH_SHORT).show();
+                    }
+                else {
+                    db.deleteGoal(id, goal_name);
+                    Toast.makeText(getApplicationContext(), "Goal deleted", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(getApplicationContext(), TrackingGoal.class);
                     i.putExtra("username", uniqueString);
                     startActivity(i);
                 }
-                else Toast.makeText(getApplicationContext(), "Error in deletion.", Toast.LENGTH_SHORT).show();
-
-
             }
         });
 
