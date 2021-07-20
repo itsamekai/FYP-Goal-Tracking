@@ -23,39 +23,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/OrgUpdateDetails"
-        android:layout_width="240dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="170dp"
-        android:background="@drawable/orghomepage_button_border"
-        android:fontFamily="@font/poppins"
-        android:gravity="center"
-        android:text="@string/view_requested_help"
-        android:textAllCaps="false"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logged_in_org_name" />
 
-    <Button
-        android:id="@+id/currentlyHelping"
-        android:layout_width="240dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/orghomepage_button_border"
-        android:fontFamily="@font/poppins"
-        android:gravity="center"
-        android:text="@string/currently_helping_users"
-        android:textAllCaps="false"
-        android:textSize="15sp"
-        android:textStyle="bold"
+    <ImageView
+        android:id="@+id/OrgUpdateDetails"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="420dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/view_requested_help"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
+
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/OrgUpdateDetails" />
+        app:srcCompat="@drawable/requestedhelp" />
+
+    <ImageView
+        android:id="@+id/currentlyHelping"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="300dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/view_requested_help"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/currentlyhelping" />
 
     <ImageView
         android:id="@+id/orgLogOut"
@@ -99,20 +96,20 @@
         app:layout_constraintVertical_bias="0.994"
         app:srcCompat="@drawable/settingsicon" />
 
-    <Button
+
+    <ImageView
         android:id="@+id/orgUpdateDetailsButton"
-        android:layout_width="240dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/orghomepage_button_border"
-        android:fontFamily="@font/poppins"
-        android:gravity="center"
-        android:text="@string/add_services"
-        android:textAllCaps="false"
-        android:textSize="15sp"
-        android:textStyle="bold"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="180dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/view_requested_help"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
+
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentlyHelping" />
+        app:srcCompat="@drawable/addservices" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

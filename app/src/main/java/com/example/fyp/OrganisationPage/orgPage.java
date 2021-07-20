@@ -17,8 +17,8 @@ import com.example.fyp.R;
 
 public class orgPage extends AppCompatActivity {
 
-    public Button requested, current, addServices;
-    public ImageView logOut, settings;
+    //public Button  ;
+    public ImageView logOut, current, settings,requested,addServices;
     public TextView name;
     public String uniqueString;
     public DataBaseHelper db;
