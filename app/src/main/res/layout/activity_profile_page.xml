@@ -221,10 +221,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.298"
+        app:layout_constraintHorizontal_bias="0.612"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.345" />
+        app:layout_constraintVertical_bias="0.356" />
 
     <TextView
         android:id="@+id/user_friend"
@@ -328,8 +328,8 @@
 
     <TextView
         android:id="@+id/setting_string"
-        android:layout_width="60dp"
-        android:layout_height="15dp"
+        android:layout_width="51dp"
+        android:layout_height="24dp"
         android:fontFamily="@font/segoe"
         android:gravity="center"
         android:text="Setting"

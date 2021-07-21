@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fyp.Database.DataBaseHelper;
+import com.example.fyp.GeneralMainPage.MainHomePage;
 import com.example.fyp.ObjectClass.Users;
 import com.example.fyp.R;
 
@@ -28,6 +29,7 @@ public class ProfilePageEdit extends AppCompatActivity {
 
     public ImageView profilePic;
     public ImageView uploadButton;
+    public ImageView profilePageEditArrowBack;
     public Button updateb;
     public TextView user_fullname1;
     public TextView user_fullname2;
@@ -45,11 +47,20 @@ public class ProfilePageEdit extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page_edit);
+        String uniqueString7 = getIntent().getStringExtra("username");
 
         profilePic = findViewById(R.id.ProfilePic);
         uploadButton = findViewById(R.id.upload1);
         user_fullname3 = findViewById(R.id.user_fullname1);
         aboutD = findViewById(R.id.aboutdetails);
+
+        // return to previous page with arrow
+        profilePageEditArrowBack = (ImageView) findViewById(R.id.ProfilePageEditAB);
+        profilePageEditArrowBack.setOnClickListener(v -> {
+            Intent returnPage = new Intent(this, ProfilePage.class);
+            returnPage.putExtra("username",  uniqueString7);
+            startActivity(returnPage);
+        });
 
 
         // sets image
@@ -164,7 +175,7 @@ public class ProfilePageEdit extends AppCompatActivity {
     }
     // checkifempty(phone number)
     private boolean checkIfEmpty() {
-        if (phonenumber2.getText().toString().matches("") || address1.getText().toString().matches("") || aboutD.getText().toString().matches("")) {
+        if (phonenumber2.getText().toString().matches("") || address1.getText().toString().matches("")) {
             return true;
         }
 

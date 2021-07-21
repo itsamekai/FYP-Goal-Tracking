@@ -147,5 +147,5 @@ public class LoginPage extends AppCompatActivity {
         else Toast.makeText(this, validateMessage(), Toast.LENGTH_SHORT).show();
 
     }
-    }
+}
 

@@ -154,18 +154,18 @@ public class SeniorRegisterPage extends AppCompatActivity {
         if(!username.getText().toString().matches("\\S+")) {
             word+= "Username cannot have spaces.\n";
         }
-        if (!checkValidPassword(password.getText().toString())) {
+        if ((!checkValidPassword(password.getText().toString()))) {
             word += "Password does not meet requirement.\n";
         }
-        if (!checkValidPhoneNumber(phoneNo.getText().toString())) {
-            word += "Invalid phone number.";
+        if ((!checkValidPhoneNumber(phoneNo.getText().toString())) || (databaseHelper.checkUserPhoneNo(phoneNo.getText().toString()) != 0) ) {
+            word += "Invalid phone number/phone number registered before";
         }
         return word;
     }
 
     // checks all at once
     private boolean checkAll(String u, String pass, String phoneNumber) {
-        if (databaseHelper.checkUsernameDuplicate(u) == 0 && checkValidPassword(pass) && checkValidPhoneNumber(phoneNumber)) {
+        if (databaseHelper.checkUsernameDuplicate(u) == 0 && checkValidPassword(pass) && checkValidPhoneNumber(phoneNumber) && databaseHelper.checkUserPhoneNo(phoneNumber) == 0) {
             return true;
         }
         else return false;

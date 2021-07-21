@@ -1334,6 +1334,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return false;
     }
+
+    // checks for phonenumber duplicates in database
+    public int checkUserPhoneNo(String pn) {
+        int userphoneNoCount = 0;
+        String sql = "SELECT COUNT(phoneno) FROM Users WHERE phoneno = '" + pn + "'";
+        Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            userphoneNoCount = cursor.getInt(0);
+        }
+        cursor.close();
+        return userphoneNoCount;
+    }
 }
 
 
