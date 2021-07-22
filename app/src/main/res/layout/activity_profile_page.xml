@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GeneralMainPage.Profile.ProfilePage"
-    android:background="@drawable/seniorprofilebackground">
+    android:background="@drawable/seniorsprofilepage"
+    tools:context=".GeneralMainPage.Profile.ProfilePage">
 
     <ImageView
         android:id="@+id/ProfilePic"
@@ -17,7 +17,6 @@
         app:background="@drawable/border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.089"
@@ -34,80 +33,12 @@
         app:background="@drawable/border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintHorizontal_bias="0.069"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.014"
+        app:layout_constraintVertical_bias="0.042"
         app:shapeAppearanceOverlay="@style/Circular"
         app:srcCompat="@drawable/arrow" />
-
-    <ImageView
-        android:id="@+id/ProfileFriends"
-        android:layout_width="89dp"
-        android:layout_height="72dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/friend_string"
-        android:scaleType="fitXY"
-        app:background="@drawable/border"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.158"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.474"
-        app:shapeAppearanceOverlay="@style/Circular"
-        app:srcCompat="@drawable/friends" />
-
-    <ImageView
-        android:id="@+id/badgeicon"
-        android:layout_width="68dp"
-        android:layout_height="59dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="badgeicon"
-        android:scaleType="fitXY"
-        app:background="@drawable/border"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.174"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.622"
-        app:shapeAppearanceOverlay="@style/Circular"
-        app:srcCompat="@drawable/badge" />
-
-    <ImageView
-        android:id="@+id/awardicon1"
-        android:layout_width="62dp"
-        android:layout_height="58dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="awardicon1"
-        android:scaleType="fitXY"
-        app:background="@drawable/border"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.573"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.729"
-        app:shapeAppearanceOverlay="@style/Circular"
-        app:srcCompat="@drawable/award" />
-
-    <ImageView
-        android:id="@+id/awardicon2"
-        android:layout_width="70dp"
-        android:layout_height="56dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="awardicon2"
-        android:scaleType="fitXY"
-        app:background="@drawable/border"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.302"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.727"
-        app:shapeAppearanceOverlay="@style/Circular"
-        app:srcCompat="@drawable/cup" />
 
     <ImageView
         android:id="@+id/homeB"
@@ -116,10 +47,10 @@
         android:contentDescription="@string/home_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.024"
+        app:layout_constraintHorizontal_bias="0.027"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.958"
+        app:layout_constraintVertical_bias="0.955"
         app:srcCompat="@drawable/homeicon" />
 
     <ImageView
@@ -129,7 +60,7 @@
         android:contentDescription="@string/friend_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.269"
+        app:layout_constraintHorizontal_bias="0.27"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.955"
@@ -142,7 +73,7 @@
         android:contentDescription="@string/add_friend_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.955"
@@ -155,10 +86,10 @@
         android:contentDescription="profileiconcolouredicon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.741"
+        app:layout_constraintHorizontal_bias="0.752"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.958"
+        app:layout_constraintVertical_bias="0.955"
         app:srcCompat="@drawable/profileiconcoloured" />
 
     <ImageView
@@ -170,10 +101,10 @@
         android:contentDescription="profileiconcolouredicon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintHorizontal_bias="0.64"
         app:layout_constraintStart_toStartOf="@+id/profile_button"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.958"
+        app:layout_constraintVertical_bias="0.955"
         app:srcCompat="@drawable/settingicon" />
 
     <TextView
@@ -182,33 +113,33 @@
         android:layout_height="46dp"
         android:fontFamily="@font/segoe"
         android:gravity="center"
-        android:text="About"
+        android:text="About Me"
+        android:textColor="@color/black"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.008"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.309" />
+        app:layout_constraintVertical_bias="0.448" />
 
     <TextView
         android:id="@+id/user_fullname"
         android:layout_width="184dp"
         android:layout_height="46dp"
-        android:layout_marginStart="156dp"
-        android:layout_marginLeft="156dp"
         android:fontFamily="@font/segoe"
         android:gravity="center"
         android:text="@string/userName"
         android:textSize="25sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="@+id/ProfilePic"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.205" />
+        app:layout_constraintVertical_bias="0.313" />
 
     <TextView
         android:id="@+id/aboutdetails"
@@ -217,52 +148,20 @@
         android:fontFamily="@font/segoe"
         android:gravity="center"
         android:text="73-year-old swag kid"
-        android:textSize="25sp"
+        android:textColor="@color/black"
+        android:textSize="23sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.612"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.356" />
-
-    <TextView
-        android:id="@+id/user_friend"
-        android:layout_width="184dp"
-        android:layout_height="46dp"
-        android:fontFamily="@font/segoe"
-        android:gravity="center"
-        android:text="Friends : 200"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.691"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.471" />
-
-    <TextView
-        android:id="@+id/badgeobtain"
-        android:layout_width="184dp"
-        android:layout_height="46dp"
-        android:fontFamily="@font/segoe"
-        android:gravity="center"
-        android:text="Badge Obtain"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.638"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.629" />
+        app:layout_constraintVertical_bias="0.646" />
 
     <TextView
         android:id="@+id/home_string"
         android:layout_width="60dp"
         android:layout_height="15dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="12dp"
         android:fontFamily="@font/segoe"
         android:gravity="center"
         android:text="@string/home_string"
@@ -270,10 +169,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_button"
-        app:layout_constraintVertical_bias="0.538" />
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/friend_string"
@@ -288,10 +185,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintStart_toEndOf="@+id/home_string"
         app:layout_constraintTop_toBottomOf="@+id/friends_button"
-        app:layout_constraintVertical_bias="0.6" />
+        app:layout_constraintVertical_bias="0.19999999" />
 
     <TextView
         android:id="@+id/addFriends_string"
@@ -305,10 +202,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.524"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addFriends_button"
-        app:layout_constraintVertical_bias="0.692" />
+        app:layout_constraintVertical_bias="0.19999999" />
 
     <TextView
         android:id="@+id/profile_string"
@@ -321,10 +218,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.743"
+        app:layout_constraintHorizontal_bias="0.74"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_button"
-        app:layout_constraintVertical_bias="0.461" />
+        app:layout_constraintVertical_bias="0.2" />
 
     <TextView
         android:id="@+id/setting_string"
@@ -332,14 +229,14 @@
         android:layout_height="24dp"
         android:fontFamily="@font/segoe"
         android:gravity="center"
-        android:text="Setting"
+        android:text="Edit"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_button"
-        app:layout_constraintVertical_bias="0.466" />
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
