@@ -88,17 +88,17 @@ public class UpdateAdmin extends AppCompatActivity {
                 //String bday = DateOfBirth.getText().toString();
                 String password = UpdateAdminPassword.getText().toString();
                 String phoneNo = UpdateAdminPhoneNo.getText().toString();
-                if (checkAll(password, phoneNo)) {
-                   int updated = databaseHelper.updateAdmin(uniqueString, password, Integer.parseInt(phoneNo));
-                    if (updated == 0) {
-                        Toast.makeText(this, "Failed to update.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(this, "Updated Successfully.", Toast.LENGTH_SHORT).show();
-                        Intent returnPage = new Intent(this, ManageAdminPage.class);
-                        returnPage.putExtra("username", uniqueString);
-                        startActivity(returnPage);
+                    if (checkAll(password, phoneNo)) {
+                       int updated = databaseHelper.updateAdmin(uniqueString, password, Integer.parseInt(phoneNo));
+                        if (updated == 0) {
+                            Toast.makeText(this, "Failed to update.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(this, "Updated Successfully.", Toast.LENGTH_SHORT).show();
+                            Intent returnPage = new Intent(this, ManageAdminPage.class);
+                            returnPage.putExtra("username", uniqueString);
+                            startActivity(returnPage);
+                        }
                     }
-                }
                 else {
                     Toast.makeText(this, validateMessage(), Toast.LENGTH_LONG).show();
                 }

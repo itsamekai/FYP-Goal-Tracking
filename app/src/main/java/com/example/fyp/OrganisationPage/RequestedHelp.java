@@ -66,7 +66,7 @@ public class RequestedHelp extends AppCompatActivity {
 
     private void fillIDArrays() {
         db = new DataBaseHelper(this);
-        Cursor c = db.getRequestedGoalsID();
+        Cursor c = db.getRequestedGoalsID(db.getOrgID(uniqueString));
         if (c.getCount() != 0) {
             while (c.moveToNext()) {
                 categoryArray.add(c.getInt(0));

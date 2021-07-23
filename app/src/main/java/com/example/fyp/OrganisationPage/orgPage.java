@@ -44,12 +44,19 @@ public class orgPage extends AppCompatActivity {
         requested = findViewById(R.id.OrgUpdateDetails);
         requested.setOnClickListener(v -> {
             if (verified) {
-                if (db.checkIfRequestedHelpExists()) {
-                    Intent i = new Intent(this, RequestedHelp.class);
-                    i.putExtra("username", uniqueString);
-                    startActivity(i);
+                if (db.checkIfOrgHasServices(db.getOrgID(uniqueString))) {
+                    if (db.checkIfRequestedHelpExists()) {
+                        Intent i = new Intent(this, RequestedHelp.class);
+                        i.putExtra("username", uniqueString);
+                        startActivity(i);
+                    }
+                    else showWarningNotNeeded();
+
                 }
-                else showWarningNotNeeded();
+                else {
+                    showWarningOrgHasNoServices();
+                }
+
 
             } else {
                 showWarningNotVerified();
@@ -134,4 +141,13 @@ public class orgPage extends AppCompatActivity {
         dialog.setPositiveButton("OK", null);
         dialog.show();
     }
+
+    private void showWarningOrgHasNoServices() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("Your organisation has no services. Please add some at the add services area before being able to help users.");
+        dialog.setTitle("Message");
+        dialog.setPositiveButton("OK", null);
+        dialog.show();
+    }
+
 }

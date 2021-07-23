@@ -50,6 +50,9 @@ public class    DeleteAdmin extends AppCompatActivity {
                 else if (uniqueString.equals(adminDeleteUsername.getText().toString())) {
                     Toast.makeText(this, "Cannot delete current logged in account.", Toast.LENGTH_SHORT).show();
                 }
+                else if (databaseHelper.checkAdminDeleted(username)) {
+                    Toast.makeText(this, "This admin has already been deleted.", Toast.LENGTH_SHORT).show();
+                }
 
                 else {
                     Intent goNext = new Intent(this, ConfirmDeleteAdmin.class);

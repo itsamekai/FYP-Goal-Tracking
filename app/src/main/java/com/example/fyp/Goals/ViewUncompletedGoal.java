@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fyp.Database.DataBaseHelper;
+import com.example.fyp.GeneralMainPage.MainHomePage;
 import com.example.fyp.ObjectClass.UserAchievement;
 import com.example.fyp.R;
 
@@ -95,19 +96,16 @@ public class ViewUncompletedGoal extends AppCompatActivity {
 
 
                 //boolean b = db.checkHelpReqAlr();
-
-
-
                 // deletes child > parent
 
                 // checks if the user has asked for help from org.
                 if (db.checkHelpReqAlr(goal_id, id)) {
                     // if true, delete from the user help table first.
-                    if (db.deleteGoalFromUserHelp(id, goal_id)) {
+                    if (db.deleteGoalFromUserHelp(Integer.toString(id), Integer.toString(goal_id))) {
                         // if delete from user help table successful, delete from the usergoal table.
-                        if (db.deleteGoalFromUserGoal(id, goal_name)) {
+                        if (db.deleteGoalFromUserGoal(Integer.toString(id), goal_name)) {
                             Toast.makeText(getApplicationContext(), "Goal deleted", Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(getApplicationContext(), TrackingGoal.class);
+                            Intent i = new Intent(getApplicationContext(), MainHomePage.class);
                             i.putExtra("username", uniqueString);
                             startActivity(i);
                         }
@@ -123,9 +121,9 @@ public class ViewUncompletedGoal extends AppCompatActivity {
 
                     }
                 else if (!db.checkHelpReqAlr(goal_id, id)) {
-                    if (db.deleteGoalFromUserGoal(id, goal_name)) {
+                    if (db.deleteGoalFromUserGoal(Integer.toString(id), goal_name)) {
                         Toast.makeText(getApplicationContext(), "Goal deleted", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(getApplicationContext(), TrackingGoal.class);
+                        Intent i = new Intent(getApplicationContext(), MainHomePage.class);
                         i.putExtra("username", uniqueString);
                         startActivity(i);
                     }
@@ -183,7 +181,7 @@ public class ViewUncompletedGoal extends AppCompatActivity {
                         else Toast.makeText(getApplicationContext(), "error in giving achievements, check", Toast.LENGTH_LONG).show();
                     }
                     Toast.makeText(getApplicationContext(), "Goal Finished!", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(getApplicationContext(), TrackingGoal.class);
+                    Intent i = new Intent(getApplicationContext(), MainHomePage.class);
                     i.putExtra("username", uniqueString);
                     startActivity(i);
                 }

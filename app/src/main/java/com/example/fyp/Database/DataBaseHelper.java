@@ -72,6 +72,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String COMPLETED = "datetime_completed";
     public static final String ACCOMPLISHED = "accomplished";
     public static final String REQUESTED = "requested";
+    public static final String DELETED = "deleted";
 
     //Services
     public static final String SERVICES_TABLE = "Services";
@@ -114,7 +115,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         // creates the Users table
         String createUsersTable = "CREATE TABLE " + USERS_TABLE + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + USERNAME + " TEXT NOT NULL, " + PASSWORD + " TEXT NOT NULL, "
-                + FULLNAME + " TEXT NOT NULL, " + DOB + " TEXT NOT NULL, " + USER_PHONE_NO + " INTEGER NOT NULL, " + USER_ROLE + " TEXT NOT NULL, " + USER_ADDRESS + " TEXT NOT NULL, " + USER_ABOUT + " TEXT, " + USER_PROFILE_IMAGE + " BLOB);";
+                + FULLNAME + " TEXT NOT NULL, " + DOB + " TEXT NOT NULL, " + USER_PHONE_NO + " INTEGER NOT NULL, " + USER_ROLE + " TEXT NOT NULL, " + USER_ADDRESS + " TEXT NOT NULL, " + USER_ABOUT + " TEXT, " + USER_PROFILE_IMAGE + " BLOB, " + DELETED + " INTEGER DEFAULT 0);";
 
         String createOrgUsersTable = "CREATE TABLE " + ORGUSER_TABLE + " (" + ORG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ORG_EMAILADDRESS + " TEXT NOT NULL, " + ORG_CONTACT_NO + " TEXT NOT NULL, " + ORG_CONTACT_NAME + " TEXT NOT NULL, "
                 + ORG_ADDRESS + " TEXT NOT NULL, " + ORG_NAME + " TEXT NOT NULL, " + ORG_PASSWORD + " TEXT NOT NULL, " + ORG_VERIFIED + " INTEGER NOT NULL);";
@@ -123,14 +124,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         String createUsersGoalTable = "CREATE TABLE " + USERGOAL_TABLE + " (" + GOAL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + GOALTYPE_ID + " INTEGER NOT NULL, "
                 + USER_ID + " INTEGER NOT NULL, " + GOAL_NAME + " TEXT NOT NULL, " + GOAL_DESC + " TEXT NOT NULL, " + CREATED + " TEXT NOT NULL, "
-                + COMPLETED + " TEXT, " + ACCOMPLISHED + " INTEGER DEFAULT   0, " + REQUESTED + " INTEGER DEFAULT 0, FOREIGN KEY (" + GOALTYPE_ID + ") REFERENCES " + CATEGORY_TABLE + " (" + CAT_ID + "), FOREIGN KEY (" + USER_ID + ") REFERENCES " + USERS_TABLE + "(" + USER_ID + "));";
+                + COMPLETED + " TEXT, " + ACCOMPLISHED + " INTEGER DEFAULT 0, " + REQUESTED + " INTEGER DEFAULT 0, " + DELETED + " INTEGER DEFAULT 0, " + " FOREIGN KEY (" + GOALTYPE_ID + ") REFERENCES " + CATEGORY_TABLE + " (" + CAT_ID + "), FOREIGN KEY (" + USER_ID + ") REFERENCES " + USERS_TABLE + "(" + USER_ID + "));";
 
         String createServicesTable = "CREATE TABLE " + SERVICES_TABLE + " (" + SERVICE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + SERVICE_NAME + " TEXT NOT NULL, " + SERVICE_DESC + " TEXT NOT NULL);";
 
         String createOrgServicesTable = "CREATE TABLE " + ORGSERVICES_TABLE + " (" + ORG_HAS_SERVICE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ORGID + " INTEGER NOT NULL, " + SERVICEID + " INTEGER NOT NULL);";
 
         String createUserHelpTable = "CREATE TABLE " + USERHELP_TABLE + " (" + USERHELP_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + SERVICE_ID + " INTEGER NOT NULL, " + ORG_ID + " INTEGER, "
-                + USER_ID + " INTEGER NOT NULL, " + GOAL_ID + " INTEGER NOT NULL, " + HELPED + " INTEGER DEFAULT 0, " +
+                + USER_ID + " INTEGER NOT NULL, " + GOAL_ID + " INTEGER NOT NULL, " + HELPED + " INTEGER DEFAULT 0, " + DELETED + " INTEGER DEFAULT 0, " +
                 "FOREIGN KEY (" + SERVICE_ID + ") REFERENCES " + ORGSERVICES_TABLE + "(" + SERVICE_ID + "), " +
                 "FOREIGN KEY (" + ORG_ID + ") REFERENCES " + ORGUSER_TABLE + "(" + ORG_ID + ")," +
                 "FOREIGN KEY (" + USER_ID + ") REFERENCES " + USERS_TABLE + "(" + USER_ID + ")," +
@@ -247,7 +248,28 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // if return == 0 == false; (delete unsuccessful)
     public boolean deleteAdmin(String username) {
         SQLiteDatabase database = this.getWritableDatabase();
-        return database.delete(USERS_TABLE, "username = '" + username + "' AND UserRole = 'Admin'", null) > 0;
+        ContentValues cv = new ContentValues();
+        cv.put(DELETED, 1);
+        int update = database.update(USERS_TABLE, cv, "username=?", new String[]{username});
+        if (update == 0) {
+            return false;
+        }
+        else return true;
+    }
+
+    public boolean checkAdminDeleted(String username) {
+        int deleted = 0;
+        String sql = "SELECT deleted FROM Users WHERE username = '" + username + "';";
+        Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            deleted = cursor.getInt(0);
+        }
+        cursor.close();
+        if (deleted == 0) {
+            return false;
+        }
+        else return true;
     }
 
 
@@ -745,7 +767,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public Cursor trackingGoals(String username) {
-        String sql = "SELECT ug.goal_name, ug.goal_desc FROM UserGoalTable ug INNER JOIN Users u ON ug.user_id = u.user_id WHERE ug.accomplished = 0 AND u.username = '" + username + "';";
+        String sql = "SELECT ug.goal_name, ug.goal_desc FROM UserGoalTable ug INNER JOIN Users u ON ug.user_id = u.user_id WHERE ug.accomplished = 0 AND ug.deleted = 0 AND u.username = '" + username + "';";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = null;
         if (db != null) {
@@ -766,7 +788,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public int TotalGoals(String username) {
         int goalCount = 0;
-        String sql = "SELECT COUNT(*) FROM UserGoalTable ug INNER JOIN Users u ON ug.user_id = u.user_id WHERE u.username = '" + username + "';";
+        String sql = "SELECT COUNT(*) FROM UserGoalTable ug INNER JOIN Users u ON ug.user_id = u.user_id WHERE ug.deleted = 0 AND u.username = '" + username + "';";
         Cursor cursor = getReadableDatabase().rawQuery(sql, null);
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
@@ -797,16 +819,29 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return c;
     }
 
-    // deletes a goal.
+    // deletes a goal by hiding it.
     // returns true if deleted.
-    public boolean deleteGoalFromUserGoal(int user_id, String goalName) {
+    public boolean deleteGoalFromUserGoal(String user_id, String goalName) {
         SQLiteDatabase database = this.getWritableDatabase();
-        return database.delete(USERGOAL_TABLE, "user_id ='" + user_id + "' AND goal_name = '" + goalName + "'", null) > 0;
+        ContentValues cv = new ContentValues();
+        cv.put(DELETED, 1);
+        int update = database.update(USERGOAL_TABLE, cv, "user_id=? AND goal_name=?", new String[]{user_id, goalName});
+        if (update == 0) {
+            return false;
+        }
+        else return true;
+
     }
 
-    public boolean deleteGoalFromUserHelp(int user_id, int goal_id) {
+    public boolean deleteGoalFromUserHelp(String user_id, String goal_id) {
         SQLiteDatabase database = this.getWritableDatabase();
-        return database.delete(USERHELP_TABLE, "user_id ='" + user_id + "' AND goal_id = '" + goal_id + "'", null) > 0;
+        ContentValues cv = new ContentValues();
+        cv.put(DELETED, 1);
+        int update = database.update(USERHELP_TABLE, cv, "user_id=? AND goal_id=?", new String[]{user_id, goal_id});
+        if (update == 0) {
+            return false;
+        }
+        else return true;
     }
 
     public int updateGoal(String user_id, String goalName) {
@@ -821,8 +856,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return update;
     }
 
-    public Cursor getGoalsHelpPage(String username) {
-        String sql = "SELECT ug.goal_name, ug.goal_desc, ug.datetime_created FROM UserGoalTable ug INNER JOIN Users u ON ug.user_id = u.user_id WHERE u.username ='" + username + "' AND ug.accomplished = '0' AND ug.requested = '0';";
+        public Cursor getGoalsHelpPage(String username) {
+        String sql = "SELECT ug.goal_name, ug.goal_desc, ug.datetime_created FROM UserGoalTable ug INNER JOIN Users u ON ug.user_id = u.user_id WHERE u.username ='" + username + "' AND ug.accomplished = '0' AND ug.requested = '0' AND ug.deleted = 0;";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = null;
         if (db != null) {
@@ -836,7 +871,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         String sql = "select DISTINCT ug.goal_name, ug.goal_desc, ug.datetime_created FROM UserGoalTable ug " +
                 "INNER JOIN Users u ON ug.user_id = u.user_id " +
                 "INNER JOIN UserHelp uh ON u.user_id = uh.user_id " +
-                "WHERE ug.user_id = (SELECT user_id FROM Users WHERE username = '" + username + "') " +
+                "WHERE ug.deleted = 0 " +
+                "AND ug.user_id = (SELECT user_id FROM Users WHERE username = '" + username + "') " +
                 "AND ug.goal_id IN (SELECT goal_id FROM UserHelp WHERE org_id IS NULL and helped = 0);";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = null;
@@ -864,8 +900,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     // these id is used to get the goal
-    public Cursor getRequestedGoalsID() {
-        String sql = "SELECT service_id, user_id, goal_id FROM UserHelp WHERE helped = 0 AND org_id IS NULL AND service_id in (SELECT service_id FROM OrgServices where org_id = 1);";
+    public Cursor getRequestedGoalsID(int org_id) {
+        String sql = "SELECT service_id, user_id, goal_id FROM UserHelp WHERE helped = 0 AND deleted = 0 AND org_id IS NULL AND service_id in (SELECT service_id FROM OrgServices where org_id = " + org_id + ");";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = null;
         if (db != null) {
@@ -892,7 +928,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // this method is to get the goal_ids that the organisation is currently helping the user with.
     // use these IDs to retrieve the details of the goals and display it in a list
     public Cursor getGoalIDsForHelpedGoals(int orgid) {
-        String sql = "SELECT goal_id, service_id, user_id FROM UserHelp WHERE helped = 1 AND org_id = " + orgid + ";";
+        String sql = "SELECT goal_id, service_id, user_id FROM UserHelp WHERE helped = 1 AND deleted = 0 AND org_id = " + orgid + ";";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor c = null;
         if (db != null) {
@@ -1182,7 +1218,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // checks if there are any requested help from users.
     // returns true if there is.
     public boolean checkIfRequestedHelpExists() {
-        String sql = "SELECT COUNT(*) FROM UserHelp WHERE helped = 0 AND org_id IS NULL";
+        String sql = "SELECT COUNT(*) FROM UserHelp WHERE helped = 0 AND org_id IS NULL AND deleted = 0";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            int count = c.getInt(0);
+            if (count > 0) return true;
+        }
+        return false;
+    }
+
+    // checks if the organisation has any services. if they dont, block them out of the page.
+    // returns true if they do.
+    // false if they dont.
+    public boolean checkIfOrgHasServices(int org_id) {
+        String sql = "SELECT COUNT(*) FROM OrgServices WHERE org_id = '" + org_id + "'";
         Cursor c = getReadableDatabase().rawQuery(sql, null);
         if (c.moveToFirst()) {
             int count = c.getInt(0);
@@ -1194,7 +1243,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // checks if the organisation is helping anyone.
     // returns true if there is.
     public boolean checkIfHelping(int id) {
-        String sql = "SELECT COUNT(*) FROM UserHelp WHERE helped = 1 AND org_id = '" + id + "'";
+        String sql = "SELECT COUNT(*) FROM UserHelp WHERE helped = 1 AND deleted = 0 AND org_id = '" + id + "'";
         Cursor c = getReadableDatabase().rawQuery(sql, null);
         if (c.moveToFirst()) {
             int count = c.getInt(0);
@@ -1206,7 +1255,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // checks if there is any existing ongoing goals by the user.
     // returns true if there is.
     public boolean checkExistingOnGoingGoals(int id) {
-        String sql = "SELECT COUNT(*) FROM UserGoalTable WHERE user_id = '" + id + "' AND accomplished = 0";
+        String sql = "SELECT COUNT(*) FROM UserGoalTable WHERE user_id = '" + id + "' AND accomplished = 0 AND deleted = 0";
         Cursor c = getReadableDatabase().rawQuery(sql, null);
         if (c.moveToFirst()) {
             int count = c.getInt(0);
@@ -1230,7 +1279,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // this is for get help from organisations (get help page)
     // checks if the user has any goals that can they can request help from
     public boolean checkExistingOnGoingGoalsHelp(int id) {
-        String sql = "SELECT COUNT(*) FROM UserGoalTable WHERE user_id = '" + id + "' AND accomplished = 0 AND requested = 0";
+        String sql = "SELECT COUNT(*) FROM UserGoalTable WHERE user_id = '" + id + "' AND accomplished = 0 AND requested = 0 AND deleted = 0";
         Cursor c = getReadableDatabase().rawQuery(sql, null);
         if (c.moveToFirst()) {
             int count = c.getInt(0);
