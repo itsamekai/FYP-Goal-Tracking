@@ -458,7 +458,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // validate login by checking if username and password matches
     public int validateLogin(String u, String p) {
         int rowCount = 0;
-        String sql = "SELECT COUNT() FROM Users WHERE username = '" + u + "' AND password = '" + p + "'";
+        String sql = "SELECT COUNT() FROM Users WHERE deleted = 0 AND username = '" + u + "' AND password = '" + p + "'";
         Cursor cursor = getReadableDatabase().rawQuery(sql, null);
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();

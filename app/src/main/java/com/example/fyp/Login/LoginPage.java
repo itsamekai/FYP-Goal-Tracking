@@ -50,7 +50,7 @@ public class LoginPage extends AppCompatActivity {
                 Toast.makeText(this, "added test admin: user is testadmin", Toast.LENGTH_SHORT).show();
             }
             else {
-                Toast.makeText(this, "noob", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
             }
         });
 
