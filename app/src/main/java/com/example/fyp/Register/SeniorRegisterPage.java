@@ -107,6 +107,7 @@ public class SeniorRegisterPage extends AppCompatActivity {
                     }
                 }
                 else {
+                    System.out.println(checkAll(u, password.getText().toString(), phoneNo.getText().toString()));
                     Toast.makeText(this, validateMessage(), Toast.LENGTH_LONG).show();
                 }
             }
@@ -151,9 +152,8 @@ public class SeniorRegisterPage extends AppCompatActivity {
         if (databaseHelper.checkUsernameDuplicate(username.getText().toString()) != 0) {
             word+= "Username not available.\n";
         }
-        if(!username.getText().toString().matches("[\\s]")) {
-            word+= "Username cannot have spaces.";
-        }
+        // if false means no space
+        // true has space
         if ((!checkValidPassword(password.getText().toString()))) {
             word += "Password does not meet requirement.\n";
         }
@@ -165,7 +165,7 @@ public class SeniorRegisterPage extends AppCompatActivity {
 
     // checks all at once
     private boolean checkAll(String u, String pass, String phoneNumber) {
-        if (u.matches("[\\s]") && databaseHelper.checkUsernameDuplicate(u) == 0 && checkValidPassword(pass) && checkValidPhoneNumber(phoneNumber) && databaseHelper.checkUserPhoneNo(phoneNumber) == 0) {
+        if (databaseHelper.checkUsernameDuplicate(u) == 0 && checkValidPassword(pass) && checkValidPhoneNumber(phoneNumber) && databaseHelper.checkUserPhoneNo(phoneNumber) == 0) {
             return true;
         }
         else return false;

@@ -71,7 +71,7 @@ public class OrgRegisterPage extends AppCompatActivity {
                         startActivity(successful);
                         Toast.makeText(this, "Registration as Organisation success! Welcome.", Toast.LENGTH_SHORT).show();
                     }
-                    else Toast.makeText(this, "u failed noob.", Toast.LENGTH_SHORT).show();
+                    else Toast.makeText(this, "failed.", Toast.LENGTH_SHORT).show();
                 }
                 else Toast.makeText(this, validateMessage(), Toast.LENGTH_SHORT).show();
                 }
