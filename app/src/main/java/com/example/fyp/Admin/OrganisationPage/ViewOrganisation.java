@@ -42,9 +42,9 @@ public class ViewOrganisation extends AppCompatActivity {
         orgname = new ArrayList<>();
         contact_name = new ArrayList<>();
         contact_no = new ArrayList<>();
-        orgservices = new ArrayList<>();
+       // orgservices = new ArrayList<>();
         putDataInArray();
-        viewOrgCustomAdapter = new ViewOrgCustomAdapter(ViewOrganisation.this, orgname, contact_name, contact_no, orgservices);
+        viewOrgCustomAdapter = new ViewOrgCustomAdapter(ViewOrganisation.this, orgname, contact_name, contact_no);
         recyclerView.setAdapter(viewOrgCustomAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(ViewOrganisation.this));
 
@@ -59,7 +59,7 @@ public class ViewOrganisation extends AppCompatActivity {
                 orgname.add(c.getString(0));
                 contact_name.add(c.getString(1));
                 contact_no.add(c.getString(2));
-                orgservices.add(c.getString(3));
+              //  orgservices.add(c.getString(3));
             }
         }
     }

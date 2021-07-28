@@ -117,9 +117,15 @@ public class MainHomePage extends AppCompatActivity {
 
         rewardView = (ImageView) findViewById(R.id.view_medal);
         rewardView.setOnClickListener(v -> {
-            Intent ViewRewardPage = new Intent(this, CheckAccomplishedAchievement.class);
-            ViewRewardPage.putExtra("username", uniqueString);
-            startActivity(ViewRewardPage);
+            if (db.checkAchievementCount(userid)) {
+                Intent ViewRewardPage = new Intent(this, CheckAccomplishedAchievement.class);
+                ViewRewardPage.putExtra("username", uniqueString);
+                startActivity(ViewRewardPage);
+            }
+            else {
+                showWarningNoAchievements();
+            }
+
         });
     }
 
@@ -136,6 +142,14 @@ public class MainHomePage extends AppCompatActivity {
     private void showWarningNoCompletedGoals() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setMessage("You do not have any goals completed yet.");
+        dialog.setTitle("Error");
+        dialog.setPositiveButton("OK", null);
+        dialog.show();
+    }
+
+    private void showWarningNoAchievements() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("You do not have any achievements yet!");
         dialog.setTitle("Error");
         dialog.setPositiveButton("OK", null);
         dialog.show();

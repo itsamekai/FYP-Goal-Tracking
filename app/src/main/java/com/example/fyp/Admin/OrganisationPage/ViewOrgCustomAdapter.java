@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fyp.R;
@@ -21,12 +22,12 @@ public class ViewOrgCustomAdapter extends RecyclerView.Adapter<ViewOrgCustomAdap
     private Context context;
     private ArrayList org_name, org_incharge, org_phone, org_service;
 
-    public ViewOrgCustomAdapter(Context context, ArrayList org_name, ArrayList org_incharge, ArrayList org_phone,ArrayList org_service) {
+    public ViewOrgCustomAdapter(Context context, ArrayList org_name, ArrayList org_incharge, ArrayList org_phone) {
         this.context = context;
         this.org_name = org_name;
         this.org_incharge = org_incharge;
         this.org_phone = org_phone;
-        this.org_service = org_service;
+      //  this.org_service = org_service;
     }
 
 
@@ -44,7 +45,14 @@ public class ViewOrgCustomAdapter extends RecyclerView.Adapter<ViewOrgCustomAdap
         holder.organisationName.setText(String.valueOf(org_name.get(position)));
         holder.personInCharge.setText(String.valueOf(org_incharge.get(position)));
         holder.OrganisationPhoneNo.setText(String.valueOf(org_phone.get(position)));
-        holder.OrganisationServices.setText(String.valueOf(org_service.get(position)));
+       // holder.OrganisationServices.setText(String.valueOf(org_service.get(position)));
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // set intent
+
+            }
+        });
     }
 
     @Override
@@ -55,15 +63,15 @@ public class ViewOrgCustomAdapter extends RecyclerView.Adapter<ViewOrgCustomAdap
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView organisationName, personInCharge, OrganisationPhoneNo, OrganisationServices;
-        LinearLayout mainLayout;
+        CardView cardView;
 
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
             organisationName = itemView.findViewById(R.id.organisationName);
             personInCharge = itemView.findViewById(R.id.personInCharge);
             OrganisationPhoneNo = itemView.findViewById(R.id.OrganisationPhoneNo);
-            OrganisationServices = itemView.findViewById(R.id.OrgService);
-            //mainLayout = itemView.findViewById(R.id.mainLayout);
+            //OrganisationServices = itemView.findViewById(R.id.OrgService);
+            cardView = itemView.findViewById(R.id.cardView5);
 
         }
     }

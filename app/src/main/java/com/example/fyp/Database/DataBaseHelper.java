@@ -574,10 +574,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     // gets org name, org contact name, contact number , services from database
     public Cursor readOrgData() {
-        String sql = "SELECT org_name, contact_name, ContactNo, service_name " +
-                "FROM OrgUsers og " +
-                "INNER JOIN OrgServices os ON og.org_id = os.org_id " +
-                "INNER JOIN Services s ON os.service_id = s.service_id ";
+        String sql = "SELECT org_name, contact_name, ContactNo " +
+                "FROM OrgUsers";
+
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;
@@ -745,7 +744,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public Cursor getUsersGoals() {
         String sql = "SELECT u.fullname, c.category_name, ug.goal_name, ug.accomplished FROM UserGoalTable ug " +
                 "INNER JOIN Users u ON ug.user_id = u.user_id " +
-                "INNER JOIN Category c ON ug.goal_type_id = c.category_id;";
+                "INNER JOIN Category c ON ug.goal_type_id = c.category_id WHERE ug.deleted = 0;";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
         if (db != null) {
@@ -1268,6 +1267,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // returns true if there is
     public boolean checkCompletedGoalCount(int id) {
         String sql = "SELECT COUNT(*) FROM UserGoalTable WHERE user_id ='" + id + "' AND accomplished = 1";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            int count = c.getInt(0);
+            if (count > 0) return true;
+        }
+        return false;
+    }
+
+    public boolean checkAchievementCount(int id) {
+        String sql = "SELECT COUNT(*) FROM UserAchievement WHERE user_id ='" + id + "'";
         Cursor c = getReadableDatabase().rawQuery(sql, null);
         if (c.moveToFirst()) {
             int count = c.getInt(0);
