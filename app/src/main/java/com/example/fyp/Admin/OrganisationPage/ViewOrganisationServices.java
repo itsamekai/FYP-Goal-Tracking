@@ -21,10 +21,10 @@ import java.util.ArrayList;
 public class ViewOrganisationServices extends AppCompatActivity {
 
     public ImageView returnButton1;
-    public TextView svcdetail;
+    public TextView org_field, name_field, contact_field, email_field, address_field, service_field;
     public DataBaseHelper db;
     public ArrayList<String> orgsvc;
-    public String uniqueString;
+    public String org_name, uniqueString;
 
 
     @Override
@@ -32,8 +32,17 @@ public class ViewOrganisationServices extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_organisation_services);
         db = new DataBaseHelper(this);
-        String uniqueString = getIntent().getStringExtra("username");
+        // org name
+        org_name = getIntent().getStringExtra("name");
+        uniqueString = getIntent().getStringExtra("username");
 
+        org_field = findViewById(R.id.view_org_name);
+        name_field = findViewById(R.id.view_contact_name);
+        contact_field = findViewById(R.id.view_contact_number);
+        email_field = findViewById(R.id.view_email_address);
+        address_field = findViewById(R.id.view_org_address);
+        service_field = findViewById(R.id.view_org_services);
+        orgsvc = new ArrayList<>();
 
         returnButton1 = (ImageView) findViewById(R.id.adminArrowBack89);
         returnButton1.setOnClickListener(v -> {
@@ -42,21 +51,36 @@ public class ViewOrganisationServices extends AppCompatActivity {
             startActivity(returnpage);
         });
 
-        svcdetail = findViewById(R.id.textView18);
-        fillArrays();
+        getInformation();
+
 
     }
 
-    private void fillArrays() {
+    private void getInformation() {
         db = new DataBaseHelper(this);
-        orgsvc = new ArrayList<>();
-        Cursor c = db.readSvcData();
-        if (c.getCount() != 0) {
-            while (c.moveToNext()) {
-                orgsvc.add(c.getString(0));
-            }
+        Cursor c = db.readOrgData(org_name);
+        while (c.moveToNext()) {
+            org_field.setText(c.getString(0));
+            name_field.setText(c.getString(1));
+            contact_field.setText(c.getString(2));
+            email_field.setText(c.getString(3));
+            address_field.setText(c.getString(4));
         }
-        System.out.println("UpdateOrgSvc size: " + orgsvc.size());
+
+        String word = db.getServicesForOrg(db.getOrgIDWithName(org_name));
+        System.out.println(word);
+        if (word.equals("")) {
+            service_field.setText("No services.");
+        }
+        else {
+            if (word.charAt(word.length() - 2) == ',') {
+                word = word.substring(0, word.length() - 2);
+                System.out.println("test here");
+            }
+            service_field.setText(word);
+        }
+
+
+        }
 
     }
-}

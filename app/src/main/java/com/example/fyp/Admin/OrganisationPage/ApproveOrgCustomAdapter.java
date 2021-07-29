@@ -48,7 +48,7 @@ public class ApproveOrgCustomAdapter extends RecyclerView.Adapter<ApproveOrgCust
             public void onClick(View v) {
                 Intent i = new Intent(context, ApproveOrganisation.class);
                 i.putExtra("name", String.valueOf(org_name.get(position)));
-                //Toast.makeText(context, "Recycle Click" + position, Toast.LENGTH_SHORT).show();
+                i.putExtra("username", ShowUnapprovedOrg.uniqueString);
                 activity.startActivityForResult(i, 1);
             }
         });

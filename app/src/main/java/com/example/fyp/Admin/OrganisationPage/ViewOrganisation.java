@@ -20,6 +20,7 @@ public class ViewOrganisation extends AppCompatActivity {
     public RecyclerView recyclerView;
     public DataBaseHelper db;
     public ArrayList<String> orgname, contact_name, contact_no, orgservices;
+    public static String uniqueString;
     ViewOrgCustomAdapter viewOrgCustomAdapter;
 
 
@@ -27,7 +28,7 @@ public class ViewOrganisation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_organisation);
-        String uniqueString = getIntent().getStringExtra("username");
+        uniqueString = getIntent().getStringExtra("username");
 
 
         returnarrow = findViewById(R.id.adminArrowBack6);
@@ -44,7 +45,7 @@ public class ViewOrganisation extends AppCompatActivity {
         contact_no = new ArrayList<>();
        // orgservices = new ArrayList<>();
         putDataInArray();
-        viewOrgCustomAdapter = new ViewOrgCustomAdapter(ViewOrganisation.this, orgname, contact_name, contact_no);
+        viewOrgCustomAdapter = new ViewOrgCustomAdapter(ViewOrganisation.this, this, orgname, contact_name, contact_no);
         recyclerView.setAdapter(viewOrgCustomAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(ViewOrganisation.this));
 

@@ -61,7 +61,7 @@ public class OrgRegisterPage extends AppCompatActivity {
                 else {
                 db = new DataBaseHelper(this);
                 String email = orgEmail.getText().toString();
-                if (checkAll(email, orgPassword.getText().toString(), phoneNumb.getText().toString(), email)) {
+                if (checkAll(email, orgPassword.getText().toString(), phoneNumb.getText().toString(), orgName.getText().toString())) {
                     db = new DataBaseHelper(this);
                     OrgUsers org = new OrgUsers(orgEmail.getText().toString(), Integer.parseInt(phoneNumb.getText().toString()), PIC.getText().toString(),
                             orgAddress.getText().toString(), orgName.getText().toString(), orgPassword.getText().toString());
@@ -128,14 +128,18 @@ public class OrgRegisterPage extends AppCompatActivity {
         if (!checkValidPhoneNumber(phoneNumb.getText().toString())) {
             word += "Invalid phone number.\n";
         }
+        if (db.checkOrgNameDuplicate(orgName.getText().toString()) != 0) {
+            word += "Organisation name not available.\n";
+        }
 
 
         return word;
     }
 
     // checks all at once
-    private boolean checkAll(String emailAddress, String password, String phoneNumber, String email) {
-        if (checkValidEmail(emailAddress) && checkValidPassword(password) && checkValidPhoneNumber(phoneNumber) && db.checkEmailDuplicate(email) == 0) {
+    private boolean checkAll(String emailAddress, String password, String phoneNumber, String orgName) {
+        if (checkValidEmail(emailAddress) && checkValidPassword(password) && checkValidPhoneNumber(phoneNumber)
+                && db.checkEmailDuplicate(emailAddress) == 0 && db.checkOrgNameDuplicate(orgName) == 0) {
             return true;
         } else return false;
     }

@@ -22,12 +22,13 @@ public class ShowUnapprovedOrg extends AppCompatActivity {
     public DataBaseHelper db;
     public ArrayList<String> orgname;
     public ApproveOrgCustomAdapter ApproveOrgCustomAdapter;
+    public static String uniqueString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_unapproved_orgs);
-        String uniqueString = getIntent().getStringExtra("username");
+        uniqueString = getIntent().getStringExtra("username");
 
         returnarrow = findViewById(R.id.adminArrowBack5);
         returnarrow.setOnClickListener(v ->{

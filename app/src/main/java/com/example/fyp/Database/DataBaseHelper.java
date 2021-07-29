@@ -444,6 +444,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return emailCount;
     }
 
+    public int checkOrgNameDuplicate(String o) {
+        int count = 0;
+        String sql = "SELECT COUNT(org_name) FROM OrgUsers WHERE org_name ='" + o + "'";
+        Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            count = cursor.getInt(0);
+        }
+        cursor.close();
+        return count;
+    }
+
     // remove the rows from user table
     public boolean removeAllRows() {
         SQLiteDatabase database = this.getWritableDatabase();
@@ -624,6 +636,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             cursor = db.rawQuery(sql, null);
         }
         return cursor;
+    }
+
+    public String getServicesForOrg(int id) {
+        String word = "";
+        String sql = "SELECT s.service_name FROM Services s INNER JOIN OrgServices os ON s.service_id = os.service_id WHERE os.org_id = " + id + "";
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(sql, null);
+        }
+        if (cursor.getCount() != 0) {
+            while (cursor.moveToNext()) {
+                word += cursor.getString(0) + ", ";
+            }
+        }
+        return word;
     }
 
 
@@ -1058,6 +1087,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public int getOrgID(String email) {
         int id = 0;
         String sql = "SELECT org_id FROM OrgUsers WHERE email_address ='" + email + "'";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        if (c.moveToFirst()) {
+            id = c.getInt(0);
+        }
+        return id;
+    }
+
+    public int getOrgIDWithName(String name) {
+        int id = 0;
+        String sql = "SELECT org_id FROM OrgUsers WHERE org_name ='" + name + "'";
         Cursor c = getReadableDatabase().rawQuery(sql, null);
         if (c.moveToFirst()) {
             id = c.getInt(0);

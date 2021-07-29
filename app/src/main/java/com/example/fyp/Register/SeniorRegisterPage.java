@@ -146,14 +146,26 @@ public class SeniorRegisterPage extends AppCompatActivity {
         return m.matches();
     }
 
+    private boolean checkUsernameForSpace(String username) {
+        for (int i = 0; username.length() > i; i++) {
+            if (username.charAt(i) == ' ') {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     private String validateMessage() {
         String word = "";
         if (databaseHelper.checkUsernameDuplicate(username.getText().toString()) != 0) {
             word+= "Username not available.\n";
         }
-        // if false means no space
-        // true has space
+
+        if (checkUsernameForSpace(username.getText().toString())) {
+            word += "Username cannot have spaces.\n";
+        }
+
         if ((!checkValidPassword(password.getText().toString()))) {
             word += "Password does not meet requirement.\n";
         }
@@ -165,7 +177,7 @@ public class SeniorRegisterPage extends AppCompatActivity {
 
     // checks all at once
     private boolean checkAll(String u, String pass, String phoneNumber) {
-        if (databaseHelper.checkUsernameDuplicate(u) == 0 && checkValidPassword(pass) && checkValidPhoneNumber(phoneNumber) && databaseHelper.checkUserPhoneNo(phoneNumber) == 0) {
+        if (!checkUsernameForSpace(u) && databaseHelper.checkUsernameDuplicate(u) == 0 && checkValidPassword(pass) && checkValidPhoneNumber(phoneNumber) && databaseHelper.checkUserPhoneNo(phoneNumber) == 0) {
             return true;
         }
         else return false;

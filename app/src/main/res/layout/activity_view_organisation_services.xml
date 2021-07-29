@@ -8,19 +8,6 @@
     tools:context=".Admin.OrganisationPage.ViewOrganisationServices">
 
     <ImageView
-        android:id="@+id/svcbox"
-        android:layout_width="446dp"
-        android:layout_height="229dp"
-        android:contentDescription="@string/returnPrev"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.398"
-        app:srcCompat="@drawable/goal_description_box" />
-
-    <ImageView
         android:id="@+id/adminArrowBack89"
         android:layout_width="48dp"
         android:layout_height="49dp"
@@ -54,22 +41,186 @@
         app:layout_constraintVertical_bias="0.131" />
 
     <TextView
-        android:id="@+id/textView18"
-        android:layout_width="235dp"
-        android:layout_height="199dp"
-        android:fontFamily="@font/poppins"
-        android:gravity="center"
-        android:hint="Currently No Services
-Pls Add Services to help Senior"
+        android:id="@+id/view_org_name"
+        android:layout_width="150dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="92dp"
+        android:fontFamily="@font/segoe"
+        android:gravity="start"
+        android:text="TextView"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/view_contact_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintHorizontal_bias="0.796"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.396" />
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <TextView
+        android:id="@+id/view_contact_name"
+        android:layout_width="150dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/segoe"
+        android:gravity="start"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.796"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_org_name" />
+
+    <TextView
+        android:id="@+id/view_contact_number"
+        android:layout_width="150dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/segoe"
+        android:gravity="start"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.794"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_contact_name" />
+
+    <TextView
+        android:id="@+id/view_email_address"
+        android:layout_width="148dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/segoe"
+        android:gravity="start"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.787"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_contact_number" />
+
+    <TextView
+        android:id="@+id/view_org_address"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/segoe"
+        android:gravity="start"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.865"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_email_address" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="130dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="92dp"
+        android:fontFamily="@font/segoe"
+        android:gravity="end"
+        android:text="@string/orgname_string"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView23"
+        app:layout_constraintEnd_toStartOf="@+id/view_org_name"
+        app:layout_constraintHorizontal_bias="0.523"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="120dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/segoe"
+        android:gravity="end"
+        android:text="@string/contactname_string"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/view_contact_name"
+        app:layout_constraintHorizontal_bias="0.589"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="130dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/segoe"
+        android:gravity="end"
+        android:text="@string/contact_string"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/view_contact_number"
+        app:layout_constraintHorizontal_bias="0.523"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/segoe"
+        android:gravity="end"
+        android:text="@string/email_string"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/view_email_address"
+        app:layout_constraintHorizontal_bias="0.677"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="120dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/segoe"
+        android:gravity="end"
+        android:text="@string/address_string"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/view_org_address"
+        app:layout_constraintHorizontal_bias="0.593"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+    <TextView
+        android:id="@+id/textView54"
+        android:layout_width="120dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/segoe"
+        android:gravity="end"
+        android:text="Services:"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/view_org_services"
+        app:layout_constraintHorizontal_bias="0.597"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView26" />
+
+    <TextView
+        android:id="@+id/view_org_services"
+        android:layout_width="152dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/segoe"
+        android:gravity="start"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.796"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_org_address" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

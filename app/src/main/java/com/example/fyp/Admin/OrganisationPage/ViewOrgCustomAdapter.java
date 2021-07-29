@@ -1,5 +1,6 @@
 package com.example.fyp.Admin.OrganisationPage;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -21,10 +22,11 @@ import java.util.ArrayList;
 public class ViewOrgCustomAdapter extends RecyclerView.Adapter<ViewOrgCustomAdapter.MyViewHolder> {
 
     private Context context;
+    private Activity activity;
     private ArrayList org_name, org_incharge, org_phone;
-    public String uniqueString;
 
-    public ViewOrgCustomAdapter(Context context, ArrayList org_name, ArrayList org_incharge, ArrayList org_phone) {
+    public ViewOrgCustomAdapter(Activity activity, Context context, ArrayList org_name, ArrayList org_incharge, ArrayList org_phone) {
+        this.activity = activity;
         this.context = context;
         this.org_name = org_name;
         this.org_incharge = org_incharge;
@@ -53,8 +55,9 @@ public class ViewOrgCustomAdapter extends RecyclerView.Adapter<ViewOrgCustomAdap
             public void onClick(View v) {
                 // set intent
                 Intent newpage = new Intent(context, ViewOrganisationServices.class);
-                newpage.putExtra("username", uniqueString);
-                context.startActivity(newpage);
+                newpage.putExtra("name", String.valueOf(org_name.get(position)));
+                newpage.putExtra("username", ViewOrganisation.uniqueString);
+                activity.startActivity(newpage);
             }
         });
     }
