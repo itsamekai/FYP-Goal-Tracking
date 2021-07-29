@@ -35,6 +35,7 @@
         <activity android:name=".Admin.OrganisationPage.ApproveOrganisation" />
         <activity android:name=".Admin.OrganisationPage.ShowUnapprovedOrg" />
         <activity android:name=".Admin.OrganisationPage.ViewOrganisation" />
+        <activity android:name=".Admin.OrganisationPage.ViewOrganisationServices" />
         <activity android:name=".Admin.OrganisationPage.UpdateOrganisation" />
         <activity android:name=".Admin.AdminPage.UpdateAdmin" />
         <activity android:name=".Admin.AdminPage.CreateAdmin" />

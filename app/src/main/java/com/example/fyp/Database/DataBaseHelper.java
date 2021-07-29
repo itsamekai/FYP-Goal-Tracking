@@ -1405,6 +1405,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return userphoneNoCount;
     }
+
+    // gets org services from database
+    public Cursor readSvcData() {
+        String sql = "SELECT service_name,service_id " +
+                "FROM Services" ;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(sql, null);
+        }
+        return cursor;
+    }
 }
 
 
