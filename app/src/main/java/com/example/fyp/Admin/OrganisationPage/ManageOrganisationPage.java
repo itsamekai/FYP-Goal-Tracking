@@ -29,6 +29,7 @@ public class ManageOrganisationPage extends AppCompatActivity {
         db = new DataBaseHelper(this);
         String uniqueString = getIntent().getStringExtra("username");
 
+
         returnButton = (ImageView) findViewById(R.id.adminArrowBack3);
         returnButton.setOnClickListener(v ->{
             Intent returnpage = new Intent(this, MainAdminPage.class);

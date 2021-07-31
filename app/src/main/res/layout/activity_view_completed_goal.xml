@@ -100,7 +100,6 @@
         android:layout_marginBottom="20dp"
         android:fontFamily="@font/poppins"
         android:gravity="center"
-        android:text="@string/chosenGoalDesc"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"

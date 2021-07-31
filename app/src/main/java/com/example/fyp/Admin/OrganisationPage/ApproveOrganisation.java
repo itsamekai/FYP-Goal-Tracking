@@ -59,7 +59,9 @@ public class ApproveOrganisation extends AppCompatActivity {
                     Toast.makeText(ApproveOrganisation.this, "Approve failed.", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Intent i = new Intent(ApproveOrganisation.this, ShowUnapprovedOrg.class);
+                    Intent i = new Intent(ApproveOrganisation.this, ManageOrganisationPage.class);
+                    i.putExtra("username", uniqueString);
+                    System.out.println(uniqueString + " at approve");
                     Toast.makeText(ApproveOrganisation.this, "Approve succeed.", Toast.LENGTH_SHORT).show();
                     startActivity(i);
                 }
