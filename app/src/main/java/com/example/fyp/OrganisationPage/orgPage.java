@@ -106,9 +106,15 @@ public class orgPage extends AppCompatActivity {
     }
 
     private void setcountHelp() {
-        total = db.TotalNoOfHelpReq();
+        total = db.TotalNoOfHelpReq(db.getOrgID(uniqueString));
         number = findViewById(R.id.iconno);
-        number.setText(String.valueOf(total) + " ");
+        if (total > 0) {
+            number.setText(String.format("%d goals are awaiting your help!", total));
+        }
+        else {
+            number.setText("No goals are pending your help.");
+        }
+
 
     }
 

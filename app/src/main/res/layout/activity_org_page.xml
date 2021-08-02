@@ -25,21 +25,21 @@
 
     <TextView
         android:id="@+id/iconno"
-        android:layout_width="45dp"
-        android:layout_height="39dp"
+        android:layout_width="278dp"
+        android:layout_height="48dp"
         android:fontFamily="@font/poppins"
         android:gravity="center"
         android:scrollHorizontally="false"
         android:text="5"
         android:textColor="@color/black"
-        android:textSize="15sp"
+        android:textSize="17sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/OrgUpdateDetails"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.846"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.284" />
+        app:layout_constraintTop_toBottomOf="@+id/logged_in_org_name"
+        app:layout_constraintVertical_bias="0.758" />
 
     <ImageView
         android:id="@+id/OrgUpdateDetails"

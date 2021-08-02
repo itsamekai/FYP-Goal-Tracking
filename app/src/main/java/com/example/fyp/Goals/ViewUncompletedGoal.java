@@ -18,7 +18,7 @@ import com.example.fyp.GeneralMainPage.MainHomePage;
 import com.example.fyp.ObjectClass.UserAchievement;
 import com.example.fyp.R;
 
-public class ViewUncompletedGoal extends AppCompatActivity {
+public class ViewUncompletedGoal extends AppCompatActivity {    
 
     public TextView selectedGoalName, goalDesc, selectedGoalStart;
     public Button deleteGoal, finishGoal;

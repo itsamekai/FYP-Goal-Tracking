@@ -1459,10 +1459,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    // count if help has been req by user
-    public int TotalNoOfHelpReq() {
+    // return count of amount of goals that users need help from with respect to the organisation's services
+    // and the goal's category (goal category_id = service_id)
+    public int TotalNoOfHelpReq(int org_id) {
         int help = 0;
-        String sql = " SELECT COUNT(*) FROM UserHelp WHERE UserHelp.helped = 0 AND UserHelp.service_id = UserHelp.org_id " ;
+        String sql = "SELECT COUNT(*) FROM UserHelp uh INNER JOIN OrgServices os ON uh.service_id = os.service_id " +
+                "WHERE uh.service_id = os.service_id AND uh.org_id IS NULL AND uh.deleted = 0 AND uh.helped = 0 AND os.org_id = " + org_id + "";
         Cursor cursor = getReadableDatabase().rawQuery(sql, null);
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
