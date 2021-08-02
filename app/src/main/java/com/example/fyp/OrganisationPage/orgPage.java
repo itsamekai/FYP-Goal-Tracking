@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,14 +16,17 @@ import com.example.fyp.Login.LoginPage;
 import com.example.fyp.OrganisationProfile.OrganisationSettingsPage;
 import com.example.fyp.R;
 
+import java.util.ArrayList;
+
 public class orgPage extends AppCompatActivity {
 
     //public Button  ;
     public ImageView logOut, current, settings,requested,addServices;
-    public TextView name;
+    public TextView name,number;
     public String uniqueString;
     public DataBaseHelper db;
     public boolean verified = false;
+    int total = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +53,9 @@ public class orgPage extends AppCompatActivity {
                         Intent i = new Intent(this, RequestedHelp.class);
                         i.putExtra("username", uniqueString);
                         startActivity(i);
-                    }
-                    else showWarningNotNeeded();
+                    } else showWarningNotNeeded();
 
-                }
-                else {
+                } else {
                     showWarningOrgHasNoServices();
                 }
 
@@ -71,8 +73,7 @@ public class orgPage extends AppCompatActivity {
                     Intent i = new Intent(this, CurrentlyHelpingList.class);
                     i.putExtra("username", uniqueString);
                     startActivity(i);
-                }
-                else showWarningNotHelping();
+                } else showWarningNotHelping();
 
             } else {
                 showWarningNotVerified();
@@ -101,7 +102,13 @@ public class orgPage extends AppCompatActivity {
 
 
         name.setText(db.getOrganisationName(uniqueString));
+        setcountHelp();
+    }
 
+    private void setcountHelp() {
+        total = db.TotalNoOfHelpReq();
+        number = findViewById(R.id.iconno);
+        number.setText(String.valueOf(total) + " ");
 
     }
 

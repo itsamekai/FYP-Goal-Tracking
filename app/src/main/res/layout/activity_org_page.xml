@@ -12,17 +12,34 @@
         android:layout_width="250dp"
         android:layout_height="45dp"
         android:layout_marginTop="80dp"
-        android:text="TextView"
-        android:textSize="15sp"
-        android:textColor="@color/black"
         android:fontFamily="@font/poppins"
         android:gravity="center"
         android:scrollHorizontally="false"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/iconno"
+        android:layout_width="45dp"
+        android:layout_height="39dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:scrollHorizontally="false"
+        android:text="5"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.846"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.284" />
 
     <ImageView
         android:id="@+id/OrgUpdateDetails"
@@ -53,6 +70,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/currentlyhelping" />
+
 
     <ImageView
         android:id="@+id/orgLogOut"

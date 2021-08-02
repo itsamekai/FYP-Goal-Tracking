@@ -1458,6 +1458,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return cursor;
     }
+
+    // count if help has been req by user
+    public int TotalNoOfHelpReq() {
+        int help = 0;
+        String sql = " SELECT COUNT(*) FROM UserHelp WHERE UserHelp.helped = 0 AND UserHelp.service_id = UserHelp.org_id " ;
+        Cursor cursor = getReadableDatabase().rawQuery(sql, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            help = cursor.getInt(0);
+        }
+        cursor.close();
+        return help;
+
+    }
 }
 
 
