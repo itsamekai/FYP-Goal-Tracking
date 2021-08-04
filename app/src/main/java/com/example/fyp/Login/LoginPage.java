@@ -43,16 +43,16 @@ public class LoginPage extends AppCompatActivity {
             startActivity(intent);
         });
 
-        addAdmin = findViewById(R.id.removeButton);
-        addAdmin.setOnClickListener(v -> {
-            db = new DataBaseHelper(this);
-            if(db.addTemporaryAdmin()) {
-                Toast.makeText(this, "added test admin: user is testadmin", Toast.LENGTH_SHORT).show();
-            }
-            else {
-                Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        addAdmin = findViewById(R.id.removeButton);
+//        addAdmin.setOnClickListener(v -> {
+//            db = new DataBaseHelper(this);
+//            if(db.addTemporaryAdmin()) {
+//                Toast.makeText(this, "added test admin: user is testadmin", Toast.LENGTH_SHORT).show();
+//            }
+//            else {
+//                Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         usernameInput = (EditText) findViewById(R.id.inputUser);
         passwordInput = (EditText) findViewById(R.id.inputPassword);
