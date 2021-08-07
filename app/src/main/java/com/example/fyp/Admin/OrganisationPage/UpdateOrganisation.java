@@ -45,7 +45,7 @@ public class UpdateOrganisation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_organisation);
-        String uniqueString = getIntent().getStringExtra("username");
+        uniqueString = getIntent().getStringExtra("username");
 
         dropDownBox = (Spinner) findViewById(R.id.dropdownBox2);
 
@@ -58,7 +58,9 @@ public class UpdateOrganisation extends AppCompatActivity {
         // return to prev page
         returnArrow = (ImageView) findViewById(R.id.adminArrowBack4);
         returnArrow.setOnClickListener(v -> {
-            startActivity(new Intent(this, ManageOrganisationPage.class));
+            Intent i = new Intent(this, ManageOrganisationPage.class);
+            i.putExtra("username", uniqueString);
+            startActivity(i);
         });
 
         // get list of org name (Dropdown)
